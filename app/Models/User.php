@@ -23,11 +23,19 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'user';
     protected $fillable = [
         'name',
+        'apellido',
+        'ci',
+        'telefono',
+        'codigo_empleado',
         'email',
         'password',
+        'id_sucursal',
+        'id_rol'
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -58,4 +66,33 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function sucursal()
+    {
+        return $this->belongsTo(Sucursal::class, 'id_sucursal');
+    }
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class, 'id_rol');
+    }
+
+    public function asistencia()
+    {
+        return $this->hasMany(Asistencia::class, 'id_user');
+    }
+
+    public function licencia()
+    {
+        return $this->hasMany(Licencia::class, 'id_user');
+    }
+
+    public function documento()
+    {
+        return $this->hasMany(Documento::class, 'id_user');
+    }
+
+    public function user_horario()
+    {
+        return $this->belongsToMany(HorarioUser::class, 'id_user');
+    }
 }
