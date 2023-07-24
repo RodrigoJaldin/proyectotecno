@@ -1,10 +1,4 @@
-@extends('adminlte::page')
-
-@section('title', 'usuarios')
-
-@section('content_header')
-    <h1 style="color: black; font-weight: bold; text-align: center;">Listado de Usuarios</h1>
-@stop
+@extends('layouts.app')
 
 @section('content')
 <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearUserModal">

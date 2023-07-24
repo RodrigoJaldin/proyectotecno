@@ -1,7 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AsistenciaController;
+use App\Http\Controllers\DocumentoController;
+use App\Http\Controllers\HorarioController;
+use App\Http\Controllers\HorarioUserController;
+use App\Http\Controllers\LicenciaController;
+use App\Http\Controllers\RolController;
+use App\Http\Controllers\SucursalController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
