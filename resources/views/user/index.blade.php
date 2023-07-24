@@ -73,6 +73,14 @@
                 
         @endphp
     <br>
+<button type="button" class="btn btn-primary" id="btnRegistrarAsistencia" data-toggle="modal" data-target="#modalRegistrarAsistencia">
+    Registrar Asistencia
+</button>
+<button type="button" class="btn btn-primary" id="btnRegistrarSalida" data-toggle="modal" data-target="#modalRegistrarSalida">
+    Registrar Salida
+</button>
+
+    <br> <br>
     <table id="users" class="table table-striped table-bordered" style="width: 100%">
         <thead class="bg-primary text-white">
             <tr>
@@ -113,6 +121,7 @@
             @endforeach
         </tbody>
     </table>
+    @include('asistencia.index')
     @include('user.create')
     @include('user.edit')
 @stop
@@ -234,5 +243,21 @@
             });
         });
     </script>
+<script>
+    $(document).ready(function() {
+        // Obtener la fecha y hora actual
+        var now = new Date();
+        var fechaActual = now.toLocaleDateString();
+        var horaActual = now.toLocaleTimeString();
+
+        // Mostrar la fecha y hora actual en el modal de Registrar Asistencia
+        $("#fechaActual").text(fechaActual);
+        $("#horaLlegada").text(horaActual);
+
+        // Mostrar la fecha y hora actual en el modal de Registrar Salida
+        $("#fechaActualSalida").text(fechaActual);
+        $("#horaSalida").text(horaActual);
+    });
+</script>
 
 @stop
