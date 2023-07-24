@@ -30,6 +30,7 @@ class User extends Authenticatable
         'ci',
         'telefono',
         'codigo_empleado',
+        'foto_user',
         'email',
         'password',
         'id_sucursal',

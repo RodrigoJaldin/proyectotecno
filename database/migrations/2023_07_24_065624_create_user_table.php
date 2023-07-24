@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('ci');
             $table->string('telefono');
             $table->string('codigo_empleado')->unique();
+            $table->text('foto_user')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

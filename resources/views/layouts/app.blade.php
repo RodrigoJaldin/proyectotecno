@@ -27,19 +27,17 @@
                 <h1><a href="index.html" class="logo">Flash</a></h1>
                 <ul class="list-unstyled components mb-5">
                     <li class="active">
-                        <a href="user"><span class="fa fa-home mr-3"></span> User</a>
+                        <a href="rol"><span class="fa fa-home mr-3"></span> Rol</a>
                     </li>
                     <li>
-                        <a href="#"><span class="fa fa-user mr-3"></span> About</a>
+                        <a href="sucursal"><span class="fa fa-user mr-3"></span> Sucursales</a>
                     </li>
                     <li>
-                        <a href="#"><span class="fa fa-briefcase mr-3"></span> Portfolio</a>
+                        <a href="user"><span class="fa fa-briefcase mr-3"></span> Usuarios</a>
                     </li>
+
                     <li>
-                        <a href="#"><span class="fa fa-sticky-note mr-3"></span> Blog</a>
-                    </li>
-                    <li>
-                        <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contact</a>
+                        <a href="asistencia"><span class="fa fa-paper-plane mr-3"></span> Asistencias</a>
                     </li>
                 </ul>
 

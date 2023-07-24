@@ -16,19 +16,18 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="nombre{{ $sucursal->id }}">Nombre:</label>
-                        <input type="text" class="form-control" id="nombre{{ $sucursal->id }}"
-                            name="nombre" value="{{ $sucursal->nombre }}">
+                        <input type="text" class="form-control" id="nombre{{ $sucursal->id }}" name="nombre"
+                            value="{{ $sucursal->nombre }}">
                     </div>
                     <div class="form-group">
                         <label for="direccion{{ $sucursal->id }}">Direccion:</label>
-                        <input type="text" class="form-control" id="direccion{{ $sucursal->id }}"
-                            name="direccion" value="{{ $sucursal->direccion }}">
+                        <input type="text" class="form-control" id="direccion{{ $sucursal->id }}" name="direccion"
+                            value="{{ $sucursal->direccion }}">
                     </div>
 
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"
-                            data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                     </div>
                 </div>

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rol;
+use App\Models\Sucursal;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -15,7 +17,8 @@ class UserController extends Controller
     {
         $users = User::all();
         $roles = Rol::all();
-        return view('user.index', compact('users', 'roles'));
+        $sucursales = Sucursal::all();
+        return view('user.index', compact('users', 'roles', 'sucursales'));
     }
 
     /**
@@ -33,24 +36,35 @@ class UserController extends Controller
     {
          // Validar los datos del formulario de creación
          $request->validate([
-            'nombre' => 'required|min:1',
+            'name' => 'required|min:1',
             'apellido' => 'required|min:1',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|unique:user,email',
             'ci' => 'required|min:1',
             'telefono' => 'required|min:1',
-            'codigo_empleado' => 'required|unique:users,codigo_empleado',
+            'foto_user' => ['image', 'nullable', 'max:2048'],
+            'codigo_empleado' => 'required|unique:user,codigo_empleado',
             'id_rol' => 'required|exists:rol,id',
+            'id_sucursal' => 'required|exists:sucursal,id',
         ]);
 
         // Crear el nuevo usuario en la base de datos
         $user = new User();
-        $user->nombre = $request->input('nombre');
+        $user->name = $request->input('name');
         $user->apellido = $request->input('apellido');
         $user->email = $request->input('email');
         $user->ci = $request->input('ci');
         $user->telefono = $request->input('telefono');
+        $user->password = $request->input('password');
         $user->codigo_empleado = $request->input('codigo_empleado');
         $user->id_rol = $request->input('id_rol');
+        $user->id_sucursal = $request->input('id_sucursal');
+
+        if ($request->hasFile('foto_user')) {
+            $foto = $request->file('foto_user')->store('public/users_imagenes');
+            $url = Storage::url($foto);
+            $user->foto_user = $url;
+        }
+
         $user->save();
 
         // Redireccionar a la vista index con un mensaje de éxito
@@ -80,11 +94,12 @@ class UserController extends Controller
     {
         // Validar los datos del formulario de edición
         $request->validate([
-            'nombre' => 'required|min:1',
+            'name' => 'required|min:1',
             'apellido' => 'required|min:1',
             'email' => 'required|email|unique:users,email,' . $id,
             'ci' => 'required|min:1',
             'telefono' => 'required|min:1',
+            'foto_user' => ['image', 'nullable', 'max:2048'],
             'codigo_empleado' => 'required|unique:users,codigo_empleado,' . $id,
             'id_rol' => 'required|exists:rol,id',
         ]);
@@ -93,13 +108,25 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         // Actualizar los datos del usuario
-        $user->nombre = $request->input('nombre');
+        $user->name = $request->input('name');
         $user->apellido = $request->input('apellido');
         $user->email = $request->input('email');
         $user->ci = $request->input('ci');
         $user->telefono = $request->input('telefono');
         $user->codigo_empleado = $request->input('codigo_empleado');
         $user->id_rol = $request->input('id_rol');
+        $user->id_sucursal = $request->input('id_sucursal');
+        if ($request->hasFile('foto_user')) {
+            // Eliminar la foto anterior si existe
+            if ($user->foto_user) {
+                Storage::delete($user->foto_user);
+            }
+
+            $foto = $request->file('foto_user')->store('public/users_imagenes');
+            $url = Storage::url($foto);
+            $user->foto_user = $url;
+        }
+
         $user->save();
 
         // Redireccionar a la vista index con un mensaje de éxito

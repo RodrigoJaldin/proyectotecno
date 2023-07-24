@@ -80,6 +80,7 @@
     Registrar Salida
 </button>
 
+
     <br> <br>
     <table id="users" class="table table-striped table-bordered" style="width: 100%">
         <thead class="bg-primary text-white">
@@ -90,6 +91,7 @@
                 <th>Apellido</th>
                 <th>Email</th>
                 <th>CI</th>
+                <th>Foto</th>
                 <th>Rol</th>
                 <th>Telefono</th>
                 <th>Acciones</th>
@@ -105,23 +107,35 @@
                     <td>{{ $user->apellido ?? '--' }}</td>
                     <td>{{ $user->email ?? '--' }}</td>
                     <td>{{ $user->ci ?? '--' }}</td>
+                    <td>
+                        @if ($user->foto_user)
+                            <img src="{{ asset($user->foto_user) }}" alt="Foto del Usuario" width="70" height="70">
+                        @else
+                            <p>No se ha cargado ninguna foto del usuario</p>
+                        @endif
+                    </td>
                     <td>{{ $user->rol->tipo_rol ?? '--' }}</td>
                     <td>{{ $user->telefono ?? '--' }}</td>
                     <td>
-                        <form class="formulario-eliminar" action="{{ route('user.destroy', $user->id) }}" method="POST">
-
-                            <button type="button" class="btn btn-info btn-editar" data-user-id="{{ $user->id }}"
-                                data-toggle="modal" data-target="#editarUserModal{{ $user->id }}">Editar</button>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                        </form>
+                        @if ($user->rol->tipo_rol !== 'Gerente')
+                            <form class="formulario-eliminar" action="{{ route('user.destroy', $user->id) }}" method="POST">
+                                <button type="button" class="btn btn-info btn-editar"
+                                    data-user-id="{{ $user->id }}" data-toggle="modal"
+                                    data-target="#editarUserModal{{ $user->id }}">Editar</button>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        @else
+                            <button type="button" class="btn btn-info btn-editar"
+                                data-user-id="{{ $user->id }}" data-toggle="modal"
+                                data-target="#editarUserModal{{ $user->id }}">Editar</button>
+                        @endif
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    @include('asistencia.index')
     @include('user.create')
     @include('user.edit')
 @stop
@@ -210,7 +224,7 @@
                         required: true,
                         minlength: 1
                     },
-                    celular: {
+                    telefono: {
                         required: true,
                         minlength: 1
                     }
@@ -232,7 +246,7 @@
                         required: 'Ingrese un número de carnet',
                         minlength: 'Ingrese al menos 1 carácter'
                     },
-                    celular: {
+                    telefono: {
                         required: 'Ingrese un número de celular',
                         minlength: 'Ingrese al menos 1 carácter'
                     }
@@ -243,21 +257,6 @@
             });
         });
     </script>
-<script>
-    $(document).ready(function() {
-        // Obtener la fecha y hora actual
-        var now = new Date();
-        var fechaActual = now.toLocaleDateString();
-        var horaActual = now.toLocaleTimeString();
 
-        // Mostrar la fecha y hora actual en el modal de Registrar Asistencia
-        $("#fechaActual").text(fechaActual);
-        $("#horaLlegada").text(horaActual);
-
-        // Mostrar la fecha y hora actual en el modal de Registrar Salida
-        $("#fechaActualSalida").text(fechaActual);
-        $("#horaSalida").text(horaActual);
-    });
-</script>
 
 @stop

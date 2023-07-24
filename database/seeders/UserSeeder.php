@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'apellido' => 'Chavez',
             'ci' => '9874563',
             'telefono' => '71010463',
+            'foto_user' => null,
             'codigo_empleado' => 'BM_0001',
             'email' => 'bernardo@gmail.com',
             'password' => Hash::make('1234'),

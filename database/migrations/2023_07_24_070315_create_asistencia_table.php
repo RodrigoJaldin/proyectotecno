@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('asistencia', function (Blueprint $table) {
             $table->id();
             $table->date('fecha');
-            $table->dateTime('hora_llegada');
-            $table->dateTime('hora_salida');
-
-            $table->unsignedBigInteger("id_user");
+            $table->time('hora_llegada')->nullable();
+            $table->time('hora_salida')->nullable();
+            $table->unsignedBigInteger("id_user")->nullable();
             $table->foreign('id_user')->on('user')->references('id')->onDelete('cascade');
             $table->timestamps();
         });
+
     }
 
     /**
