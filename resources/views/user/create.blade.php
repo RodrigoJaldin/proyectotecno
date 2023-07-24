@@ -1,0 +1,55 @@
+<!-- Modal Crear Usuario -->
+<div class="modal fade" id="crearUserModal" tabindex="-1" role="dialog" aria-labelledby="crearUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="crearUserModalLabel">Crear Nuevo Usuario</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="crearUserForm" action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="codigo_empleado">Codigo:</label>
+                        <input type="text" class="form-control" id="codigo_empleado" name="codigo_empleado" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Nombre:</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ci">Carnet:</label>
+                        <input type="text" class="form-control" id="ci" name="ci" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Telefono:</label>
+                        <input type="text" class="form-control" id="telefono" name="telefono" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_rol">Rol:</label>
+                        <select class="form-control" id="id_rol" name="id_rol" required>
+                            <option value="">Seleccione un rol</option>
+                            @foreach ($roles as $rol)
+                                <option value="{{ $rol->id }}">{{ $rol->tipo_rol }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

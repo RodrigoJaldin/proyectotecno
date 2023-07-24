@@ -12,7 +12,8 @@ class SucursalController extends Controller
      */
     public function index()
     {
-        //
+        $sucursales = Sucursal::all();
+        return view('sucursal.index', compact('sucursales'));
     }
 
     /**
@@ -28,7 +29,17 @@ class SucursalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'direccion' => 'required',
+        ]);
+
+        Sucursal::create([
+            'nombre' => $request->input('nombre'),
+            'direccion' => $request->input('direccion'),
+        ]);
+
+        return redirect()->route('sucursal.index')->with('success', 'La sucursal ha sido creada exitosamente');
     }
 
     /**
@@ -52,7 +63,17 @@ class SucursalController extends Controller
      */
     public function update(Request $request, Sucursal $sucursal)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'direccion' => 'required',
+        ]);
+
+        $sucursal->update([
+            'nombre' => $request->input('nombre'),
+            'direccion' => $request->input('direccion'),
+        ]);
+
+        return redirect()->route('sucursal.index')->with('edit-success', 'La sucursal ha sido editada exitosamente');
     }
 
     /**
@@ -60,6 +81,8 @@ class SucursalController extends Controller
      */
     public function destroy(Sucursal $sucursal)
     {
-        //
+        $sucursal->delete();
+
+        return redirect()->route('sucursal.index')->with('eliminar', 'ok');
     }
 }

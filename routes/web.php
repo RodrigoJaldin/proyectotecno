@@ -1,7 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AsistenciaController;
+use App\Http\Controllers\DocumentoController;
+use App\Http\Controllers\HorarioController;
+use App\Http\Controllers\HorarioUserController;
+use App\Http\Controllers\LicenciaController;
+use App\Http\Controllers\RolController;
+use App\Http\Controllers\SucursalController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,4 +34,11 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/index', [PageController::class, 'index'])->name('index');
+Route::resource('user', UserController::class)->middleware(['auth']);
+Route::resource('licencia', LicenciaController::class)->middleware(['auth']);
+Route::resource('asistencia', AsistenciaController::class)->middleware(['auth']);
+Route::resource('horario', HorarioController::class)->middleware(['auth']);
+Route::resource('horario_user', HorarioUserController::class)->middleware(['auth']);
+Route::resource('sucursal', SucursalController::class)->middleware(['auth']);
+Route::resource('rol', RolController::class)->middleware(['auth']);
+Route::resource('documento', DocumentoController::class)->middleware(['auth']);
