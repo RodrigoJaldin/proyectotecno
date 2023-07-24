@@ -1,45 +1,77 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<!doctype html>
+<html lang="en">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <title>Sidebar 03</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    @yield('css')
+</head>
 
-        <!-- Styles -->
-        @livewireStyles
-    </head>
-    <body class="font-sans antialiased">
-        <x-banner />
+<body>
 
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar" class="active">
+            <div class="custom-menu">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                    <i class="fa fa-bars"></i>
+                    <span class="sr-only">Toggle Menu</span>
+                </button>
+            </div>
+            <div class="p-4">
+                <h1><a href="index.html" class="logo">Flash</a></h1>
+                <ul class="list-unstyled components mb-5">
+                    <li class="active">
+                        <a href="#"><span class="fa fa-home mr-3"></span> Home</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-user mr-3"></span> About</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-briefcase mr-3"></span> Portfolio</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-sticky-note mr-3"></span> Blog</a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contact</a>
+                    </li>
+                </ul>
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+                <div class="mb-5">
+                    <h3 class="h6 mb-3">Subscribe for newsletter</h3>
+                    <form action="#" class="subscribe-form">
+                        <div class="form-group d-flex">
+                            <div class="icon"><span class="icon-paper-plane"></span></div>
+                            <input type="text" class="form-control" placeholder="Enter Email Address">
+                        </div>
+                    </form>
+                </div>
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                <div class="footer">
+
+                </div>
+
+            </div>
+        </nav>
+
+        <!-- Convertime esto a un layout  -->
+
+        <div id="content" class="p-4 p-md-5 pt-5">
+            @yield('content')
         </div>
+    </div>
 
-        @stack('modals')
+    @yield('js')
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
 
-        @livewireScripts
-    </body>
 </html>
