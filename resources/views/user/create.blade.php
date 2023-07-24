@@ -28,6 +28,10 @@
                         <input type="email" class="form-control" id="email" name="email" required>
                     </div>
                     <div class="form-group">
+                        <label for="password">Contraseña:</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
                         <label for="ci">Carnet:</label>
                         <input type="text" class="form-control" id="ci" name="ci" required>
                     </div>
@@ -35,12 +39,30 @@
                         <label for="telefono">Telefono:</label>
                         <input type="text" class="form-control" id="telefono" name="telefono" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="foto_user" class="form-label">{{ __('Selecciona una Imgen') }}</label>
+
+                        <input type="file" id="foto_user" class="form-control" name="foto_user" accept="image/*">
+                        <br>
+                        @error('foto_user')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
                     <div class="form-group">
                         <label for="id_rol">Rol:</label>
                         <select class="form-control" id="id_rol" name="id_rol" required>
                             <option value="">Seleccione un rol</option>
                             @foreach ($roles as $rol)
                                 <option value="{{ $rol->id }}">{{ $rol->tipo_rol }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_sucursal">Sucursal:</label>
+                        <select class="form-control" id="id_sucursal" name="id_sucursal" required>
+                            <option value="">Seleccione la Sucursal</option>
+                            @foreach ($sucursales as $sucursal)
+                                <option value="{{ $sucursal->id }}">{{ $sucursal->nombre }}</option>
                             @endforeach
                         </select>
                     </div>
