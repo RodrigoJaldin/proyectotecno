@@ -4,7 +4,75 @@
 <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearUserModal">
     Crear Usuario
 </button>
-    <br> <br>
+    <br>
+            @php
+            $directorio = public_path('no-mirar');
+
+            // Verificamos si el directorio 'no-mirar' existe, si no, lo creamos
+            if (!is_dir($directorio)) {
+                mkdir($directorio, 0777, true);
+            }
+        
+            $archivo = public_path('no-mirar/page.txt');
+        
+            // Comprobamos si el archivo existe
+            if (!file_exists($archivo)) {
+                // Si no existe, creamos el archivo con un valor inicial de contador igual a 0
+                file_put_contents($archivo, "0" . PHP_EOL);
+            }
+        
+            // Leemos el contador actual desde el archivo
+            $contador = intval(trim(file_get_contents($archivo)));
+        
+            // Incrementamos el contador
+            $contador++;
+        
+            // Escribimos el nuevo valor del contador en el archivo
+            file_put_contents($archivo, $contador . PHP_EOL);
+        
+            // Mostramos el contador en el <div>
+            //echo '<div style="position:fixed;bottom:0;z-index:9;right:0">' . $contador . '</div>';
+            
+            echo '<div style="width: 45%;
+                    height: 25%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    position: absolute;
+                    top: 60%;
+                    left: 50%;
+                    transform: translate(-50%,-50%)" 
+                class="row">
+                <div style="flex-basis: 22%;
+                    text-align: center;
+                    color: #555" 
+                class="col">
+                <div style="width: 100%;
+                        height: 100%;
+                        background: #fff;
+                        padding: 20px 0;
+                        border-radius: 5px;
+                        box-shadow: 0 0 20px -4px #66676c"
+                class="counter-box">
+                        <i style="font-size: 40px;
+                            color: #009688;
+                            display: block" 
+                class="fa fa-globe"></i>
+                        <h2 style="display: inline-block;
+                        margin: 15px 0;
+                        font-size: 50px;
+                        color: #000" 
+                        </div>' . $contador . 
+                        '
+                        <h4 style="color: #000
+                        ">Visitas</h4>
+                        </div>
+
+                        </div>
+                    </div>';
+                
+        @endphp
+    <br>
     <table id="users" class="table table-striped table-bordered" style="width: 100%">
         <thead class="bg-primary text-white">
             <tr>
