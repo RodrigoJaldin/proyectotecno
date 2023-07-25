@@ -35,7 +35,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return redirect()->route('user')->with(compact('users', 'roles', 'sucursales', 'horarios'));
+        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
 
     public function jefesCocina()
@@ -48,7 +48,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return redirect()->route('user')->with(compact('users', 'roles', 'sucursales', 'horarios'));
+        return redirect()->route('user.index',compact('users', 'roles', 'sucursales', 'horarios'));
     }
 
     public function jefesCaja()

@@ -82,6 +82,8 @@
                 <li>
                     <a href="asistencia">Asistencias</a>
                     <a href="horario">Horarios</a>
+                    <a href="documento">Documentos</a>
+
                 </li>
 
             </ul>
