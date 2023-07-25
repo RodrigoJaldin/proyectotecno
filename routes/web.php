@@ -33,8 +33,18 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+Route::get('user/Gerente', [UserController::class, 'gerente'])->name('gerente')->middleware(['auth']);
+Route::get('user/JefeCocina', [UserController::class, 'jefesCocina'])->name('jefesCocina')->middleware(['auth']);
+Route::get('user/jefesCaja', [UserController::class, 'jefesCaja'])->name('jefesCaja')->middleware(['auth']);
+Route::get('user/jefesAlmacen', [UserController::class, 'jefesAlmacen'])->name('jefesAlmacen')->middleware(['auth']);
+Route::get('user/encargadosPlancha', [UserController::class, 'encargadosPlancha'])->name('encargadosPlancha')->middleware(['auth']);
+Route::get('user/auxiliaresCocina', [UserController::class, 'auxiliaresCocina'])->name('auxiliaresCocina')->middleware(['auth']);
+Route::get('user/cajeros', [UserController::class, 'cajeros'])->name('cajeros')->middleware(['auth']);
+Route::get('user/limpieza', [UserController::class, 'limpieza'])->name('limpieza')->middleware(['auth']);
 
 Route::resource('user', UserController::class)->middleware(['auth']);
+
+
 Route::resource('licencia', LicenciaController::class)->middleware(['auth']);
 Route::resource('horario', HorarioController::class)->middleware(['auth']);
 Route::resource('horario_user', HorarioUserController::class)->middleware(['auth']);
