@@ -14,9 +14,8 @@ return new class extends Migration
         Schema::create('horario', function (Blueprint $table) {
             $table->id();
             $table->string('turno');
-            $table->dateTime('hora_entrada');
-            $table->dateTime('hora_salida');
-
+            $table->time('hora_entrada');
+            $table->time('hora_salida');
             $table->timestamps();
         });
     }

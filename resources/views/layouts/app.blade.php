@@ -35,22 +35,37 @@
         <!-- Sidebar Holder -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Bootstrap Sidebar</h3>
+                <h3>Bienvenid@! {{ auth()->user()->name }}</h3>
             </div>
 
             <ul class="list-unstyled components">
-                <p>Dummy Heading</p>
+                <p></p>
                 <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Usuarios</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="#">Home 1</a>
+                            <a href="{{ route('gerente') }}">Gerente</a>
                         </li>
                         <li>
-                            <a href="#">Home 2</a>
+                            <a href="{{ route('jefesCocina') }}">Jefes de Cocina</a>
                         </li>
                         <li>
-                            <a href="#">Home 3</a>
+                            <a href="{{ route('jefesCaja') }}">Jefes de Caja</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('jefesAlmacen') }}">Jefes de almacen</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('encargadosPlancha') }}">Encargados de Plancha</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('auxiliaresCocina') }}">Auxiliar de cocina</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('cajeros') }}">Cajero</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('limpieza') }}">Limpieza</a>
                         </li>
                     </ul>
                 </li>
