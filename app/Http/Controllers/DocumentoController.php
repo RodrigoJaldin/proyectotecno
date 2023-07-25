@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Documento;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,7 +15,8 @@ class DocumentoController extends Controller
     public function index()
     {
         $documentos = Documento::all();
-        return view('documento.index', compact('documentos'));
+        $users = User::all();
+        return view('documento.index', compact('documentos', 'users'));
     }
 
     /**
@@ -22,7 +24,8 @@ class DocumentoController extends Controller
      */
     public function create()
     {
-        return view('documento.create');
+        $users = User::all();
+        return view('documento.create', compact('users'));
     }
 
     /**
@@ -34,7 +37,7 @@ class DocumentoController extends Controller
             'descripcion' => 'required|min:1',
             'tipo_documento' => 'required|min:1',
             'archivo' => 'required|file',
-            'id_user' => 'required|exists:users,id',
+            'id_user' => 'required|exists:user,id',
         ]);
 
         $documento = new Documento();
@@ -68,7 +71,9 @@ class DocumentoController extends Controller
      */
     public function edit(Documento $documento)
     {
-        return view('documento.edit', compact('documento'));
+        $users = User::all();
+
+        return view('documento.edit', compact('documento', 'users'));
     }
     /**
      * Update the specified resource in storage.
@@ -78,6 +83,7 @@ class DocumentoController extends Controller
         $request->validate([
             'descripcion' => 'required|min:1',
             'tipo_documento' => 'required|min:1',
+            'archivo' => 'required|file',
             'id_user' => 'required|exists:user,id',
 
         ]);

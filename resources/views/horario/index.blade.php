@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearHorarioModal">
+    <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearHorarioModal" >
         Crear Horario
     </button>
     <br> <br>
@@ -38,7 +38,7 @@
                 </tr>
                 <!-- Modal Editar Horario -->
                 <div class="modal fade" id="editarHorarioModal{{ $horario->id }}" tabindex="-1" role="dialog"
-                    aria-labelledby="editarHorarioModal{{ $horario->id }}" aria-hidden="true">
+                    aria-labelledby="editarHorarioModal{{ $horario->id }}" aria-hidden="true" data-backdrop="false">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">

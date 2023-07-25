@@ -1,4 +1,4 @@
-<!-- Modal Editar Rol -->
+{{-- <!-- Modal Editar Rol -->
 <div class="modal fade" id="editarSucursalModal{{ $sucursal->id }}" tabindex="-1" role="dialog"
     aria-labelledby="editarSucursalModal{{ $sucursal->id }}" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -35,3 +35,4 @@
         </div>
     </div>
 </div>
+ --}}

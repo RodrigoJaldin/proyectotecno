@@ -1,5 +1,5 @@
 <!-- Modal para registrar la hora de llegada -->
-<div class="modal fade" id="modalRegistrarAsistencia" tabindex="-1" role="dialog" aria-labelledby="modalRegistrarAsistenciaLabel" aria-hidden="true">
+<div class="modal fade" id="modalRegistrarAsistencia" tabindex="-1" role="dialog" aria-labelledby="modalRegistrarAsistenciaLabel" aria-hidden="true" data-backdrop="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -27,7 +27,7 @@
 
 
 <!-- Modal para registrar la hora de salida -->
-<div class="modal fade" id="modalRegistrarSalida" tabindex="-1" role="dialog" aria-labelledby="modalRegistrarSalidaLabel" aria-hidden="true">
+<div class="modal fade" id="modalRegistrarSalida" tabindex="-1" role="dialog" aria-labelledby="modalRegistrarSalidaLabel" aria-hidden="true" data-backdrop="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

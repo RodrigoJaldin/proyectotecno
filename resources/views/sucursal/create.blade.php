@@ -1,6 +1,6 @@
 <!-- Modal Crear Sucursal -->
 <div class="modal fade" id="modalCrearSucursal" tabindex="-1" role="dialog" aria-labelledby="modalCrearSucursalLabel"
-    aria-hidden="true">
+    aria-hidden="true" data-backdrop="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
