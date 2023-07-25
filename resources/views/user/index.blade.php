@@ -169,8 +169,8 @@
         </tbody>
     </table>
     @include('user.create')
-    {{--  @include('horario_user.create') {{-- ASIGNAR HORARIO --}}
-    {{-- @include('horario_user.index') VER HORARIO --}}
+    @include('horario_user.create') {{-- ASIGNAR HORARIO --}}
+    @include('horario_user.index') {{-- VER HORARIO --}}
 
 @stop
 
@@ -240,6 +240,14 @@
                     $('#horarioUsuarioBody').html(data);
                     $('#verHorarioModal').modal('show');
                 });
+            });
+        });
+
+        $(document).ready(function() {
+            // Evento click para el botón de "Asignar Horario"
+            $('.btn-asignar-horario').on('click', function() {
+                var userId = $(this).data('user-id'); // Obtener el id del usuario desde el botón
+                $('#userId').val(userId); // Asignar el id del usuario al campo "userId" del formulario
             });
         });
 
