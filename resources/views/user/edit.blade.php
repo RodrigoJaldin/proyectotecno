@@ -1,6 +1,6 @@
 <!-- Modal Editar Usuario -->
 <div class="modal fade" id="editarUserModal{{ $user->id }}" tabindex="-1" role="dialog"
-    aria-labelledby="editarUserModal{{ $user->id }}" aria-hidden="true">
+    aria-labelledby="editarUserModal{{ $user->id }}" aria-hidden="true" data-backdrop="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
