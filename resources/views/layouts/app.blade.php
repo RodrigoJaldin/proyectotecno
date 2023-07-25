@@ -39,6 +39,9 @@
                     <li>
                         <a href="asistencia"><span class="fa fa-paper-plane mr-3"></span> Asistencias</a>
                     </li>
+                    <li>
+                        <a href="horario"><span class="fa fa-paper-plane mr-3"></span> Horarios</a>
+                    </li>
                 </ul>
 
                 <div class="mb-5">

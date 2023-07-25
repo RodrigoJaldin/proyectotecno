@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Horario;
 use App\Models\Rol;
 use App\Models\Sucursal;
 use App\Models\User;
@@ -18,7 +19,18 @@ class UserController extends Controller
         $users = User::all();
         $roles = Rol::all();
         $sucursales = Sucursal::all();
-        return view('user.index', compact('users', 'roles', 'sucursales'));
+        $horarios = Horario::all();
+
+        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+    }
+
+    public function getHorario(Request $request)
+    {
+        $userId = $request->input('userId');
+        $user = User::find($userId);
+        $horarioUsuario = $user->user_horarios;
+
+        return view('horario_user.index', compact('horarioUsuario'));
     }
 
     /**
@@ -29,9 +41,15 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function showHorario($userId)
+    {
+        $user = User::findOrFail($userId);
+
+        // Obtener el horario del usuario
+        $horario = $user->user_horario;
+
+        return view('user.show_horario_modal', compact('horario'));
+    }
     public function store(Request $request)
     {
          // Validar los datos del formulario de creación

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearUserModal">
-    Crear Usuario
-</button>
+    <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearUserModal">
+        Crear Usuario
+    </button>
 
 
     <br> <br>
@@ -43,18 +43,29 @@
                     <td>{{ $user->telefono ?? '--' }}</td>
                     <td>
                         @if ($user->rol->tipo_rol !== 'Gerente')
-                            <form class="formulario-eliminar" action="{{ route('user.destroy', $user->id) }}" method="POST">
-                                <button type="button" class="btn btn-info btn-editar"
-                                    data-user-id="{{ $user->id }}" data-toggle="modal"
-                                    data-target="#editarUserModal{{ $user->id }}">Editar</button>
+                            <!-- Formulario para editar y eliminar usuarios -->
+                            <form class="formulario-eliminar" action="{{ route('user.destroy', $user->id) }}"
+                                method="POST">
+                                <button type="button" class="btn btn-info btn-editar" data-user-id="{{ $user->id }}"
+                                    data-toggle="modal" data-target="#editarUserModal{{ $user->id }}">Editar</button>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Eliminar</button>
+                                <!-- Botón para ver horario -->
+                                <button type="button" class="btn btn-primary btn-ver-horario"
+                                    data-user-id="{{ $user->id }}" data-toggle="modal"
+                                    data-target="#verHorarioModal">Ver Horario</button>
+
+                                <!-- Botón para asignar horario -->
+                                <button type="button" class="btn btn-primary btn-asignar-horario"
+                                    data-user-id="{{ $user->id }}" data-toggle="modal"
+                                    data-target="#asignarHorarioModal">Asignar Horario</button>
+
                             </form>
                         @else
-                            <button type="button" class="btn btn-info btn-editar"
-                                data-user-id="{{ $user->id }}" data-toggle="modal"
-                                data-target="#editarUserModal{{ $user->id }}">Editar</button>
+                            <!-- Solo botón de editar para el rol Gerente -->
+                            <button type="button" class="btn btn-info btn-editar" data-user-id="{{ $user->id }}"
+                                data-toggle="modal" data-target="#editarUserModal{{ $user->id }}">Editar</button>
                         @endif
                     </td>
                 </tr>
@@ -63,6 +74,9 @@
     </table>
     @include('user.create')
     @include('user.edit')
+    @include('horario_user.create') {{-- ASIGNAR HORARIO --}}
+    @include('horario_user.index') {{-- VER HORARIO --}}
+
 @stop
 
 @section('css')
@@ -98,6 +112,16 @@
             )
         </script>
     @endif
+     @if (session(' success-asignar-horario'))
+        <script>
+            Swal.fire(
+                'Exito!',
+                'El horario se ha asignado correctamente al usuario',
+                'success'
+            )
+        </script>
+    @endif
+
     @if (session('edit-success'))
         <script>
             Swal.fire(
@@ -108,6 +132,22 @@
         </script>
     @endif
     <script>
+        $(document).ready(function() {
+            // Evento click para abrir el modal y obtener el horario del usuario
+            $('.btn-ver-horario').on('click', function() {
+                var userId = $(this).data('user-id');
+                $('#horarioUsuarioBody')
+                    .empty(); // Limpia el contenido del modal antes de cargar el nuevo horario
+                $.get('{{ route('user.getHorario') }}', {
+                    userId: userId
+                }, function(data) {
+                    // Mostrar el horario del usuario en el modal
+                    $('#horarioUsuarioBody').html(data);
+                    $('#verHorarioModal').modal('show');
+                });
+            });
+        });
+
         $('.formulario-eliminar').submit(function(evento) {
             evento.preventDefault();
 
@@ -126,7 +166,6 @@
                 }
             })
         })
-
 
 
         $('.btn-editar').on('click', function() {
