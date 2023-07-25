@@ -52,12 +52,12 @@ Route::resource('user', UserController::class)->middleware(['auth', 'registrar.v
 
 
 Route::resource('licencia', LicenciaController::class)->middleware(['auth']);
-Route::resource('horario', HorarioController::class)->middleware(['auth']);
+Route::resource('horario', HorarioController::class)->middleware(['auth','registrar.visita.horario']);
 Route::resource('horario_user', HorarioUserController::class)->middleware(['auth']);
-Route::resource('sucursal', SucursalController::class)->middleware(['auth']);
-Route::resource('rol', RolController::class)->middleware(['auth']);
+Route::resource('sucursal', SucursalController::class)->middleware(['auth', 'registrar.visita.sucursal']);
+Route::resource('rol', RolController::class)->middleware(['auth', 'registrar.visita.rol']);
 Route::resource('documento', DocumentoController::class)->middleware(['auth']);
-Route::resource('asistencia', AsistenciaController::class)->middleware(['auth']);
+Route::resource('asistencia', AsistenciaController::class)->middleware(['auth', 'registrar.visita.asistencia']);
 
 Route::post('/registrar-asistencia-llegada', [AsistenciaController::class, 'registrarAsistenciaLlegada'])->name('registrarAsistenciaLlegada')->middleware(['auth']);
 Route::post('/registrar-asistencia-salida', [AsistenciaController::class, 'registrarAsistenciaSalida'])->name('registrarAsistenciaSalida')->middleware(['auth']);

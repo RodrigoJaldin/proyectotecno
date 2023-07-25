@@ -70,6 +70,21 @@
     @include('rol.edit')
     @include('rol.create')
 
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <div style="position: fixed; bottom: 10px; right: 10px;">
+                    <h2 style="font-size: 17px;">Visitas</h2>
+                    <div class="card bg-light" style="width: 120px; height: 80px; font-size: 14px;">
+                        <div class="card-body">
+                            <p class="card-text" style="font-size: 18px;">{{ session('contadorVisitasRol') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @stop
 
 @section('css')
