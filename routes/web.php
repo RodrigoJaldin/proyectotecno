@@ -41,4 +41,7 @@ Route::resource('horario_user', HorarioUserController::class)->middleware(['auth
 Route::resource('sucursal', SucursalController::class)->middleware(['auth']);
 Route::resource('rol', RolController::class)->middleware(['auth']);
 Route::resource('documento', DocumentoController::class)->middleware(['auth']);
-//Route::post('registrar-asistencia', AsistenciaController::class, 'registrar-asistencia'])->name('asistencia.registrar-asistencia')->middleware(['auth']);
+Route::resource('asistencia', AsistenciaController::class)->middleware(['auth']);
+
+Route::post('/registrar-asistencia-llegada', [AsistenciaController::class, 'registrarAsistenciaLlegada'])->name('registrarAsistenciaLlegada')->middleware(['auth']);
+Route::post('/registrar-asistencia-salida', [AsistenciaController::class, 'registrarAsistenciaSalida'])->name('registrarAsistenciaSalida')->middleware(['auth']);

@@ -34,10 +34,11 @@ class SucursalController extends Controller
             'direccion' => 'required',
         ]);
 
-        Sucursal::create([
-            'nombre' => $request->input('nombre'),
-            'direccion' => $request->input('direccion'),
-        ]);
+        // Crear la nueva sucursal en la base de datos
+        $sucursal = new Sucursal();
+        $sucursal->nombre = $request->input('nombre');
+        $sucursal->direccion = $request->input('direccion');
+        $sucursal->save();
 
         return redirect()->route('sucursal.index')->with('success', 'La sucursal ha sido creada exitosamente');
     }
@@ -61,18 +62,21 @@ class SucursalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Sucursal $sucursal)
+    public function update(Request $request, string $id)
     {
         $request->validate([
             'nombre' => 'required',
             'direccion' => 'required',
         ]);
 
-        $sucursal->update([
-            'nombre' => $request->input('nombre'),
-            'direccion' => $request->input('direccion'),
-        ]);
+        // Obtener el usuario existente por su ID
+        $sucursal = Sucursal::findOrFail($id);
 
+         // Actualizar los datos del usuario
+         $sucursal->nombre = $request->input('nombre');
+         $sucursal->direccion = $request->input('direccion');
+
+         $sucursal->save();
         return redirect()->route('sucursal.index')->with('edit-success', 'La sucursal ha sido editada exitosamente');
     }
 
