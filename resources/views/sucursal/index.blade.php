@@ -81,6 +81,7 @@
         </tbody>
     </table>
     @include('sucursal.create')
+
 @stop
 
 @section('css')
