@@ -1,6 +1,6 @@
 <!-- Modal Crear Rol -->
 <div class="modal fade" id="crearRolModal" tabindex="-1" role="dialog" aria-labelledby="crearRolModalLabel"
-    aria-hidden="true">
+    aria-hidden="true" data-backdrop="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

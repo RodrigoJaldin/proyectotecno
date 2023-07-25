@@ -40,7 +40,7 @@
                 </tr>
                 <!-- Modal Editar Sucursal -->
                 <div class="modal fade" id="editarSucursalModal{{ $sucursal->id }}" tabindex="-1" role="dialog"
-                    aria-labelledby="editarSucursalModal{{ $sucursal->id }}" aria-hidden="true">
+                    aria-labelledby="editarSucursalModal{{ $sucursal->id }}" aria-hidden="true" data-backdrop="false">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">

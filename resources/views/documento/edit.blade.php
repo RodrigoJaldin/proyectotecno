@@ -20,8 +20,13 @@
             <input type="file" name="archivo" id="archivo" class="form-control-file">
         </div>
         <div class="form-group">
-            <label for="id_user">ID de Usuario</label>
-            <input type="text" name="id_user" id="id_user" class="form-control" value="{{ $documento->id_user }}" required>
+            <label for="id_user">Usuario</label>
+            <select name="id_user" id="id_user" class="form-control" required>
+                <option value="">Seleccionar Usuario</option>
+                @foreach ($users as $user)
+                    <option value="{{ $user->id }}" {{ $documento->id_user == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
+                @endforeach
+            </select>
         </div>
         <button type="submit" class="btn btn-primary">Actualizar Documento</button>
     </form>
