@@ -83,6 +83,7 @@
                     <a href="asistencia">Asistencias</a>
                     <a href="horario">Horarios</a>
                     <a href="documento">Documentos</a>
+                    <a href="licencia">Licencias</a>
 
                 </li>
 

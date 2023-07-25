@@ -84,10 +84,12 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="id_user{{ $documento->id }}">Usuario</label>
-                                        <select name="id_user" id="id_user{{ $documento->id }}" class="form-control" required>
-                                            <option value="">{{ $documento->users->name}}</option>
+                                        <select name="id_user" id="id_user{{ $documento->id }}" class="form-control"
+                                            required>
+                                            <option value="">{{ $documento->users->name }}</option>
                                             @foreach ($users as $user)
-                                                <option value="{{ $user->id }}" {{ $documento->id_user == $user->id ? 'selected' : '' }}>
+                                                <option value="{{ $user->id }}"
+                                                    {{ $documento->id_user == $user->id ? 'selected' : '' }}>
                                                     {{ $user->name }}
                                                 </option>
                                             @endforeach
