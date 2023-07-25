@@ -83,27 +83,25 @@ class DocumentoController extends Controller
         $request->validate([
             'descripcion' => 'required|min:1',
             'tipo_documento' => 'required|min:1',
-            'archivo' => 'required|file',
             'id_user' => 'required|exists:user,id',
 
         ]);
-
-
-        $documento = new Documento();
 
         $documento->descripcion = $request->descripcion;
         $documento->tipo_documento = $request->tipo_documento;
 
         if ($request->hasFile('archivo')) {
-            // Eliminar la foto anterior si existe
+            // Eliminar el archivo anterior si existe
             if ($documento->archivo) {
                 Storage::delete($documento->archivo);
             }
 
-            $archivos = $request->file('archivo')->store('public/documentos_archivos');
-            $url = Storage::url($archivos);
+            $archivo = $request->file('archivo')->store('public/documentos_archivos');
+            $url = Storage::url($archivo);
             $documento->archivo = $url;
         }
+
+        $documento->id_user = $request->id_user; // Actualizar el ID de usuario
 
         $documento->save();
 

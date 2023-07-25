@@ -13,8 +13,10 @@
         <thead class="bg-primary text-white">
             <tr>
                 <th>ID</th>
+                <th>Usuario</th>
                 <th>Descripcion</th>
                 <th>Tipo Documento</th>
+                <th>Archivo</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -22,6 +24,9 @@
         <tbody>
             @foreach ($documentos as $documento)
                 <tr>
+                    <td>{{ $documento->id }}</td>
+
+                    <td>{{ $documento->users->name }} {{ $documento->users->apellido }}</td>
                     <td>{{ $documento->descripcion }}</td>
                     <td>{{ $documento->tipo_documento }}</td>
                     <td>
@@ -32,16 +37,69 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('documento.edit', $documento) }}" class="btn btn-info">Editar</a>
-                        <form action="{{ route('documento.destroy', $documento) }}" method="POST"
-                            style="display: inline-block;">
+                        <form class="formulario-eliminar" action="{{ route('documento.destroy', $documento->id) }}"
+                            method="POST">
+                            <button type="button" class="btn btn-info btn-editar" data-documento-id="{{ $documento->id }}"
+                                data-toggle="modal" data-target="#editarDocumentoModal{{ $documento->id }}">Editar</button>
+
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger"
-                                onclick="return confirm('¿Estás seguro de eliminar este documento?')">Eliminar</button>
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
                         </form>
                     </td>
                 </tr>
+                <!-- ... -->
+                <div class="modal fade" id="editarDocumentoModal{{ $documento->id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="editarDocumentoModalLabel{{ $documento->id }}" aria-hidden="true"
+                    data-backdrop="false">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editarDocumentoModalLabel{{ $documento->id }}">Editar Documento
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="editarDocumentoForm{{ $documento->id }}"
+                                    action="{{ route('documento.update', $documento->id) }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="form-group">
+                                        <label for="descripcion{{ $documento->id }}">Descripción</label>
+                                        <input type="text" name="descripcion" id="descripcion{{ $documento->id }}"
+                                            class="form-control" value="{{ $documento->descripcion }}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tipo_documento{{ $documento->id }}">Tipo de Documento</label>
+                                        <input type="text" name="tipo_documento" id="tipo_documento{{ $documento->id }}"
+                                            class="form-control" value="{{ $documento->tipo_documento }}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="archivo{{ $documento->id }}">Archivo</label>
+                                        <input type="file" name="archivo" id="archivo{{ $documento->id }}"
+                                            class="form-control-file">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="id_user{{ $documento->id }}">Usuario</label>
+                                        <select name="id_user" id="id_user{{ $documento->id }}" class="form-control" required>
+                                            <option value="">{{ $documento->users->name}}</option>
+                                            @foreach ($users as $user)
+                                                <option value="{{ $user->id }}" {{ $documento->id_user == $user->id ? 'selected' : '' }}>
+                                                    {{ $user->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Actualizar Documento</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endforeach
         </tbody>
     </table>
@@ -63,6 +121,67 @@
     <script>
         $('#documentos').DataTable();
     </script>
+    @if (session('eliminar') == 'ok')
+        <script>
+            Swal.fire(
+                'Eliminado!',
+                'El documento ha sido eliminado exitosamente',
+                'success'
+            )
+        </script>
+    @endif
+    @if (session('success'))
+        <script>
+            Swal.fire(
+                'Exito!',
+                'El documento ha sido creado exitosamente',
+                'success'
+            )
+        </script>
+    @endif
+    @if (session('edit-success'))
+        <script>
+            Swal.fire(
+                'Exito!',
+                'El documento ha sido editado exitosamente',
+                'success'
+            )
+        </script>
+    @endif
+    <script>
+        $('.formulario-eliminar').submit(function(evento) {
+            evento.preventDefault();
 
+            Swal.fire({
+                title: 'Estas seguro?',
+                text: "Este documento se eliminara definitivamente",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    this.submit();
+                }
+            })
+        })
+        $('.btn-editar').on('click', function() {
+            var documentoId = $(this).data('documento-id');
+            var descripcion = $(this).closest('tr').find('td:eq(2)').text();
+            var tipoDocumento = $(this).closest('tr').find('td:eq(3)').text();
+
+            $('#editarDocumentoForm' + documentoId).attr('action', "{{ route('documento.update', '') }}" + "/" +
+                documentoId);
+            $('#descripcion' + documentoId).val(descripcion);
+            $('#tipo_documento' + documentoId).val(tipoDocumento);
+
+            // Aquí puedes seguir con el código para el campo de usuario (select)
+            // Por ejemplo:
+            var userId = $(this).closest('tr').find('td:eq(1)').data('user-id');
+            $('#id_user' + documentoId).val(userId);
+        });
+    </script>
 
 @stop
