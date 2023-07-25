@@ -49,6 +49,12 @@ a, a:hover, a:focus {
     SIDEBAR STYLE
 ----------------------------------------------------- */
 
+/* Your existing CSS styles go here */
+
+
+/* Add more night mode styles for specific elements as needed */
+
+
 .wrapper {
     display: flex;
     width: 100%;
@@ -59,7 +65,7 @@ a, a:hover, a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #ffa500; /* Cambiamos el color del sidebar a naranja */
+    background: #ffc107; /* Cambiamos el color del sidebar a naranja */
     color: #fff;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
@@ -72,12 +78,12 @@ a, a:hover, a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #ffa500;
+    background: #000000;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #ffa500;
+    border-bottom: 1px solid #ffc107;
 }
 
 #sidebar ul p {
@@ -91,13 +97,13 @@ a, a:hover, a:focus {
     display: block;
 }
 #sidebar ul li a:hover {
-    color: #ffa500;
+    color: #ffc107;
     background: #fff;
 }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: #ffa500;
+    background: #ffc107;
 }
 
 a[data-toggle="collapse"] {
@@ -115,7 +121,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #ffa500;
+    background: #ffc107;
 }
 
 ul.CTAs {
@@ -132,11 +138,11 @@ ul.CTAs a {
 
 a.download {
     background: #fff;
-    color: #ffa500;
+    color: #ffc107;
 }
 
 a.article, a.article:hover {
-    background: #ffa500 !important;
+    background: #ffc107 !important;
     color: #fff !important;
 }
 /* ---------------------------------------------------
@@ -217,11 +223,18 @@ a.article, a.article:hover {
     }
 
 }
-
+.btn-editar{
+    background-color: #ffc107;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 /* Table Styles */
 /* table_styles.css */
 
 /* Table Styles */
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -248,48 +261,146 @@ tbody tr:hover {
 
 /* Modal Styles */
 
-/* Modal Styles */
-/* Estilos del header */
+/* Estilos para el modal */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 .modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+    padding: 15px;
 }
 
 .modal-title {
-    font-size: 1.2em;
+    font-size: 1.4em;
     font-weight: 600;
-    color: #ffa500; /* Color naranja para el título del modal */
+    color: #ffa500;
 }
 
 .modal-close {
     cursor: pointer;
-    font-size: 1.2em;
+    font-size: 1.4em;
     color: #999;
 }
 
-/* Estilos del cuerpo del modal */
 .modal-body {
-    margin-bottom: 20px;
+    padding: 15px;
 }
 
-/* Estilos del footer */
 .modal-footer {
+    padding: 15px;
     text-align: right;
+    border-top: 1px solid #ddd;
 }
 
 .modal-footer button {
-    padding: 8px 16px;
-    background-color: #ffa500; /* Cambiamos el color de los botones a naranja */
+    padding: 8px 20px;
+    background-color: #ffa500;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .modal-footer button:hover {
-    background-color: #ff9900; /* Cambiamos el color del botón al hacer hover */
+    background-color: #ff9900;
+}
+
+/* Estilos para el modo noche */
+body.night-mode .modal {
+    background-color: #333;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/*NOCHE*/
+/* Night mode styles */
+body.night-mode {
+    background: #353535;
+    color: #ddd;
+}/* Estilos para el modo noche */
+body.night-mode .modal-header {
+    background-color: #000000;
+    border-bottom: 1px solid #000000 !important;
+}
+
+body.night-mode .modal-title {
+    color: #ffd700 !important; /* Color dorado para el título del modal en modo noche */
+}
+
+body.night-mode .modal-close {
+    color: #ffffff !important;
+}
+
+body.night-mode .modal-body {
+    background-color: #777777 !important;
+    color: #ffffff !important;
+}
+
+body.night-mode .modal-footer {
+    background-color: #000000;
+    border-top: 1px solid #000000 !important;
+}
+
+body.night-mode .modal-footer button {
+    background-color: #ffd700 !important;
+    color: #000000 !important;
+}
+
+body.night-mode .modal-footer button:hover {
+    background-color: #ffcc00 !important;
+    color: #000000 !important;
+
+}
+
+body.night-mode .modal-footer .button-secondary {
+    background-color: #333 !important;
+    color: #000000 !important;
+
+}
+
+body.night-mode .modal-footer .button-secondary:hover {
+    background-color: #444 !important;
+    color: #000000 !important;
+
+}
+
+
+
+/* Table Styles para el modo noche */
+body.night-mode table {
+    border: 1px solid #555;
+    background-color: rgb(0, 0, 0);
+    color: #fff !important; /* Cambiamos el color del texto a blanco en modo noche */
+}
+
+
+body.night-mode table th {
+    background-color: #ffc107 !important; /* Mantenemos el fondo naranja más suave para los títulos en modo noche */
+    color: #000 !important; /* Cambiamos el color del texto a negro para los títulos en modo noche */
+    border-bottom: 1px solid #555;
+}
+
+body.night-mode td {
+    color: #fff !important; /* Cambiamos el color del texto a blanco en modo noche para las celdas */
+}
+
+body.night-mode tbody tr:nth-child(even) {
+    background-color: #444 !important;
+}
+
+body.night-mode tbody tr:hover {
+
+    background-color: #555 !important; /* Fondo gris más claro cuando se pasa el cursor por encima en modo noche */
 }
