@@ -25,17 +25,17 @@ class UserController extends Controller
     }
 
 
-
     public function gerente()
     {
         $users = User::whereHas('rol', function ($query) {
             $query->where('tipo_rol', 'Gerente');
         })->get();
+
         $roles = Rol::all();
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+        return redirect()->route('user')->with(compact('users', 'roles', 'sucursales', 'horarios'));
     }
 
     public function jefesCocina()
@@ -43,11 +43,12 @@ class UserController extends Controller
         $users = User::whereHas('rol', function ($query) {
             $query->where('tipo_rol', 'Jefe de Cocina');
         })->get();
+
         $roles = Rol::all();
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+        return redirect()->route('user')->with(compact('users', 'roles', 'sucursales', 'horarios'));
     }
 
     public function jefesCaja()
