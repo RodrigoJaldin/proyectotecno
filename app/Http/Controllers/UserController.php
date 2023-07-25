@@ -15,6 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        
         $users = User::all();
         $roles = Rol::all();
         $sucursales = Sucursal::all();

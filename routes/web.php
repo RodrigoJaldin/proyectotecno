@@ -9,6 +9,8 @@ use App\Http\Controllers\LicenciaController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\SucursalController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VisitaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,7 +36,10 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::resource('user', UserController::class)->middleware(['auth']);
+/*VISITAS */
+/* Route::get('/user', [VisitaController::class, 'registrarVisita']); */
+
+Route::resource('user', UserController::class)->middleware(['auth', 'registrar.visita']);
 Route::resource('licencia', LicenciaController::class)->middleware(['auth']);
 Route::resource('horario', HorarioController::class)->middleware(['auth']);
 Route::resource('horario_user', HorarioUserController::class)->middleware(['auth']);
@@ -45,3 +50,5 @@ Route::resource('asistencia', AsistenciaController::class)->middleware(['auth'])
 
 Route::post('/registrar-asistencia-llegada', [AsistenciaController::class, 'registrarAsistenciaLlegada'])->name('registrarAsistenciaLlegada')->middleware(['auth']);
 Route::post('/registrar-asistencia-salida', [AsistenciaController::class, 'registrarAsistenciaSalida'])->name('registrarAsistenciaSalida')->middleware(['auth']);
+
+

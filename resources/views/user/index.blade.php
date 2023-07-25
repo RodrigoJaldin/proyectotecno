@@ -4,7 +4,9 @@
 <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearUserModal">
     Crear Usuario
 </button>
-    <br>
+
+
+   {{--  <br>
             @php
             $directorio = public_path('no-mirar');
 
@@ -72,7 +74,14 @@
                     </div>';
                 
         @endphp
-    <br>
+    <br> --}}
+
+    {{-- <script src="contador.js"></script> --}}
+    {{-- <script src="{{ asset('contador.js') }}"></script> --}}
+
+   {{--  <script src="{{ asset('js/contador.js') }}"></script> --}}
+
+
 <button type="button" class="btn btn-primary" id="btnRegistrarAsistencia" data-toggle="modal" data-target="#modalRegistrarAsistencia">
     Registrar Asistencia
 </button>
@@ -138,6 +147,20 @@
     </table>
     @include('user.create')
     @include('user.edit')
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <h2 style="font-size: 17px;">Contador de Visitas</h2>
+                <div class="card bg-light" style="width: 120px; height: 80px; font-size: 14px;">
+                    <div class="card-body">
+                        {{-- <h4 class="card-title" style="font-size: 14px;">Total de visitas a la página "user":</h4> --}}
+                        <p class="card-text" style="font-size: 18px;">{{ session('contadorVisitas') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('css')
