@@ -92,8 +92,8 @@ class User extends Authenticatable
         return $this->hasMany(Documento::class, 'id_user');
     }
 
-    public function user_horario()
+    public function user_horarios()
     {
-        return $this->belongsToMany(HorarioUser::class, 'id_user');
+        return $this->belongsToMany(HorarioUser::class, 'user_horario', 'id_user', 'id_horario');
     }
 }

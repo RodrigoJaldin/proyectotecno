@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title" id="editarUserModal{{ $user->id }}">Editar Usuario</h2>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar" >
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
