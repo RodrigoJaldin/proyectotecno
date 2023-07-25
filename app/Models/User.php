@@ -93,7 +93,7 @@ class User extends Authenticatable
     }
 
     public function user_horarios()
-{
-    return $this->belongsToMany(HorarioUser::class, 'user_horario', 'id_user', 'id_horario');
-}
+    {
+        return $this->belongsToMany(HorarioUser::class, 'user_horario', 'id_user', 'id_horario');
+    }
 }

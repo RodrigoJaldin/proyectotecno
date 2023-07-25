@@ -28,16 +28,18 @@ class HorarioUserController extends Controller
      */
     public function store(Request $request)
     {
+        // Validar los datos recibidos del formulario
         $request->validate([
-            'userId' => 'required|integer|exists:users,id',
+            'userId' => 'required|integer|exists:user,id',
             'horario_id' => 'required|integer|exists:horario,id',
-            'dia_laboral' => 'required|in:Lunes,Martes,Miércoles,Jueves,Viernes,Sábado,Domingo',
+            'dia_laboral' => 'required|string|max:50',
         ]);
 
+        // Obtener los datos del formulario
         $userId = $request->input('userId');
         $horarioId = $request->input('horario_id');
         $diaLaboral = $request->input('dia_laboral');
-        dd($userId);
+
         // Verificar si el usuario ya tiene un horario asignado para el día laboral seleccionado
         $userHorario = HorarioUser::where('id_user', $userId)->where('dia_laboral', $diaLaboral)->first();
 
@@ -53,7 +55,8 @@ class HorarioUserController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success-asignar-horario', 'Horario asignado exitosamente');
+        // Redirigir de regreso al index de usuarios con un mensaje de éxito
+        return redirect()->route('user.index')->with('success-horario-asignado', 'Horario asignado exitosamente');
     }
 
     /**

@@ -24,6 +24,8 @@ class UserController extends Controller
         return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
 
+
+
     public function gerente()
     {
         $users = User::whereHas('rol', function ($query) {
@@ -117,15 +119,6 @@ class UserController extends Controller
         return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
 
-
-    public function getHorario(Request $request)
-    {
-        $userId = $request->input('userId');
-        $user = User::find($userId);
-        $horarioUsuario = $user->user_horarios;
-
-        return view('horario_user.index', compact('horarioUsuario'));
-    }
 
     /**
      * Show the form for creating a new resource.

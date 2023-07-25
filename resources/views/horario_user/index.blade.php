@@ -1,6 +1,5 @@
-<!-- Modal para ver el horario del usuario -->
 <div class="modal fade" id="verHorarioModal" tabindex="-1" role="dialog" aria-labelledby="verHorarioModalLabel"
-    aria-hidden="true">
+    aria-hidden="true" data-backdrop="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,7 +8,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="horarioUsuarioBody">
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -18,27 +17,24 @@
                             <th>Hora de Salida</th>
                         </tr>
                     </thead>
-                    <tbody id="horarioBody">
-                        @if ($user->user_horario)
-                            @foreach ($user->user_horario as $horario)
-                                <tr>
-                                    <td>{{ $horario->dia_laboral }}</td>
-                                    <td>{{ $horario->horario->hora_entrada }}</td>
-                                    <td>{{ $horario->horario->hora_salida }}</td>
-                                </tr>
-                            @endforeach
-                        @else
+                    <tbody>
+                        @forelse ($user->user_horarios as $horario)
+                            <tr>
+                                <td>{{ $horario->dia_laboral }}</td>
+                                <td>{{ $horario->horario->hora_entrada }}</td>
+                                <td>{{ $horario->horario->hora_salida }}</td>
+                            </tr>
+                        @empty
                             <tr>
                                 <td colspan="3">El usuario no tiene un horario asignado.</td>
                             </tr>
-                        @endif
+                        @endforelse
                     </tbody>
                 </table>
             </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            </div>
         </div>
     </div>
+
+
 </div>
+

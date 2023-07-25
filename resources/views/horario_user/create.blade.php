@@ -1,6 +1,6 @@
 <!-- Modal para asignar horario a un usuario -->
 <div class="modal fade" id="asignarHorarioModal" tabindex="-1" role="dialog" aria-labelledby="asignarHorarioModalLabel"
-    aria-hidden="true">
+    aria-hidden="true" data-backdrop="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,7 +12,8 @@
             <div class="modal-body">
                 <form id="asignarHorarioForm" action="{{ route('asignarHorario') }}" method="POST">
                     @csrf
-                    <input type="hidden" id="userId" name="userId">
+                    <input type="hidden" id="userId" name="userId" value="{{ $user->id }}">
+
 
                     <div class="form-group">
                         <label for="horario_id">Seleccionar Horario</label>

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearUserModal" data-backdrop="false">
-    Crear Usuario
-</button>
+    <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearUserModal" data-backdrop="false">
+        Crear Usuario
+    </button>
 
 
     <br> <br>
@@ -69,6 +69,7 @@
                         @endif
                     </td>
                 </tr>
+
                 <!-- Modal Editar Usuario -->
                 <div class="modal fade" id="editarUserModal{{ $user->id }}" tabindex="-1" role="dialog"
                     aria-labelledby="editarUserModal{{ $user->id }}" aria-hidden="true" data-backdrop="false">
@@ -166,11 +167,12 @@
                     </div>
                 </div>
             @endforeach
+
         </tbody>
     </table>
     @include('user.create')
     @include('horario_user.create') {{-- ASIGNAR HORARIO --}}
-    @include('horario_user.index') {{-- VER HORARIO --}}
+    {{-- @include('horario_user.index') VERHORARIO --}}
 
 @stop
 
@@ -207,6 +209,16 @@
             )
         </script>
     @endif
+    @if (session('success-horario-asignado'))
+        <script>
+            Swal.fire(
+                'Exito!',
+                'El usuario ha sido creado exitosamente',
+                'success'
+            )
+        </script>
+    @endif
+
     @if (session(' success-asignar-horario'))
         <script>
             Swal.fire(
@@ -227,22 +239,6 @@
         </script>
     @endif
     <script>
-        $(document).ready(function() {
-            // Evento click para abrir el modal y obtener el horario del usuario
-            $('.btn-ver-horario').on('click', function() {
-                var userId = $(this).data('user-id');
-                $('#horarioUsuarioBody')
-                    .empty(); // Limpia el contenido del modal antes de cargar el nuevo horario
-                $.get('{{ route('user.getHorario') }}', {
-                    userId: userId
-                }, function(data) {
-                    // Mostrar el horario del usuario en el modal
-                    $('#horarioUsuarioBody').html(data);
-                    $('#verHorarioModal').modal('show');
-                });
-            });
-        });
-
         $(document).ready(function() {
             // Evento click para el botón de "Asignar Horario"
             $('.btn-asignar-horario').on('click', function() {
