@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearUserModal">
-        Crear Usuario
-    </button>
+<button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearUserModal" data-backdrop="false">
+    Crear Usuario
+</button>
 
 
     <br> <br>
