@@ -35,7 +35,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
 
     public function jefesCocina()
@@ -47,7 +47,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
 
     public function jefesCaja()
@@ -59,7 +59,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
 
     public function jefesAlmacen()
@@ -71,7 +71,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
 
     public function encargadosPlancha()
@@ -83,7 +83,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
     public function auxiliaresCocina()
     {
@@ -94,7 +94,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
     public function cajeros()
     {
@@ -105,7 +105,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
     public function limpieza()
     {
@@ -116,7 +116,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
 
 

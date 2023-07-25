@@ -213,17 +213,7 @@
         <script>
             Swal.fire(
                 'Exito!',
-                'El usuario ha sido creado exitosamente',
-                'success'
-            )
-        </script>
-    @endif
-
-    @if (session(' success-asignar-horario'))
-        <script>
-            Swal.fire(
-                'Exito!',
-                'El horario se ha asignado correctamente al usuario',
+                'El horario se ha asignado exitosamente',
                 'success'
             )
         </script>

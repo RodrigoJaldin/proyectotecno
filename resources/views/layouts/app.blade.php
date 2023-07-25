@@ -70,7 +70,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">About</a>
+                    <a href="asistencia">Asistencias</a>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
