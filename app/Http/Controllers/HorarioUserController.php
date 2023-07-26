@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\HorarioUser;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HorarioUserController extends Controller
@@ -27,10 +28,19 @@ class HorarioUserController extends Controller
 
     public function showUserHorarios($user_id)
     {
-        //dd($user_id);
+        $user = User::find($user_id);
+
+        if (!$user) {
+            // Manejar el caso cuando el usuario no existe
+            return redirect()->back()->with('error', 'Usuario no encontrado');
+        }
+
         $userHorarios = HorarioUser::where('id_user', $user_id)->with(['users', 'horario'])->get();
-        return redirect()->route('horario_user.index', compact('userHorarios'));
+        return view('horario_user.index', compact('userHorarios', 'user'));
     }
+
+
+
 
     /**
      * Store a newly created resource in storage.
