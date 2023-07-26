@@ -17,7 +17,9 @@ p {
     color: #999;
 }
 
-a, a:hover, a:focus {
+a,
+a:hover,
+a:focus {
     color: inherit;
     text-decoration: none;
     transition: all 0.3s;
@@ -49,12 +51,6 @@ a, a:hover, a:focus {
     SIDEBAR STYLE
 ----------------------------------------------------- */
 
-/* Your existing CSS styles go here */
-
-
-/* Add more night mode styles for specific elements as needed */
-
-
 .wrapper {
     display: flex;
     width: 100%;
@@ -65,7 +61,8 @@ a, a:hover, a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #ffc107; /* Cambiamos el color del sidebar a naranja */
+    background: #ffc107;
+    /* Cambiamos el color del sidebar a naranja */
     color: #fff;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
@@ -96,12 +93,14 @@ a, a:hover, a:focus {
     font-size: 1.1em;
     display: block;
 }
+
 #sidebar ul li a:hover {
     color: #ffc107;
     background: #fff;
 }
 
-#sidebar ul li.active > a, a[aria-expanded="true"] {
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
     color: #fff;
     background: #ffc107;
 }
@@ -167,9 +166,11 @@ ul.CTAs a {
 #sidebarCollapse span:first-of-type {
     transform: rotate(45deg) translate(2px, 2px);
 }
+
 #sidebarCollapse span:nth-of-type(2) {
     opacity: 0;
 }
+
 #sidebarCollapse span:last-of-type {
     transform: rotate(-45deg) translate(1px, -1px);
 }
@@ -190,10 +191,12 @@ ul.CTAs a {
         margin-left: -250px;
         transform: rotateY(90deg);
     }
+
     #sidebar.active {
         margin-left: 0;
         transform: none;
     }
+
     #sidebarCollapse span:first-of-type,
     #sidebarCollapse span:nth-of-type(2),
     #sidebarCollapse span:last-of-type {
@@ -201,27 +204,33 @@ ul.CTAs a {
         opacity: 1;
         margin: 5px auto;
     }
+
     #sidebarCollapse.active span {
         margin: 0 auto;
     }
+
     #sidebarCollapse.active span:first-of-type {
         transform: rotate(45deg) translate(2px, 2px);
     }
+
     #sidebarCollapse.active span:nth-of-type(2) {
         opacity: 0;
     }
+
     #sidebarCollapse.active span:last-of-type {
         transform: rotate(-45deg) translate(1px, -1px);
     }
 
 }
-.btn-editar{
+
+.btn-editar {
     background-color: #ffc107;
     color: #000;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
+
 /* Table Styles */
 /* table_styles.css */
 
@@ -235,8 +244,10 @@ table {
 }
 
 table th {
-    background-color: #ffc107 !important; /* Fondo naranja más suave para los títulos */
-    color: #000; /* Texto en color negro */
+    background-color: #ffc107 !important;
+    /* Fondo naranja más suave para los títulos */
+    color: #000;
+    /* Texto en color negro */
     padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -247,7 +258,8 @@ tbody tr:nth-child(even) {
 }
 
 tbody tr:hover {
-    background-color: #cfcfcf !important; /* Fondo amarillo cuando se pasa el cursor por encima */
+    background-color: #cfcfcf !important;
+    /* Fondo amarillo cuando se pasa el cursor por encima */
 }
 
 
@@ -321,14 +333,17 @@ body.night-mode .modal {
 body.night-mode {
     background: #353535;
     color: #ddd;
-}/* Estilos para el modo noche */
+}
+
+/* Estilos para el modo noche */
 body.night-mode .modal-header {
     background-color: #000000;
     border-bottom: 1px solid #000000 !important;
 }
 
 body.night-mode .modal-title {
-    color: #ffd700 !important; /* Color dorado para el título del modal en modo noche */
+    color: #ffd700 !important;
+    /* Color dorado para el título del modal en modo noche */
 }
 
 body.night-mode .modal-close {
@@ -374,18 +389,22 @@ body.night-mode .modal-footer .button-secondary:hover {
 body.night-mode table {
     border: 1px solid #555;
     background-color: rgb(0, 0, 0);
-    color: #fff !important; /* Cambiamos el color del texto a blanco en modo noche */
+    color: #fff !important;
+    /* Cambiamos el color del texto a blanco en modo noche */
 }
 
 
 body.night-mode table th {
-    background-color: #ffc107 !important; /* Mantenemos el fondo naranja más suave para los títulos en modo noche */
-    color: #000 !important; /* Cambiamos el color del texto a negro para los títulos en modo noche */
+    background-color: #ffc107 !important;
+    /* Mantenemos el fondo naranja más suave para los títulos en modo noche */
+    color: #000 !important;
+    /* Cambiamos el color del texto a negro para los títulos en modo noche */
     border-bottom: 1px solid #555;
 }
 
 body.night-mode td {
-    color: #fff !important; /* Cambiamos el color del texto a blanco en modo noche para las celdas */
+    color: #fff !important;
+    /* Cambiamos el color del texto a blanco en modo noche para las celdas */
 }
 
 body.night-mode tbody tr:nth-child(even) {
@@ -394,15 +413,26 @@ body.night-mode tbody tr:nth-child(even) {
 
 body.night-mode tbody tr:hover {
 
-    background-color: #555 !important; /* Fondo gris más claro cuando se pasa el cursor por encima en modo noche */
+    background-color: #555 !important;
+    /* Fondo gris más claro cuando se pasa el cursor por encima en modo noche */
 }
+
 /****************************************************************/
 /* Estilos específicos para Modo Niñ@ */
-body.modo-nino {
+/*body.modo-nino {
     background-color: pink;
     color: white;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}*/
+body.modo-nino {
+    background-color: pink;
+    color: white;
+    background-image: url('https://media.revistagq.com/photos/642d7028a81d2011d5ac3fde/3:2/w_1920,h_1280,c_limit/Barbie_movie_0001_Barbie___Teaser_Trailer_2_1-6_screenshot.jpeg'); /* Reemplaza 'ruta-de-la-imagen.jpg' con la URL o ruta de la imagen que desees usar */
+    background-size: cover;
+    background-position: center;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
 }
+
 
 /* Estilos específicos para Modo Niñ@ - Sidebar */
 body.modo-nino #sidebar {
@@ -423,13 +453,9 @@ body.modo-nino #sidebar ul li a:hover {
 }
 
 /* Estilos para Modo Niñ@ - Contenido */
-body.modo-nino #content {
-    background-color: pink; /* Cambiar el color de fondo del contenido a rosado en Modo Niñ@ */
-    color: white; /* Cambiar el color del texto del contenido a blanco en Modo Niñ@ */
-    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
-}
 
-body.modo-nino #sidebar ul li.active > a,
+
+body.modo-nino #sidebar ul li.active>a,
 body.modo-nino a[aria-expanded="true"] {
     background: rgb(255, 97, 123);
     color: #fff;
@@ -451,9 +477,12 @@ body.modo-nino table {
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
 }
 
+
 body.modo-nino table th {
-    background-color: rgb(255, 102, 128) !important; /* Fondo naranja más suave para los títulos */
-    color: #000; /* Texto en color negro */
+    background-color: rgb(255, 102, 128) !important;
+    /* Fondo naranja más suave para los títulos */
+    color: #000;
+    /* Texto en color negro */
     padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -464,5 +493,245 @@ body.modo-nino tbody tr:nth-child(even) {
 }
 
 body.modo-nino tbody tr:hover {
-    background-color: #cfcfcf !important; /* Fondo amarillo cuando se pasa el cursor por encima */
+    background-color: #cfcfcf !important;
+    /* Fondo amarillo cuando se pasa el cursor por encima */
+}
+body.modo-nino tbody tr {
+    background-color: #efefef9a !important;
+    /* Fondo amarillo cuando se pasa el cursor por encima */
+}
+
+body.modo-nino .btn-editar {
+    background-color: rgb(255, 102, 128);
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+body.modo-nino .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: pink;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+body.modo-nino .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+}
+
+body.modo-nino .modal-title {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: pink;
+}
+
+body.modo-nino .modal-body {
+    padding: 15px;
+    color: black;
+    /* Agregar esta línea para definir el color del texto a negro */
+}
+
+body.modo-nino .modal-close {
+    cursor: pointer;
+    font-size: 1.4em;
+    color: #999;
+}
+
+body.modo-nino .modal-body {
+    padding: 15px;
+}
+
+body.modo-nino .modal-footer {
+    padding: 15px;
+    text-align: right;
+    border-top: 1px solid #ddd;
+}
+
+body.modo-nino .modal-footer button {
+    padding: 8px 20px;
+    background-color: pink;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+body.modo-nino .modal-footer button:hover {
+    background-color: rgb(255, 163, 178);
+}
+
+body.modo-nino .btn-success {
+    background-color: rgb(255, 102, 128);
+}
+
+/*****************MODO JOVEN*****************************************/
+body.modo-joven {
+    background-color: rgb(145, 212, 246);
+    color: white;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+/* Estilos específicos para Modo JOVEN - Sidebar */
+body.modo-joven #sidebar {
+    background: rgb(102, 204, 255);
+    color: #fff;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-joven #sidebar ul li a {
+    color: #fff;
+    transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-joven #sidebar ul li a:hover {
+    color: rgb(102, 204, 255);
+    background: #fff;
+    transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-joven #content {
+    background-color: rgb(205, 238, 255);
+    /* Cambiar el color de fondo del contenido a rosado en Modo Niñ@ */
+    color: white;
+    /* Cambiar el color del texto del contenido a blanco en Modo Niñ@ */
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-joven #sidebar ul li.active>a,
+body.modo-joven a[aria-expanded="true"] {
+    background: rgb(102, 204, 255);
+    color: #fff;
+    transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-joven ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: rgb(102, 204, 255);
+    transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-joven table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-joven table th {
+    background-color: rgb(102, 204, 255) !important;
+    /* Fondo naranja más suave para los títulos */
+    color: #000;
+    /* Texto en color negro */
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+body.modo-joven tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+body.modo-joven tbody tr:hover {
+    background-color: #cfcfcf !important;
+    /* Fondo amarillo cuando se pasa el cursor por encima */
+}
+
+body.modo-joven .btn-editar {
+    background-color: rgb(102, 204, 255);
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+body.modo-joven .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(145, 212, 246);
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+body.modo-joven .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+}
+
+body.modo-joven .modal-title {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: rgb(145, 212, 246);
+}
+
+body.modo-joven .modal-body {
+    padding: 15px;
+    color: black;
+    /* Agregar esta línea para definir el color del texto a negro */
+}
+
+body.modo-joven .modal-close {
+    cursor: pointer;
+    font-size: 1.4em;
+    color: #999;
+}
+
+body.modo-joven .modal-body {
+    padding: 15px;
+}
+
+body.modo-joven .modal-footer {
+    padding: 15px;
+    text-align: right;
+    border-top: 1px solid #ddd;
+}
+
+body.modo-joven .modal-footer button {
+    padding: 8px 20px;
+    background-color: rgb(145, 212, 246);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+body.modo-joven .modal-footer button:hover {
+    background-color: rgb(145, 212, 246);
+}
+
+body.modo-joven .btn-success {
+    background-color: rgb(102, 204, 255);
+    color: #000;
+}
+
+body.modo-joven .dataTables_length {
+    color: #000;
+}
+
+body.modo-joven .dataTables_info {
+    color: #000;
+}
+
+body.modo-joven .dataTables_filter {
+    color: #000;
 }

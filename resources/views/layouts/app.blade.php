@@ -154,13 +154,13 @@
                                 <a class="nav-link" href="#" id="modo-normal-btn">Modo Normal</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" id="nodo-nino-btn">Nodo Niñ@</a>
+                                <a class="nav-link" href="#" id="modo-nino-btn">Modo Niña</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Modo Joven</a>
+                                <a class="nav-link" href="#" id="modo-joven-btn">Modo Joven</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Modo adulto</a>
+                                <a class="nav-link" href="#" id="modo-adulto-btn">Modo Adulto</a>
                             </li>
                         </ul>
                     </div>
