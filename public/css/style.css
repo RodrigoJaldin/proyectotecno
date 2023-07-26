@@ -136,15 +136,7 @@ ul.CTAs a {
     margin-bottom: 5px;
 }
 
-a.download {
-    background: #fff;
-    color: #ffc107;
-}
 
-a.article, a.article:hover {
-    background: #ffc107 !important;
-    color: #fff !important;
-}
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -403,4 +395,74 @@ body.night-mode tbody tr:nth-child(even) {
 body.night-mode tbody tr:hover {
 
     background-color: #555 !important; /* Fondo gris más claro cuando se pasa el cursor por encima en modo noche */
+}
+/****************************************************************/
+/* Estilos específicos para Modo Niñ@ */
+body.modo-nino {
+    background-color: pink;
+    color: white;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+/* Estilos específicos para Modo Niñ@ - Sidebar */
+body.modo-nino #sidebar {
+    background: rgb(255, 97, 123);
+    color: #fff;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-nino #sidebar ul li a {
+    color: #fff;
+    transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-nino #sidebar ul li a:hover {
+    color: pink;
+    background: #fff;
+    transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+/* Estilos para Modo Niñ@ - Contenido */
+body.modo-nino #content {
+    background-color: pink; /* Cambiar el color de fondo del contenido a rosado en Modo Niñ@ */
+    color: white; /* Cambiar el color del texto del contenido a blanco en Modo Niñ@ */
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-nino #sidebar ul li.active > a,
+body.modo-nino a[aria-expanded="true"] {
+    background: rgb(255, 97, 123);
+    color: #fff;
+    transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-nino ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: rgb(255, 122, 144);
+    transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-nino table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-nino table th {
+    background-color: rgb(255, 102, 128) !important; /* Fondo naranja más suave para los títulos */
+    color: #000; /* Texto en color negro */
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+body.modo-nino tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+body.modo-nino tbody tr:hover {
+    background-color: #cfcfcf !important; /* Fondo amarillo cuando se pasa el cursor por encima */
 }
