@@ -5,14 +5,13 @@
         Registrar Rotacion
     </button>
     <br> <br>
-    <table id="roles" class="table table-striped table-bordered" style="width: 100%">
+    <table id="rotaciones" class="table table-striped table-bordered" style="width: 100%">
         <thead class="bg-primary text-white">
             <tr>
                 <th>Usuario Solicitante</th>
                 <th>Usuario Reemplazante</th>
                 <th>Fecha</th>
                 <th>Horario</th>
-                <th>Acciones</th>
             </tr>
         </thead>
 
@@ -23,7 +22,6 @@
                     <td>{{ $rotacion->usuarioReemplazante->name }}</td>
                     <td>{{ $rotacion->fecha }}</td>
                     <td>{{ $rotacion->horario->turno }}</td>
-
                 </tr>
             @endforeach
         </tbody>
@@ -52,25 +50,12 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="id_horario_solicitante">Horario del Usuario Solicitante:</label>
-                            <select class="form-control" id="id_horario_solicitante" name="id_horario_solicitante" required>
-                                <!-- Los horarios del usuario solicitante se actualizarán dinámicamente mediante JavaScript -->
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label for="usuario_reemplazante">Usuario Reemplazante:</label>
                             <select class="form-control" id="usuario_reemplazante" name="usuario_reemplazante" required>
                                 <!-- Aquí debes mostrar la lista de usuarios que pueden ser reemplazantes -->
                                 @foreach ($users as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                 @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="id_horario_reemplazante">Horario del Usuario Reemplazante:</label>
-                            <select class="form-control" id="id_horario_reemplazante" name="id_horario_reemplazante"
-                                required>
-                                <!-- Los horarios del usuario reemplazante se actualizarán dinámicamente mediante JavaScript -->
                             </select>
                         </div>
 
@@ -96,6 +81,8 @@
             </div>
         </div>
     </div>
+
+
 
     <div class="container mt-5">
         <div class="row">
@@ -125,7 +112,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
     <script>
-        $('#roles').DataTable();
+        $('#rotaciones').DataTable();
 
         $('.formulario-eliminar').submit(function(evento) {
             evento.preventDefault();
@@ -140,59 +127,9 @@
                 confirmButtonText: 'Si, eliminar!'
             }).then((result) => {
                 if (result.isConfirmed) {
-
                     this.submit();
                 }
             })
-        });
-
-        // Función para obtener los horarios del usuario solicitante mediante una consulta AJAX
-        function fetchHorariosSolicitante(usuarioSolicitanteId) {
-            $.ajax({
-                url: `/getHorarios/${usuarioSolicitanteId}`,
-                type: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    const selectHorarioSolicitante = $('#id_horario_solicitante');
-                    selectHorarioSolicitante.empty();
-                    data.forEach(horario => {
-                        selectHorarioSolicitante.append($('<option>', {
-                            value: horario.id,
-                            text: horario.turno
-                        }));
-                    });
-                }
-            });
-        }
-
-        // Función para obtener los horarios del usuario reemplazante mediante una consulta AJAX
-        function fetchHorariosReemplazante(usuarioReemplazanteId) {
-            $.ajax({
-                url: `/getHorarios/${usuarioReemplazanteId}`,
-                type: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    const selectHorarioReemplazante = $('#id_horario_reemplazante');
-                    selectHorarioReemplazante.empty();
-                    data.forEach(horario => {
-                        selectHorarioReemplazante.append($('<option>', {
-                            value: horario.id,
-                            text: horario.turno
-                        }));
-                    });
-                }
-            });
-        }
-
-        // Asociar las funciones de actualización a los eventos de cambio de selección
-        $(document).ready(function() {
-            $('#usuario_solicitante').on('change', function() {
-                fetchHorariosSolicitante($(this).val());
-            });
-
-            $('#usuario_reemplazante').on('change', function() {
-                fetchHorariosReemplazante($(this).val());
-            });
         });
     </script>
 @endsection

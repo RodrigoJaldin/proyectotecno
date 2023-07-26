@@ -45,10 +45,11 @@ Route::get('encargadosPlancha', [UserController::class, 'encargadosPlancha'])->n
 Route::get('auxiliaresCocina', [UserController::class, 'auxiliaresCocina'])->name('auxiliaresCocina')->middleware(['auth', 'gerente', 'registrar.visita']);
 Route::get('cajeros', [UserController::class, 'cajeros'])->name('cajeros')->middleware(['auth', 'gerente', 'registrar.visita']);
 Route::get('limpieza', [UserController::class, 'limpieza'])->name('limpieza')->middleware(['auth', 'gerente', 'registrar.visita']);
-Route::get('/getHorarios/{id}', [RotacionController::class, 'getHorarios'])->name('getHorarios')->middleware(['auth', 'gerente']);
 
 Route::resource('user', UserController::class)->middleware(['auth', 'gerente', 'registrar.visita']);
 Route::resource('rol', RolController::class)->middleware(['auth', 'registrar.visita.rol', 'gerente']);
+
+Route::get('{user_id}', [HorarioUserController::class, 'showUserHorarios'])->name('showUserHorarios')->middleware(['auth']);
 
 Route::resource('licencia', LicenciaController::class)->middleware(['auth','registrar.visita.licencia', 'gerente']);
 Route::resource('horario', HorarioController::class)->middleware(['auth','registrar.visita.horario', 'gerente']);
