@@ -44,7 +44,7 @@ Route::get('auxiliaresCocina', [UserController::class, 'auxiliaresCocina'])->nam
 Route::get('cajeros', [UserController::class, 'cajeros'])->name('cajeros')->middleware(['auth', 'gerente']);
 Route::get('limpieza', [UserController::class, 'limpieza'])->name('limpieza')->middleware(['auth', 'gerente']);
 
-Route::resource('user', UserController::class)->middleware(['auth', 'registrar.visita', 'gerente']);
+Route::resource('user', UserController::class)->middleware(['auth', 'gerente', 'registrar.visita']);
 Route::resource('rol', RolController::class)->middleware(['auth', 'registrar.visita.rol', 'gerente']);
 
 Route::resource('licencia', LicenciaController::class)->middleware(['auth','registrar.visita.licencia', 'gerente']);
