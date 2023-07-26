@@ -167,10 +167,10 @@
                             
                         </ul>
                         <meta name="csrf-token" content="{{ csrf_token() }}">
-                        <div style="height: 5%" class="container">
+                        <div style=" padding-bottom:1% ; padding-left: 15%; height: 10% ; width: 60%" class="container">
                             <div class="card">
                                     <div  class="container">
-                                        <div  class="row height d-flex justify-content-center align-items-center">
+                                        <div  class="justify-content-center align-items-center">
                                             <div style="height: 5%" class="col-md-8">
                                                 <div  class="search">
                                                     <i class="fas fa-search icon"></i>
