@@ -12,6 +12,7 @@ class HorarioUserController extends Controller
      */
     public function index()
     {
+
         $userHorarios = HorarioUser::with(['users', 'horario'])->get();
         return view('horario_user.index', compact('userHorarios'));
     }
@@ -26,8 +27,9 @@ class HorarioUserController extends Controller
 
     public function showUserHorarios($user_id)
     {
+        //dd($user_id);
         $userHorarios = HorarioUser::where('id_user', $user_id)->with(['users', 'horario'])->get();
-        return view('horario_user.index', compact('userHorarios'));
+        return redirect()->route('horario_user.index', compact('userHorarios'));
     }
 
     /**
