@@ -100,6 +100,8 @@
                 <ul class="list-unstyled components">
                     <li>
                         <a href="asistencia"><i class="far fa-calendar-check"></i> Asistencias</a>
+                        <a href="documento"><i class="far fa-file-alt"></i> Documentos</a>
+
                     </li>
                     {{-- <li>
                         <a href="licencia">Licencias</a>

@@ -35,24 +35,22 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
-Route::get('user/Gerente', [UserController::class, 'gerente'])->name('gerente')->middleware(['auth']);
-Route::get('user/JefeCocina', [UserController::class, 'jefesCocina'])->name('jefesCocina')->middleware(['auth']);
-Route::get('user/jefesCaja', [UserController::class, 'jefesCaja'])->name('jefesCaja')->middleware(['auth']);
-Route::get('user/jefesAlmacen', [UserController::class, 'jefesAlmacen'])->name('jefesAlmacen')->middleware(['auth']);
-Route::get('user/encargadosPlancha', [UserController::class, 'encargadosPlancha'])->name('encargadosPlancha')->middleware(['auth']);
-Route::get('user/auxiliaresCocina', [UserController::class, 'auxiliaresCocina'])->name('auxiliaresCocina')->middleware(['auth']);
-Route::get('user/cajeros', [UserController::class, 'cajeros'])->name('cajeros')->middleware(['auth']);
-Route::get('user/limpieza', [UserController::class, 'limpieza'])->name('limpieza')->middleware(['auth']);
+Route::get('Gerente', [UserController::class, 'gerente'])->name('gerente')->middleware(['auth', 'gerente']);
+Route::get('JefeCocina', [UserController::class, 'jefesCocina'])->name('jefesCocina')->middleware(['auth', 'gerente']);
+Route::get('jefesCaja', [UserController::class, 'jefesCaja'])->name('jefesCaja')->middleware(['auth', 'gerente']);
+Route::get('jefesAlmacen', [UserController::class, 'jefesAlmacen'])->name('jefesAlmacen')->middleware(['auth', 'gerente']);
+Route::get('encargadosPlancha', [UserController::class, 'encargadosPlancha'])->name('encargadosPlancha')->middleware(['auth', 'gerente']);
+Route::get('auxiliaresCocina', [UserController::class, 'auxiliaresCocina'])->name('auxiliaresCocina')->middleware(['auth', 'gerente']);
+Route::get('cajeros', [UserController::class, 'cajeros'])->name('cajeros')->middleware(['auth', 'gerente']);
+Route::get('limpieza', [UserController::class, 'limpieza'])->name('limpieza')->middleware(['auth', 'gerente']);
 
-Route::resource('user', UserController::class)->middleware(['auth', 'registrar.visita']);
-Route::resource('rol', RolController::class)->middleware(['auth', 'registrar.visita.rol']);
+Route::resource('user', UserController::class)->middleware(['auth', 'registrar.visita', 'gerente']);
+Route::resource('rol', RolController::class)->middleware(['auth', 'registrar.visita.rol', 'gerente']);
 
-
-
-Route::resource('licencia', LicenciaController::class)->middleware(['auth','registrar.visita.licencia']);
-Route::resource('horario', HorarioController::class)->middleware(['auth','registrar.visita.horario']);
+Route::resource('licencia', LicenciaController::class)->middleware(['auth','registrar.visita.licencia', 'gerente']);
+Route::resource('horario', HorarioController::class)->middleware(['auth','registrar.visita.horario', 'gerente']);
 Route::resource('horario_user', HorarioUserController::class)->middleware(['auth']);
-Route::resource('sucursal', SucursalController::class)->middleware(['auth', 'registrar.visita.sucursal']);
+Route::resource('sucursal', SucursalController::class)->middleware(['auth', 'registrar.visita.sucursal', 'gerente']);
 Route::resource('documento', DocumentoController::class)->middleware(['auth', 'registrar.visita.documento']);
 Route::resource('asistencia', AsistenciaController::class)->middleware(['auth', 'registrar.visita.asistencia']);
 

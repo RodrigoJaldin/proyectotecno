@@ -14,19 +14,38 @@ class DocumentoController extends Controller
      */
     public function index()
     {
-        $documentos = Documento::all();
+        $user = auth()->user();
+        $documentos = null;
         $users = User::all();
+
+        if ($user->rol->tipo_rol === 'Gerente') {
+            $documentos = Documento::all();
+        } else {
+            $documentos = Documento::where('id_user', $user->id)->get();
+        }
+
         return view('documento.index', compact('documentos', 'users'));
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        $users = User::all();
+        $user = auth()->user();
+        $users = null;
+
+        if ($user->rol->tipo_rol === 'Gerente') {
+            $users = User::all();
+        } else {
+            $users = User::where('id', $user->id)->get();
+        }
+
         return view('documento.create', compact('users'));
     }
+
+
 
     /**
      * Store a newly created resource in storage.
