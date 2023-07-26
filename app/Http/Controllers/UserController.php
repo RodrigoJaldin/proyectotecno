@@ -7,6 +7,7 @@ use App\Models\Rol;
 use App\Models\Sucursal;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -16,7 +17,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        
         $users = User::all();
         $roles = Rol::all();
         $sucursales = Sucursal::all();
@@ -24,7 +24,6 @@ class UserController extends Controller
 
         return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
-
 
     public function gerente()
     {
@@ -36,7 +35,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
 
     public function jefesCocina()
@@ -49,7 +48,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return redirect()->route('user.index',compact('users', 'roles', 'sucursales', 'horarios'));
+        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
 
     public function jefesCaja()
@@ -61,7 +60,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
 
     public function jefesAlmacen()
@@ -73,7 +72,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
 
     public function encargadosPlancha()
@@ -85,7 +84,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
     public function auxiliaresCocina()
     {
@@ -96,7 +95,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
     public function cajeros()
     {
@@ -107,7 +106,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
     public function limpieza()
     {
@@ -118,7 +117,7 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
-        return redirect()->route('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
 
 
@@ -203,11 +202,11 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|min:1',
             'apellido' => 'required|min:1',
-            'email' => 'required|email|unique:users,email,' . $id,
+            'email' => 'required|email|unique:user,email,' . $id,
             'ci' => 'required|min:1',
             'telefono' => 'required|min:1',
             'foto_user' => ['image', 'nullable', 'max:2048'],
-            'codigo_empleado' => 'required|unique:users,codigo_empleado,' . $id,
+            'codigo_empleado' => 'required|unique:user,codigo_empleado,' . $id,
             'id_rol' => 'required|exists:rol,id',
         ]);
 

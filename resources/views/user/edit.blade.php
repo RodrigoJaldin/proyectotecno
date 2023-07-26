@@ -1,16 +1,16 @@
 <!-- Modal Editar Usuario -->
 <div class="modal fade" id="editarUserModal{{ $user->id }}" tabindex="-1" role="dialog"
-    aria-labelledby="editarUserModal{{ $user->id }}" aria-hidden="true">
+    aria-labelledby="editarUserModal{{ $user->id }}" aria-hidden="true" data-backdrop="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title" id="editarUserModal{{ $user->id }}">Editar Usuario</h2>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar" >
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="editarUserForm{{ $user->id }}" action="{{ route('user.update', $user->id) }}" method="POST"
-                enctype="multipart/form-data">
+            <form id="editarUserForm{{ $user->id }}" action="{{ route('user.update', $user->id) }}"
+                method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
@@ -21,29 +21,29 @@
                     </div>
                     <div class="form-group">
                         <label for="name{{ $user->id }}">Nombre:</label>
-                        <input type="text" class="form-control" id="name{{ $user->id }}" name="name"
-                            value="{{ $user->name }}">
+                        <input type="text" class="form-control" id="name{{ $user->id }}"
+                            name="name" value="{{ $user->name }}">
                     </div>
                     <div class="form-group">
                         <label for="apellido{{ $user->id }}">Apellido:</label>
-                        <input type="text" class="form-control" id="apellido{{ $user->id }}" name="apellido"
-                            value="{{ $user->apellido }}">
+                        <input type="text" class="form-control" id="apellido{{ $user->id }}"
+                            name="apellido" value="{{ $user->apellido }}">
                     </div>
 
                     <div class="form-group">
                         <label for="email{{ $user->id }}">Correo Electrónico:</label>
-                        <input type="email" class="form-control" id="email{{ $user->id }}" name="email"
-                            value="{{ $user->email }}">
+                        <input type="email" class="form-control" id="email{{ $user->id }}"
+                            name="email" value="{{ $user->email }}">
                     </div>
                     <div class="form-group">
                         <label for="ci{{ $user->id }}">Carnet:</label>
-                        <input type="text" class="form-control" id="ci{{ $user->id }}" name="ci"
-                            value="{{ $user->ci }}">
+                        <input type="text" class="form-control" id="ci{{ $user->id }}"
+                            name="ci" value="{{ $user->ci }}">
                     </div>
                     <div class="form-group">
                         <label for="telefono{{ $user->id }}">Telefono:</label>
-                        <input type="text" class="form-control" id="telefono{{ $user->id }}" name="telefono"
-                            value="{{ $user->telefono }}">
+                        <input type="text" class="form-control" id="telefono{{ $user->id }}"
+                            name="telefono" value="{{ $user->telefono }}">
                     </div>
 
                     <div class="mb-3">
@@ -63,7 +63,8 @@
                         <label for="id_rol{{ $user->id }}">Rol:</label>
                         <select class="form-control" id="rol{{ $user->id }}" name="id_rol">
                             @foreach ($roles as $rol)
-                                <option value="{{ $rol->id }}" @if ($user->id_rol === $rol->id) selected @endif>
+                                <option value="{{ $rol->id }}"
+                                    @if ($user->id_rol === $rol->id) selected @endif>
                                     {{ $rol->tipo_rol }}
                                 </option>
                             @endforeach
@@ -75,7 +76,8 @@
                         <label for="id_sucursal{{ $user->id }}">Sucursal:</label>
                         <select class="form-control" id="rol{{ $user->id }}" name="id_sucursal">
                             @foreach ($sucursales as $sucursal)
-                                <option value="{{ $sucursal->id }}" @if ($user->id_sucursal === $sucursal->id) selected @endif>
+                                <option value="{{ $sucursal->id }}"
+                                    @if ($user->id_sucursal === $sucursal->id) selected @endif>
                                     {{ $sucursal->nombre }}
                                 </option>
                             @endforeach
@@ -83,7 +85,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-secondary"
+                            data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                     </div>
                 </div>

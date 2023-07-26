@@ -58,17 +58,13 @@ class LicenciaController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Licencia $licencia)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, Licencia $licencia)
     {
         $request->validate([
