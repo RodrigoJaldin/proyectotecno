@@ -92,6 +92,22 @@
         </tbody>
     </table>
     @include('licencia.create')
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <div style="position: fixed; bottom: 10px; right: 10px;">
+                    <h2 style="font-size: 17px;">Visitas</h2>
+                    <div class="card" style="width: 60px; height: 70px; font-size: 18px; background-color: #31525B;">
+                        <div class="card-body">
+                            <p style="color: #fff" class="card-text">{{ session('contadorVisitasLicencia') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @stop
 
 @section('css')

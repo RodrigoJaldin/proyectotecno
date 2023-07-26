@@ -49,11 +49,11 @@ Route::resource('rol', RolController::class)->middleware(['auth', 'registrar.vis
 
 
 
-Route::resource('licencia', LicenciaController::class)->middleware(['auth']);
+Route::resource('licencia', LicenciaController::class)->middleware(['auth','registrar.visita.licencia']);
 Route::resource('horario', HorarioController::class)->middleware(['auth','registrar.visita.horario']);
 Route::resource('horario_user', HorarioUserController::class)->middleware(['auth']);
 Route::resource('sucursal', SucursalController::class)->middleware(['auth', 'registrar.visita.sucursal']);
-Route::resource('documento', DocumentoController::class)->middleware(['auth']);
+Route::resource('documento', DocumentoController::class)->middleware(['auth', 'registrar.visita.documento']);
 Route::resource('asistencia', AsistenciaController::class)->middleware(['auth', 'registrar.visita.asistencia']);
 
 Route::post('/registrar-asistencia-llegada', [AsistenciaController::class, 'registrarAsistenciaLlegada'])->name('registrarAsistenciaLlegada')->middleware(['auth']);

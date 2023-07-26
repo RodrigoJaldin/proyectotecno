@@ -75,15 +75,16 @@
             <div class="col">
                 <div style="position: fixed; bottom: 10px; right: 10px;">
                     <h2 style="font-size: 17px;">Visitas</h2>
-                    <div class="card bg-light" style="width: 120px; height: 80px; font-size: 14px;">
+                    <div class="card" style="width: 60px; height: 70px; font-size: 18px; background-color: #31525B;">
                         <div class="card-body">
-                            <p class="card-text" style="font-size: 18px;">{{ session('contadorVisitasRol') }}</p>
+                            <p style="color: #fff" class="card-text">{{ session('contadorVisitasRol') }}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
 @stop
 
