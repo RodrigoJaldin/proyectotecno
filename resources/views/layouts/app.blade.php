@@ -89,14 +89,7 @@
 
             </ul>
 
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="" class="download">Download source</a>
-                </li>
-                <li>
-                    <a href="" class="article">Back to article</a>
-                </li>
-            </ul>
+
         </nav>
 
         <!-- Page Content Holder -->
@@ -119,16 +112,16 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Page</a>
+                                <a class="nav-link" href="#" id="modo-normal-btn">Modo Normal</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
+                                <a class="nav-link" href="#" id="nodo-nino-btn">Nodo Niñ@</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
+                                <a class="nav-link" href="#">Modo Joven</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
+                                <a class="nav-link" href="#">Modo adulto</a>
                             </li>
                         </ul>
                     </div>
@@ -166,6 +159,12 @@
             });
         });
     </script>
+
+<script src={{{ asset('js/thememodes.js') }}}></script>
+
+
+
+
 </body>
 
 </html>
