@@ -16,9 +16,14 @@ class SucursalController extends Controller
         return view('sucursal.index', compact('sucursales'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function trabajadoresPorSucursal($sucursal_id)
+    {
+        $sucursal = Sucursal::findOrFail($sucursal_id);
+        $trabajadores = $sucursal->users;
+
+        return view('sucursal.trabajadores', compact('trabajadores', 'sucursal'));
+    }
+
     public function create()
     {
         //

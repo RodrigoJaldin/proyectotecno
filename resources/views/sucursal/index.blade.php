@@ -29,16 +29,16 @@
                                 <button type="button" class="btn btn-info btn-editar"
                                     data-sucursal-id="{{ $sucursal->id }}" data-toggle="modal"
                                     data-target="#editarSucursalModal{{ $sucursal->id }}">Editar</button>
+                                <!-- Nuevo botón para ver trabajadores de la sucursal -->
+                                <a href="{{ route('sucursal.trabajadores', ['sucursal_id' => $sucursal->id]) }}">Ver
+                                    Trabajadores</a>
                             @endif
-
-
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Eliminar</button>
                         </form>
                     </td>
                 </tr>
-
             @endforeach
         </tbody>
     </table>
