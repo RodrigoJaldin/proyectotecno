@@ -85,28 +85,37 @@
                         <a href="documento">Documentos</a>
                         <a href="licencia">Licencias</a>
                     </li>
-
+                    <li class="">
+                        <a class="nav-link" id="link" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class='bx bx-log-out icon'></i>
+                            <span class="text nav-text">Logout</span>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
                 </ul>
                 @else
                 <ul class="list-unstyled components">
-
-                <li>
-                    <a href="asistencia">Asistencias</a>
-                </li>
-                <li>
-                    <a href="licencia">Licencias</a>
-                </li>
+                    <li>
+                        <a href="asistencia">Asistencias</a>
+                    </li>
+                    <li>
+                        <a href="licencia">Licencias</a>
+                    </li>
+                    <li class="">
+                        <a class="nav-link" id="link" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class='bx bx-log-out icon'></i>
+                            <span class="text nav-text">Logout</span>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
                 @endif
-                <li class="">
-                    <a class="nav-link" id="link" href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <i class='bx bx-log-out icon'></i>
-                        <span class="text nav-text">Logout</span>
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
-                </li>
+
             </ul>
             </ul>
 
