@@ -63,4 +63,4 @@ Route::post('/registrar-asistencia-llegada', [AsistenciaController::class, 'regi
 Route::post('/registrar-asistencia-salida', [AsistenciaController::class, 'registrarAsistenciaSalida'])->name('registrarAsistenciaSalida')->middleware(['auth']);
 Route::post('/asignarHorario', [HorarioUserController::class, 'store'])->name('asignarHorario')->middleware(['auth']);
 Route::get('/user/{userId}/horarios', [HorarioUserController::class, 'showHorariosAsignados'])->name('showHorariosAsignados')->middleware(['auth']);
-Route::get('/showUserHorarios/{user_id}', [HorarioUserController::class, 'showUserHorarios'])->name('showUserHorarios')->middleware(['auth']);
+Route::get('/{user_id}', [HorarioUserController::class, 'showUserHorarios'])->name('showUserHorarios')->middleware(['auth']);
