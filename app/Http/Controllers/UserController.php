@@ -8,6 +8,7 @@ use App\Models\Sucursal;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -160,7 +161,7 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->ci = $request->input('ci');
         $user->telefono = $request->input('telefono');
-        $user->password = $request->input('password');
+        $user->password = Hash::make($request->input('password')); // Generar el hash de la contraseña
         $user->codigo_empleado = $request->input('codigo_empleado');
         $user->id_rol = $request->input('id_rol');
         $user->id_sucursal = $request->input('id_sucursal');
@@ -222,6 +223,12 @@ class UserController extends Controller
         $user->codigo_empleado = $request->input('codigo_empleado');
         $user->id_rol = $request->input('id_rol');
         $user->id_sucursal = $request->input('id_sucursal');
+
+        // Actualizar la contraseña si se proporciona una nueva
+        $newPassword = $request->input('password');
+        if ($newPassword) {
+            $user->password = Hash::make($newPassword);
+        }
         if ($request->hasFile('foto_user')) {
             // Eliminar la foto anterior si existe
             if ($user->foto_user) {

@@ -43,48 +43,63 @@
             <div class="sidebar-header">
                 <h3>Bienvenid@! {{ auth()->user()->name }}</h3>
             </div>
+            @if (auth()->user()->rol->tipo_rol === 'Gerente')
+                <ul class="list-unstyled components">
+                    <p></p>
+                    <li class="active">
+                        <a href="sucursal">Sucursales</a>
+                        <a href="rol">Roles</a>
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle">Usuarios</a>
 
-            <ul class="list-unstyled components">
-                <p></p>
-                <li class="active">
-                    <a href="sucursal">Sucursales</a>
-                    <a href="rol">Roles</a>
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Usuarios</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <a href="{{ route('gerente') }}">Gerente</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('jefesCocina') }}">Jefes de Cocina</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('jefesCaja') }}">Jefes de Caja</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('jefesAlmacen') }}">Jefes de almacen</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('encargadosPlancha') }}">Encargados de Plancha</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('auxiliaresCocina') }}">Auxiliar de cocina</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('cajeros') }}">Cajero</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('limpieza') }}">Limpieza</a>
+                            </li>
+                        </ul>
 
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="{{ route('gerente') }}">Gerente</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('jefesCocina') }}">Jefes de Cocina</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('jefesCaja') }}">Jefes de Caja</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('jefesAlmacen') }}">Jefes de almacen</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('encargadosPlancha') }}">Encargados de Plancha</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('auxiliaresCocina') }}">Auxiliar de cocina</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('cajeros') }}">Cajero</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('limpieza') }}">Limpieza</a>
-                        </li>
-                    </ul>
+                    <li>
+                        <a href="asistencia">Asistencias</a>
+                        <a href="horario">Horarios</a>
+                        <a href="documento">Documentos</a>
+                        <a href="licencia">Licencias</a>
+                    </li>
 
-                <li>
+                </ul>
+                @else
                     <a href="asistencia">Asistencias</a>
-                    <a href="horario">Horarios</a>
-                    <a href="documento">Documentos</a>
                     <a href="licencia">Licencias</a>
-
+                @endif
+                <li class="">
+                    <a class="nav-link" id="link" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class='bx bx-log-out icon'></i>
+                        <span class="text nav-text">Logout</span>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                 </li>
 
             </ul>
