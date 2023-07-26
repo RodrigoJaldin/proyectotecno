@@ -136,7 +136,7 @@
         <!-- Page Content Holder -->
         <div id="content">
 
-            <nav style="height: 10%"  class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
                     <button type="button" id="sidebarCollapse" class="navbar-btn">
@@ -166,7 +166,22 @@
                             </li>
                             
                         </ul>
-                        <!--aca-->
+                        <meta name="csrf-token" content="{{ csrf_token() }}">
+                        <div style="height: 5%" class="container">
+                            <div class="card">
+                                    <div  class="container">
+                                        <div  class="row height d-flex justify-content-center align-items-center">
+                                            <div style="height: 5%" class="col-md-8">
+                                                <div  class="search">
+                                                    <i class="fas fa-search icon"></i>
+                                                    <input type="text" id="mysearch" class="form-control" placeholder="Haz tu busqueda aqui">
+                                                </div>
+                                                <ul id="showlist" tabindex="1" class="list-group"></ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
                     </div>
                     
                 </div>
