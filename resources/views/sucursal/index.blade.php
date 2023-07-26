@@ -30,8 +30,8 @@
                                     data-sucursal-id="{{ $sucursal->id }}" data-toggle="modal"
                                     data-target="#editarSucursalModal{{ $sucursal->id }}">Editar</button>
                                 <!-- Nuevo botón para ver trabajadores de la sucursal -->
-                                <a href="{{ route('sucursal.trabajadores', ['sucursal_id' => $sucursal->id]) }}">Ver
-                                    Trabajadores</a>
+                                <a href="{{ route('sucursal.trabajadores', ['sucursal_id' => $sucursal->id]) }}" class="btn btn-primary">Ver Trabajadores</a>
+
                             @endif
                             @csrf
                             @method('DELETE')
