@@ -36,14 +36,14 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
-Route::get('Gerente', [UserController::class, 'gerente'])->name('gerente')->middleware(['auth', 'gerente']);
-Route::get('JefeCocina', [UserController::class, 'jefesCocina'])->name('jefesCocina')->middleware(['auth', 'gerente']);
-Route::get('jefesCaja', [UserController::class, 'jefesCaja'])->name('jefesCaja')->middleware(['auth', 'gerente']);
-Route::get('jefesAlmacen', [UserController::class, 'jefesAlmacen'])->name('jefesAlmacen')->middleware(['auth', 'gerente']);
-Route::get('encargadosPlancha', [UserController::class, 'encargadosPlancha'])->name('encargadosPlancha')->middleware(['auth', 'gerente']);
-Route::get('auxiliaresCocina', [UserController::class, 'auxiliaresCocina'])->name('auxiliaresCocina')->middleware(['auth', 'gerente']);
-Route::get('cajeros', [UserController::class, 'cajeros'])->name('cajeros')->middleware(['auth', 'gerente']);
-Route::get('limpieza', [UserController::class, 'limpieza'])->name('limpieza')->middleware(['auth', 'gerente']);
+Route::get('Gerente', [UserController::class, 'gerente'])->name('gerente')->middleware(['auth', 'gerente', 'registrar.visita']);
+Route::get('JefeCocina', [UserController::class, 'jefesCocina'])->name('jefesCocina')->middleware(['auth', 'gerente', 'registrar.visita']);
+Route::get('jefesCaja', [UserController::class, 'jefesCaja'])->name('jefesCaja')->middleware(['auth', 'gerente', 'registrar.visita']);
+Route::get('jefesAlmacen', [UserController::class, 'jefesAlmacen'])->name('jefesAlmacen')->middleware(['auth', 'gerente', 'registrar.visita']);
+Route::get('encargadosPlancha', [UserController::class, 'encargadosPlancha'])->name('encargadosPlancha')->middleware(['auth', 'gerente', 'registrar.visita']);
+Route::get('auxiliaresCocina', [UserController::class, 'auxiliaresCocina'])->name('auxiliaresCocina')->middleware(['auth', 'gerente', 'registrar.visita']);
+Route::get('cajeros', [UserController::class, 'cajeros'])->name('cajeros')->middleware(['auth', 'gerente', 'registrar.visita']);
+Route::get('limpieza', [UserController::class, 'limpieza'])->name('limpieza')->middleware(['auth', 'gerente', 'registrar.visita']);
 
 Route::resource('user', UserController::class)->middleware(['auth', 'gerente', 'registrar.visita']);
 Route::resource('rol', RolController::class)->middleware(['auth', 'registrar.visita.rol', 'gerente']);
