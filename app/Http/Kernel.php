@@ -60,6 +60,7 @@ class Kernel extends HttpKernel
         'registrar.visita.horario' => \App\Http\Middleware\RegistrarVisitaHorarioMiddleware::class,
         'registrar.visita.documento' => \App\Http\Middleware\RegistrarVisitaDocumentoMiddleware::class,
         'registrar.visita.licencia' => \App\Http\Middleware\RegistrarVisitaLicenciaMiddleware::class,
+        'registrar.visita.home' => \App\Http\Middleware\RegistrarVisitaHomeMiddleware::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
