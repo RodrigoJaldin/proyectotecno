@@ -136,7 +136,7 @@
         <!-- Page Content Holder -->
         <div id="content">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav style="height: 10%"  class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
                     <button type="button" id="sidebarCollapse" class="navbar-btn">
@@ -164,9 +164,14 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Modo adulto</a>
                             </li>
+                            
                         </ul>
+                        <!--aca-->
                     </div>
+                    
                 </div>
+                
+
             </nav>
             <div class="content">
                 @yield('content')
