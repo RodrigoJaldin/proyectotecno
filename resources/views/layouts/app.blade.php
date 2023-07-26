@@ -88,8 +88,14 @@
 
                 </ul>
                 @else
+                <ul class="list-unstyled components">
+
+                <li>
                     <a href="asistencia">Asistencias</a>
+                </li>
+                <li>
                     <a href="licencia">Licencias</a>
+                </li>
                 @endif
                 <li class="">
                     <a class="nav-link" id="link" href="{{ route('logout') }}"
@@ -101,7 +107,7 @@
                         {{ csrf_field() }}
                     </form>
                 </li>
-
+            </ul>
             </ul>
 
 
