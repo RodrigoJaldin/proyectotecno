@@ -168,11 +168,11 @@
                         </ul>
                         <meta name="csrf-token" content="{{ csrf_token() }}">
                         <div style="width: 40% ; " class="container">
-                            <div style=" height: 10% ; width: 77%" class="card">
+                            <div style=" height: 10% ; width: 90%" class="card">
                                     <div class="container">
                                         <div  class="justify-content-center align-items-center">
                                             <div class="col-md-8">
-                                                <div style="width: 200%" class="search">
+                                                <div style="width: 149%" class="search">
                                                     <i class="fas fa-search icon"></i>
                                                     <input type="text" id="mysearch" class="form-control" placeholder="Haz tu busqueda aqui">
                                                 </div>
