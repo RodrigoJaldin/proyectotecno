@@ -24,6 +24,7 @@
 
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
@@ -47,68 +48,68 @@
                 <ul class="list-unstyled components">
                     <p></p>
                     <li class="active">
-                        <a href="sucursal">Sucursales</a>
-                        <a href="rol">Roles</a>
-                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle">Usuarios</a>
-
+                        <a href="sucursal"><i class="fas fa-building"></i> Sucursales</a>
+                        <a href="rol"><i class="fas fa-user-cog"></i> Roles</a>
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-users"></i> Usuarios
+                        </a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
                             <li>
-                                <a href="{{ route('gerente') }}">Gerente</a>
+                                <a href="{{ route('gerente') }}"><i class="fas fa-user-tie"></i> Gerente</a>
                             </li>
                             <li>
-                                <a href="{{ route('jefesCocina') }}">Jefes de Cocina</a>
+                                <a href="{{ route('jefesCocina') }}"><i class="fas fa-chef"></i> Jefes de Cocina</a>
                             </li>
                             <li>
-                                <a href="{{ route('jefesCaja') }}">Jefes de Caja</a>
+                                <a href="{{ route('jefesCaja') }}"><i class="fas fa-cash-register"></i> Jefes de Caja</a>
                             </li>
                             <li>
-                                <a href="{{ route('jefesAlmacen') }}">Jefes de almacen</a>
+                                <a href="{{ route('jefesAlmacen') }}"><i class="fas fa-warehouse"></i> Jefes de Almacén</a>
                             </li>
                             <li>
-                                <a href="{{ route('encargadosPlancha') }}">Encargados de Plancha</a>
+                                <a href="{{ route('encargadosPlancha') }}"><i class="fas fa-user-hard-hat"></i> Encargados de Plancha</a>
                             </li>
                             <li>
-                                <a href="{{ route('auxiliaresCocina') }}">Auxiliar de cocina</a>
+                                <a href="{{ route('auxiliaresCocina') }}"><i class="fas fa-user-check"></i> Auxiliar de Cocina</a>
                             </li>
                             <li>
-                                <a href="{{ route('cajeros') }}">Cajero</a>
+                                <a href="{{ route('cajeros') }}"><i class="fas fa-cash-register"></i> Cajero</a>
                             </li>
                             <li>
-                                <a href="{{ route('limpieza') }}">Limpieza</a>
+                                <a href="{{ route('limpieza') }}"><i class="fas fa-broom"></i> Limpieza</a>
                             </li>
                         </ul>
 
-                    <li>
-                        <a href="asistencia">Asistencias</a>
-                        <a href="horario">Horarios</a>
-                        <a href="documento">Documentos</a>
-                        <a href="licencia">Licencias</a>
-                    </li>
-                    <li class="">
-                        <a class="nav-link" id="link" href="{{ route('logout') }}"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class='bx bx-log-out icon'></i>
-                            <span class="text nav-text">Logout</span>
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                    </li>
+                        <li>
+                            <a href="asistencia"><i class="far fa-calendar-check"></i> Asistencias</a>
+                            <a href="horario"><i class="far fa-clock"></i> Horarios</a>
+                            <a href="documento"><i class="far fa-file-alt"></i> Documentos</a>
+                            <a href="licencia"><i class="far fa-id-card"></i> Licencias</a>
+                        </li>
+                        <li class="">
+                            <a  id="link" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fas fa-sign-out-alt"></i> Cerrar Sesion
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
                 </ul>
                 @else
                 <ul class="list-unstyled components">
                     <li>
-                        <a href="asistencia">Asistencias</a>
+                        <a href="asistencia"><i class="far fa-calendar-check"></i> Asistencias</a>
+                        <a href="documento"><i class="far fa-file-alt"></i> Documentos</a>
+
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="licencia">Licencias</a>
-                    </li>
+                    </li> --}}
                     <li class="">
-                        <a class="nav-link" id="link" href="{{ route('logout') }}"
+                        <a id="link" href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class='bx bx-log-out icon'></i>
-                            <span class="text nav-text">Logout</span>
+                            <i class="fas fa-sign-out-alt"></i> Cerrar Sesion
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             {{ csrf_field() }}

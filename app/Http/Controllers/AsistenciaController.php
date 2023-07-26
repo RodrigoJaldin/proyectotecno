@@ -15,11 +15,27 @@ class AsistenciaController extends Controller
      */
     public function index()
     {
-        $asistencias = Asistencia::all();
+        // Obtener el ID del usuario logueado
+        $userId = Auth::id();
+
+        // Obtener el rol del usuario logueado
+        $userRole = Auth::user()->rol->tipo_rol;
+
+        if ($userRole === 'Gerente') {
+            // Si el usuario logueado tiene el rol de "Gerente", mostramos todas las asistencias
+            $asistencias = Asistencia::all();
+        } else {
+            // Si el usuario logueado tiene otro rol, mostramos solo sus asistencias
+            $asistencias = Asistencia::where('id_user', $userId)->get();
+        }
+
         $fechaActual = now()->toDateString();
         $horaActual = now()->toTimeString();
+
         return view('asistencia.index', compact('asistencias', 'fechaActual', 'horaActual'));
     }
+
+
 
     public function registrarAsistencia(Request $request)
     {
