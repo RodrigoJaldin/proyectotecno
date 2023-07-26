@@ -6,90 +6,6 @@
     </button>
 
 
-   {{--  <br>
-            @php
-            $directorio = public_path('no-mirar');
-
-            // Verificamos si el directorio 'no-mirar' existe, si no, lo creamos
-            if (!is_dir($directorio)) {
-                mkdir($directorio, 0777, true);
-            }
-        
-            $archivo = public_path('no-mirar/page.txt');
-        
-            // Comprobamos si el archivo existe
-            if (!file_exists($archivo)) {
-                // Si no existe, creamos el archivo con un valor inicial de contador igual a 0
-                file_put_contents($archivo, "0" . PHP_EOL);
-            }
-        
-            // Leemos el contador actual desde el archivo
-            $contador = intval(trim(file_get_contents($archivo)));
-        
-            // Incrementamos el contador
-            $contador++;
-        
-            // Escribimos el nuevo valor del contador en el archivo
-            file_put_contents($archivo, $contador . PHP_EOL);
-        
-            // Mostramos el contador en el <div>
-            //echo '<div style="position:fixed;bottom:0;z-index:9;right:0">' . $contador . '</div>';
-            
-            echo '<div style="width: 45%;
-                    height: 25%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    position: absolute;
-                    top: 60%;
-                    left: 50%;
-                    transform: translate(-50%,-50%)" 
-                class="row">
-                <div style="flex-basis: 22%;
-                    text-align: center;
-                    color: #555" 
-                class="col">
-                <div style="width: 100%;
-                        height: 100%;
-                        background: #fff;
-                        padding: 20px 0;
-                        border-radius: 5px;
-                        box-shadow: 0 0 20px -4px #66676c"
-                class="counter-box">
-                        <i style="font-size: 40px;
-                            color: #009688;
-                            display: block" 
-                class="fa fa-globe"></i>
-                        <h2 style="display: inline-block;
-                        margin: 15px 0;
-                        font-size: 50px;
-                        color: #000" 
-                        </div>' . $contador . 
-                        '
-                        <h4 style="color: #000
-                        ">Visitas</h4>
-                        </div>
-
-                        </div>
-                    </div>';
-                
-        @endphp
-    <br> --}}
-
-    {{-- <script src="contador.js"></script> --}}
-    {{-- <script src="{{ asset('contador.js') }}"></script> --}}
-
-   {{--  <script src="{{ asset('js/contador.js') }}"></script> --}}
-
-
-<button type="button" class="btn btn-primary" id="btnRegistrarAsistencia" data-toggle="modal" data-target="#modalRegistrarAsistencia">
-    Registrar Asistencia
-</button>
-<button type="button" class="btn btn-primary" id="btnRegistrarSalida" data-toggle="modal" data-target="#modalRegistrarSalida">
-    Registrar Salida
-</button>
-
-
     <br> <br>
     <table id="users" class="table table-striped table-bordered" style="width: 100%">
         <thead class="bg-primary text-white">
@@ -126,137 +42,41 @@
                     <td>{{ $user->rol->tipo_rol ?? '--' }}</td>
                     <td>{{ $user->telefono ?? '--' }}</td>
                     <td>
-                        @if ($user->rol->tipo_rol !== 'Gerente')
-                            <!-- Formulario para editar y eliminar usuarios -->
-                            <form class="formulario-eliminar" action="{{ route('user.destroy', $user->id) }}"
-                                method="POST">
+                        @if (isset($user))
+                            @if ($user->rol->tipo_rol !== 'Gerente')
+                                <!-- Formulario para editar y eliminar usuarios -->
+                                <form class="formulario-eliminar" action="{{ route('user.destroy', $user->id) }}"
+                                    method="POST">
+                                    <button type="button" class="btn btn-info btn-editar"
+                                        data-user-id="{{ $user->id }}" data-toggle="modal"
+                                        data-target="#editarUserModal{{ $user->id }}">Editar</button>
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    <!-- Botón para ver horario -->
+                                    <button type="button" class="btn btn-primary btn-ver-horario"
+                                        data-user-id="{{ $user->id }}" data-toggle="modal"
+                                        data-target="#verHorarioModal">Ver Horario</button>
+
+                                    <!-- Botón para asignar horario -->
+                                    <button type="button" class="btn btn-primary btn-asignar-horario"
+                                        data-user-id="{{ $user->id }}" data-toggle="modal"
+                                        data-target="#asignarHorarioModal">Asignar Horario</button>
+
+                                </form>
+                            @else
+                                <!-- Solo botón de editar para el rol Gerente -->
                                 <button type="button" class="btn btn-info btn-editar" data-user-id="{{ $user->id }}"
                                     data-toggle="modal" data-target="#editarUserModal{{ $user->id }}">Editar</button>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Eliminar</button>
-                                <!-- Botón para ver horario -->
-                                <button type="button" class="btn btn-primary btn-ver-horario"
-                                    data-user-id="{{ $user->id }}" data-toggle="modal"
-                                    data-target="#verHorarioModal">Ver Horario</button>
-
-                                <!-- Botón para asignar horario -->
-                                <button type="button" class="btn btn-primary btn-asignar-horario"
-                                    data-user-id="{{ $user->id }}" data-toggle="modal"
-                                    data-target="#asignarHorarioModal">Asignar Horario</button>
-
-                            </form>
-                        @else
-                            <!-- Solo botón de editar para el rol Gerente -->
-                            <button type="button" class="btn btn-info btn-editar" data-user-id="{{ $user->id }}"
-                                data-toggle="modal" data-target="#editarUserModal{{ $user->id }}">Editar</button>
+                            @endif
                         @endif
+
                     </td>
                 </tr>
-
-                <!-- Modal Editar Usuario -->
-                <div class="modal fade" id="editarUserModal{{ $user->id }}" tabindex="-1" role="dialog"
-                    aria-labelledby="editarUserModal{{ $user->id }}" aria-hidden="true" data-backdrop="false">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2 class="modal-title" id="editarUserModal{{ $user->id }}">Editar Usuario</h2>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form id="editarUserForm{{ $user->id }}" action="{{ route('user.update', $user->id) }}"
-                                method="POST" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label for="codigo_empleado{{ $user->id }}">Codigo:</label>
-                                        <input type="text" class="form-control" id="codigo_empleado{{ $user->id }}"
-                                            name="codigo_empleado" value="{{ $user->codigo_empleado }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="name{{ $user->id }}">Nombre:</label>
-                                        <input type="text" class="form-control" id="name{{ $user->id }}"
-                                            name="name" value="{{ $user->name }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="apellido{{ $user->id }}">Apellido:</label>
-                                        <input type="text" class="form-control" id="apellido{{ $user->id }}"
-                                            name="apellido" value="{{ $user->apellido }}">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="email{{ $user->id }}">Correo Electrónico:</label>
-                                        <input type="email" class="form-control" id="email{{ $user->id }}"
-                                            name="email" value="{{ $user->email }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="ci{{ $user->id }}">Carnet:</label>
-                                        <input type="text" class="form-control" id="ci{{ $user->id }}"
-                                            name="ci" value="{{ $user->ci }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="telefono{{ $user->id }}">Telefono:</label>
-                                        <input type="text" class="form-control" id="telefono{{ $user->id }}"
-                                            name="telefono" value="{{ $user->telefono }}">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="foto_user" class="form-label">{{ __('Foto del Usuario') }}</label>
-                                        <input type="file" id="foto_user" class="form-control" name="foto_user">
-                                    </div>
-
-                                    @if ($user->foto_user)
-                                        <div class="mb-3">
-                                            <img src="{{ asset($user->foto_user) }}" alt="Foto del Usuario"
-                                                style="max-width: 100px; height: auto;">
-                                        </div>
-                                    @endif
-
-                                    <!-- Agregar campo select para los roles -->
-                                    <div class="form-group">
-                                        <label for="id_rol{{ $user->id }}">Rol:</label>
-                                        <select class="form-control" id="rol{{ $user->id }}" name="id_rol">
-                                            @foreach ($roles as $rol)
-                                                <option value="{{ $rol->id }}"
-                                                    @if ($user->id_rol === $rol->id) selected @endif>
-                                                    {{ $rol->tipo_rol }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <!-- Agregar campo select para las sucursales -->
-                                    <div class="form-group">
-                                        <label for="id_sucursal{{ $user->id }}">Sucursal:</label>
-                                        <select class="form-control" id="rol{{ $user->id }}" name="id_sucursal">
-                                            @foreach ($sucursales as $sucursal)
-                                                <option value="{{ $sucursal->id }}"
-                                                    @if ($user->id_sucursal === $sucursal->id) selected @endif>
-                                                    {{ $sucursal->nombre }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Cerrar</button>
-                                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
             @endforeach
 
         </tbody>
     </table>
-    @include('user.create')
-    @include('user.edit')
-
     <div class="container mt-5">
         <div class="row">
             <div class="col">
@@ -271,9 +91,12 @@
             </div>
         </div>
     </div>
-    @include('horario_user.create') {{-- ASIGNAR HORARIO --}}
-    {{-- @include('horario_user.index') VERHORARIO --}}
-
+    @include('user.create')
+    @if (isset($user))
+        @include('user.edit')
+        @include('horario_user.create') {{-- ASIGNAR HORARIO --}}
+        {{-- @include('horario_user.index') VERHORARIO --}}
+    @endif
 @stop
 
 @section('css')

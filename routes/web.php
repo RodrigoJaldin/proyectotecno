@@ -44,10 +44,8 @@ Route::get('user/auxiliaresCocina', [UserController::class, 'auxiliaresCocina'])
 Route::get('user/cajeros', [UserController::class, 'cajeros'])->name('cajeros')->middleware(['auth']);
 Route::get('user/limpieza', [UserController::class, 'limpieza'])->name('limpieza')->middleware(['auth']);
 
-/*VISITAS */
-/* Route::get('/user', [VisitaController::class, 'registrarVisita']); */
-
 Route::resource('user', UserController::class)->middleware(['auth', 'registrar.visita']);
+Route::resource('rol', RolController::class)->middleware(['auth', 'registrar.visita.rol']);
 
 
 
@@ -55,7 +53,6 @@ Route::resource('licencia', LicenciaController::class)->middleware(['auth']);
 Route::resource('horario', HorarioController::class)->middleware(['auth','registrar.visita.horario']);
 Route::resource('horario_user', HorarioUserController::class)->middleware(['auth']);
 Route::resource('sucursal', SucursalController::class)->middleware(['auth', 'registrar.visita.sucursal']);
-Route::resource('rol', RolController::class)->middleware(['auth', 'registrar.visita.rol']);
 Route::resource('documento', DocumentoController::class)->middleware(['auth']);
 Route::resource('asistencia', AsistenciaController::class)->middleware(['auth', 'registrar.visita.asistencia']);
 
