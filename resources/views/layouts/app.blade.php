@@ -49,10 +49,9 @@
                     @if (!empty(auth()->user()->foto_user))
                         <img src="{{ auth()->user()->foto_user }}" alt="Foto de perfil" class="rounded-circle" style="width: 120px; height: 120px;">
                     @else
-                        <i class="fas fa-user-circle" style="font-size: 50px;"></i>
+                        <i class="fas fa-user-circle" style="font-size: 120px;"></i>
                     @endif
                 </div>
-
             @if (auth()->user()->rol->tipo_rol === 'Gerente')
                 <ul class="list-unstyled components">
                     <p></p>

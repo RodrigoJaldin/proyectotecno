@@ -35,7 +35,7 @@
         </tbody>
     </table>
     @include('asistencia.create')
-    
+
     <div class="container mt-5">
         <div class="row">
             <div class="col">
@@ -54,7 +54,6 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 @stop
 
