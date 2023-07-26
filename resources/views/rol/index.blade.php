@@ -110,7 +110,7 @@
                 text: "Este rol se eliminara definitivamente",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
+                confirmButtonColor: '#B4BEC7',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Si, eliminar!'
             }).then((result) => {

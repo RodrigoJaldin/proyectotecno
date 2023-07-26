@@ -5,7 +5,6 @@
         Crear Usuario
     </button>
 
-
     <br> <br>
     <table id="users" class="table table-striped table-bordered" style="width: 100%">
         <thead class="bg-primary text-white">
@@ -54,9 +53,7 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Eliminar</button>
                                     <!-- Botón para ver horario -->
-                                    <button type="button" class="btn btn-primary btn-ver-horario"
-                                        data-user-id="{{ $user->id }}" data-toggle="modal"
-                                        data-target="#verHorarioModal">Ver Horario</button>
+                                    <a href="{{ route('showUserHorarios', $user->id) }}" class="btn btn-primary">Ver Horario</a>
 
                                     <!-- Botón para asignar horario -->
                                     <button type="button" class="btn btn-primary btn-asignar-horario"
@@ -95,7 +92,6 @@
     @if (isset($user))
         @include('user.edit')
         @include('horario_user.create') {{-- ASIGNAR HORARIO --}}
-        {{-- @include('horario_user.index') VERHORARIO --}}
     @endif
 @stop
 
@@ -232,6 +228,5 @@
             });
         });
     </script>
-
 
 @stop

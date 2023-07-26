@@ -93,6 +93,8 @@
                             <a href="horario"><i class="far fa-clock"></i> Horarios</a>
                             <a href="documento"><i class="far fa-file-alt"></i> Documentos</a>
                             <a href="licencia"><i class="far fa-id-card"></i> Licencias</a>
+                            <a href="rotacion"><i class="far fa-calendar-check"></i> Rotaciones</a>
+
                         </li>
                         <li class="">
                             <a  id="link" href="{{ route('logout') }}"
