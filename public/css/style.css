@@ -62,7 +62,6 @@ a:focus {
     min-width: 250px;
     max-width: 250px;
     background: #ffc107;
-    /* Cambiamos el color del sidebar a naranja */
     color: #fff;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
@@ -419,11 +418,7 @@ body.night-mode tbody tr:hover {
 
 /****************************************************************/
 /* Estilos específicos para Modo Niñ@ */
-/*body.modo-nino {
-    background-color: pink;
-    color: white;
-    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
-}*/
+
 body.modo-nino {
     background-color: pink;
     color: white;
@@ -538,7 +533,7 @@ body.modo-nino .modal-title {
 body.modo-nino .modal-body {
     padding: 15px;
     color: black;
-    /* Agregar esta línea para definir el color del texto a negro */
+
 }
 
 body.modo-nino .modal-close {
@@ -576,15 +571,17 @@ body.modo-nino .btn-success {
 }
 
 /*****************MODO JOVEN*****************************************/
+/* Estilos específicos para Modo JOVEN */
 body.modo-joven {
-    background-color: rgb(145, 212, 246);
-    color: white;
+    background-color: #00aaff;
+    color: #fff;
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
 }
 
-/* Estilos específicos para Modo JOVEN - Sidebar */
 body.modo-joven #sidebar {
-    background: rgb(102, 204, 255);
+    background: #00aaff;
     color: #fff;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
 }
@@ -595,30 +592,29 @@ body.modo-joven #sidebar ul li a {
 }
 
 body.modo-joven #sidebar ul li a:hover {
-    color: rgb(102, 204, 255);
+    color: #00aaff;
     background: #fff;
     transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
 }
 
 body.modo-joven #content {
-    background-color: rgb(205, 238, 255);
-    /* Cambiar el color de fondo del contenido a rosado en Modo Niñ@ */
-    color: white;
-    /* Cambiar el color del texto del contenido a blanco en Modo Niñ@ */
+    background-color: #b3ffff;
+    color: #fff;
+    font-size: 18px;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
 }
 
 body.modo-joven #sidebar ul li.active>a,
 body.modo-joven a[aria-expanded="true"] {
-    background: rgb(102, 204, 255);
+    background: #00aaff;
     color: #fff;
     transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
 }
 
 body.modo-joven ul ul a {
-    font-size: 0.9em !important;
+    font-size: 1em !important;
     padding-left: 30px !important;
-    background: rgb(102, 204, 255);
+    background: #00aaff;
     transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
 }
 
@@ -631,10 +627,8 @@ body.modo-joven table {
 }
 
 body.modo-joven table th {
-    background-color: rgb(102, 204, 255) !important;
-    /* Fondo naranja más suave para los títulos */
-    color: #000;
-    /* Texto en color negro */
+    background-color: #00aaff !important;
+    color: #fff;
     padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -645,13 +639,12 @@ body.modo-joven tbody tr:nth-child(even) {
 }
 
 body.modo-joven tbody tr:hover {
-    background-color: #cfcfcf !important;
-    /* Fondo amarillo cuando se pasa el cursor por encima */
+    background-color: #00ccff !important;
 }
 
 body.modo-joven .btn-editar {
-    background-color: rgb(102, 204, 255);
-    color: #000;
+    background-color: #00aaff;
+    color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -662,7 +655,7 @@ body.modo-joven .modal {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgb(145, 212, 246);
+    background-color: #00aaff;
     max-width: 500px;
     margin: 0 auto;
     border-radius: 5px;
@@ -680,13 +673,12 @@ body.modo-joven .modal-header {
 body.modo-joven .modal-title {
     font-size: 1.4em;
     font-weight: 600;
-    color: rgb(145, 212, 246);
+    color: #00aaff; /* Texto en un tono amarillo brillante */
 }
 
 body.modo-joven .modal-body {
     padding: 15px;
-    color: black;
-    /* Agregar esta línea para definir el color del texto a negro */
+    color: black; /* Color del texto a negro */
 }
 
 body.modo-joven .modal-close {
@@ -707,7 +699,7 @@ body.modo-joven .modal-footer {
 
 body.modo-joven .modal-footer button {
     padding: 8px 20px;
-    background-color: rgb(145, 212, 246);
+    background-color: #00aaff;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -716,12 +708,12 @@ body.modo-joven .modal-footer button {
 }
 
 body.modo-joven .modal-footer button:hover {
-    background-color: rgb(145, 212, 246);
+    background-color: #00aaff;
 }
 
 body.modo-joven .btn-success {
-    background-color: rgb(102, 204, 255);
-    color: #000;
+    background-color: #00aaff;
+    color: #000; 
 }
 
 body.modo-joven .dataTables_length {
@@ -734,4 +726,164 @@ body.modo-joven .dataTables_info {
 
 body.modo-joven .dataTables_filter {
     color: #000;
+}
+
+
+/**************************MODO ADULTO****************************************/
+/* Estilos específicos para Modo ADULTO */
+body.modo-adulto {
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 18px;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+/* Estilos específicos para Modo ADULTO - Sidebar */
+body.modo-adulto #sidebar {
+    background: #ccc;
+    color: #333;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-adulto #sidebar ul li a {
+    color: #333;
+    transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-adulto #sidebar ul li a:hover {
+    color: #ccc;
+    background: #333;
+    transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+/* Estilos para Modo ADULTO - Contenido */
+body.modo-adulto #content {
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 18px;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-adulto #sidebar ul li.active>a,
+body.modo-adulto a[aria-expanded="true"] {
+    background: #ccc;
+    color: #333;
+    transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-adulto ul ul a {
+    font-size: 1em !important;
+    padding-left: 30px !important;
+    background: #ccc;
+    transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-adulto table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-adulto table th {
+    background-color: #ccc !important;
+    color: #333;
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+body.modo-adulto tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+body.modo-adulto tbody tr:hover {
+    background-color: #ccc !important;
+}
+
+body.modo-adulto .btn-editar {
+    background-color: #ccc;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+body.modo-adulto .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f0f0f0;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+body.modo-adulto .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+}
+
+body.modo-adulto .modal-title {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #333;
+}
+
+body.modo-adulto .modal-body {
+    padding: 15px;
+    color: #333;
+}
+
+body.modo-adulto .modal-close {
+    cursor: pointer;
+    font-size: 1.4em;
+    color: #999;
+}
+
+body.modo-adulto .modal-body {
+    padding: 15px;
+}
+
+body.modo-adulto .modal-footer {
+    padding: 15px;
+    text-align: right;
+    border-top: 1px solid #ddd;
+}
+
+body.modo-adulto .modal-footer button {
+    padding: 8px 20px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+body.modo-adulto .modal-footer button:hover {
+    background-color: #ccc;
+}
+
+body.modo-adulto .btn-success {
+    background-color: #ccc;
+    color: #333;
+}
+
+body.modo-adulto .dataTables_length {
+    color: #333;
+}
+
+body.modo-adulto .dataTables_info {
+    color: #333;
+}
+
+body.modo-adulto .dataTables_filter {
+    color: #333;
 }
