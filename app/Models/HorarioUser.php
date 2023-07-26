@@ -19,7 +19,7 @@ class HorarioUser extends Model
     public function users()
     {
         return $this->belongsTo(User::class, 'id_user');
-    }
+}
 
     public function horario()
     {

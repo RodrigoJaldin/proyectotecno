@@ -28,12 +28,7 @@ class RotacionController extends Controller
     }
 
     // Método para obtener los horarios de un usuario solicitante mediante una consulta AJAX
-    public function getHorarios(Request $request, $usuarioId)
-    {
-        $horariosUsuario = HorarioUser::where('id_user', $usuarioId)->get();
 
-        return response()->json($horariosUsuario);
-    }
     /**
      * Show the form for creating a new resource.
      */
