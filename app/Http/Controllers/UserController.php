@@ -26,6 +26,7 @@ class UserController extends Controller
         return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
 
+
     public function gerente()
     {
         $users = User::whereHas('rol', function ($query) {
