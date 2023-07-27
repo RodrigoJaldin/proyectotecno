@@ -57,6 +57,7 @@ Route::get('/{user_id}/horario', [HorarioUserController::class, 'showUserHorario
 //****************** G R A F I C O S ***************** */
 Route::get('/graficovisita', [VisitaController::class, 'generarGrafico'])->name('graficovisita');
 Route::get('/graficolicencia', [LicenciaController::class, 'licenciasPorUsuario'])->name('graficolicencia');
+Route::get('/graficoasistencia', [AsistenciaController::class, 'asistenciaPorUsuarioAutenticado'])->name('graficoasistencia');
 
 
 // Rutas para Contratos
