@@ -13,7 +13,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="codigo_empleado">Codigo:</label>
-                        <input type="text" class="form-control" id="codigo_empleado" name="codigo_empleado" required>
+                        <input type="text" class="form-control" id="codigo_empleado" name="codigo_empleado" value="BM_000" required>
                     </div>
                     <div class="form-group">
                         <label for="name">Nombre:</label>

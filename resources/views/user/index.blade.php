@@ -41,35 +41,37 @@
                     <td>{{ $user->rol->tipo_rol ?? '--' }}</td>
                     <td>{{ $user->telefono ?? '--' }}</td>
                     <td>
-                        @if (isset($user))
-                            @if ($user->rol->tipo_rol !== 'Gerente')
-                                <!-- Formulario para editar y eliminar usuarios -->
-                                <form class="formulario-eliminar" action="{{ route('user.destroy', $user->id) }}"
-                                    method="POST">
-                                    <button type="button" class="btn btn-info btn-editar"
-                                        data-user-id="{{ $user->id }}" data-toggle="modal"
-                                        data-target="#editarUserModal{{ $user->id }}">Editar</button>
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                                    <!-- Botón para ver horario -->
-                                    <a href="{{ route('horario_user.showUserHorarios', ['user_id' => $user->id]) }}"
-                                        class="btn btn-primary">Ver Horario</a>
-
-                                    <!-- Botón para asignar horario -->
-                                    <button type="button" class="btn btn-primary btn-asignar-horario"
-                                        data-user-id="{{ $user->id }}" data-toggle="modal"
-                                        data-target="#asignarHorarioModal">Asignar Horario</button>
-
-                                </form>
-                            @else
-                                <!-- Solo botón de editar para el rol Gerente -->
+                        @if (isset($user) && $user->rol->tipo_rol !== 'Gerente')
+                            <!-- Formulario para editar y eliminar usuarios -->
+                            <form class="formulario-eliminar" action="{{ route('user.destroy', $user->id) }}"
+                                method="POST">
                                 <button type="button" class="btn btn-info btn-editar" data-user-id="{{ $user->id }}"
                                     data-toggle="modal" data-target="#editarUserModal{{ $user->id }}">Editar</button>
-                            @endif
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                <!-- Botón para ver horario -->
+                                <a href="{{ route('horario_user.showUserHorarios', ['user_id' => $user->id]) }}"
+                                    class="btn btn-primary">Ver Horario</a>
+                                <!-- Enlace para calcular nómina -->
+                                <a href="{{ route('users.calcularNomina', ['user' => $user->id]) }}"
+                                    class="btn btn-primary">
+                                    Calcular Nómina
+                                </a>
+
+                                <!-- Botón para asignar horario -->
+                                <button type="button" class="btn btn-primary btn-asignar-horario"
+                                    data-user-id="{{ $user->id }}" data-toggle="modal"
+                                    data-target="#asignarHorarioModal">Asignar Horario</button>
+                            </form>
+                        @elseif (isset($user) && $user->rol->tipo_rol === 'Gerente')
+                            <!-- Solo botón de editar para el rol Gerente -->
+                            <button type="button" class="btn btn-info btn-editar" data-user-id="{{ $user->id }}"
+                                data-toggle="modal" data-target="#editarUserModal{{ $user->id }}">Editar</button>
                         @endif
 
                     </td>
+
                 </tr>
             @endforeach
 
@@ -229,5 +231,8 @@
             });
         });
     </script>
+
+
+
 
 @stop
