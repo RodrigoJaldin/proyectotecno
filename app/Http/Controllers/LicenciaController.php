@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Licencia;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class LicenciaController extends Controller
 {
@@ -92,4 +94,26 @@ class LicenciaController extends Controller
 
         return redirect()->route('licencia.index')->with('eliminar', 'ok');
     }
+
+    //funcion para mostrar la cantidad de licencias por usuarios
+    public function licenciasPorUsuario()
+{
+    $licenciasPorUsuario = Licencia::join('user', 'licencia.id_user', '=', 'user.id')
+        ->groupBy('user.id')
+        ->select('user.name', 'user.apellido', DB::raw('count(*) as total'))
+        ->get();
+
+    // Preparar los datos para el gráfico
+    $users = $licenciasPorUsuario->map(function ($item) {
+        return $item->nombre . ' ' . $item->apellido;
+    });
+    $cantidadLicencias = $licenciasPorUsuario->pluck('total');
+
+    // Pasar los datos a la vista para el gráfico
+    return view('grafico.graficolicencia', compact('users', 'cantidadLicencias'));
+}
+
+
+
+
 }

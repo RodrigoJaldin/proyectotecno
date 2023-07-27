@@ -164,7 +164,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#" id="modo-adulto-btn">Modo Adulto</a>
                             </li>
-                            
+
                         </ul>
                         <meta name="csrf-token" content="{{ csrf_token() }}">
                         <div style="width: 40% ; " class="container">

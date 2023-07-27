@@ -47,6 +47,8 @@ Route::get('auxiliaresCocina', [UserController::class, 'auxiliaresCocina'])->nam
 Route::get('cajeros', [UserController::class, 'cajeros'])->name('cajeros')->middleware(['auth', 'gerente', 'registrar.visita']);
 Route::get('limpieza', [UserController::class, 'limpieza'])->name('limpieza')->middleware(['auth', 'gerente', 'registrar.visita']);
 
+Route::get('user/{user_id}', [HorarioUserController::class, 'showUserHorarios'])->name('showUserHorarios')->middleware(['auth']);
+
 Route::resource('user', UserController::class)->middleware(['auth', 'gerente', 'registrar.visita']);
 Route::resource('rol', RolController::class)->middleware(['auth', 'registrar.visita.rol', 'gerente']);
 
@@ -67,3 +69,7 @@ Route::get('/user/{userId}/horarios', [HorarioUserController::class, 'showHorari
 Route::get('/{user_id}', [HorarioUserController::class, 'showUserHorarios'])->name('showUserHorarios')->middleware(['auth']);
 
 Route::post('myurl',[SearchController::class,'show']);
+
+//ruta para graficos
+Route::get('/graficovisita', [VisitaController::class, 'generarGrafico'])->name('graficovisita');
+Route::get('/graficolicencia', [LicenciaController::class, 'licenciasPorUsuario'])->name('graficolicencia');
