@@ -441,7 +441,6 @@ class UserController extends Controller
     {
         $user_id = Auth::id();
         $menuItems = DB::table('menus')->where('user_id', $user_id)->get();
-        dd($menuItems);
         return view('layouts.app', ['menuItems' => $menuItems]);
     }
 }

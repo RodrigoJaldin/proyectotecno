@@ -156,18 +156,13 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#" id="modo-normal-btn">Modo Normal</a>
-                            </li>
+                            @foreach ($menuItems as $menuItem)
                             <li class="nav-item">
-                                <a class="nav-link" href="#" id="modo-nino-btn">Modo Niña</a>
+
+                                <a class="nav-link" href="#" id="{{ $menuItem->url }}"> {{ $menuItem->nombre }}</a>
+
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" id="modo-joven-btn">Modo Joven</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" id="modo-adulto-btn">Modo Adulto</a>
-                            </li>
+                        @endforeach
 
                         </ul>
                         <meta name="csrf-token" content="{{ csrf_token() }}">

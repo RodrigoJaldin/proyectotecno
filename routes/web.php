@@ -103,8 +103,3 @@ Route::get('/{sucursal_id}', [SucursalController::class, 'trabajadoresPorSucursa
     ->name('sucursal.trabajadores')->middleware(['auth']);
 
 
-    Route::middleware(['auth'])->group(function () {
-        // Llamar a la función mostrarVista antes de cualquier otra ruta que renderice la vista app.blade.php
-        Route::get('/dashboard', [UserController::class, 'mostrarVista']);
-        // Agregar otras rutas aquí...
-    });
