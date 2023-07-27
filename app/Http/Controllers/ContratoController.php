@@ -14,8 +14,8 @@ class ContratoController extends Controller
     public function index()
     {
         $contratos = Contrato::all();
-        $users = User::all();
-        return view('contrato.index', compact('contratos'));
+        $usuarios = User::all();
+        return view('contrato.index', compact('contratos', 'usuarios'));
     }
 
     /**
@@ -23,7 +23,6 @@ class ContratoController extends Controller
      */
     public function create()
     {
-        $usuarios = User::all();
         return view('contrato.create', compact('usuarios'));
     }
 
