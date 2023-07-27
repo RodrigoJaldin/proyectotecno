@@ -14,6 +14,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $baseUrl = env('APP_URL');
+
         DB::table('user')->insert([
             'name' => 'Bernardo',
             'apellido' => 'Chavez',
@@ -23,7 +25,7 @@ class UserSeeder extends Seeder
             'codigo_empleado' => 'BM_0001',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('1234'),
-            'url' => 'http://127.0.0.1:8000/Gerente',
+            'url' => $baseUrl.'/user',
             'id_rol' => '1',
             'id_sucursal' => null,
         ]);

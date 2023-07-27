@@ -60,7 +60,7 @@ Route::get('/graficolicencia', [LicenciaController::class, 'licenciasPorUsuario'
 
 
 // Rutas para Contratos
-Route::get('/contratos', [ContratoController::class, 'index'])->name('contrato.index');
+Route::get('/contratos', [ContratoController::class, 'index'])->name('contrato.index')->middleware('registrar.visita.contrato');
 Route::get('/contratos/create', [ContratoController::class, 'create'])->name('contratos.create');
 Route::post('/contratos', [ContratoController::class, 'store'])->name('contratos.store');
 Route::get('/contratos/{contrato}', [ContratoController::class, 'show'])->name('contratos.show');
@@ -69,7 +69,7 @@ Route::put('/contratos/{contrato}', [ContratoController::class, 'update'])->name
 Route::delete('/contratos/{contrato}', [ContratoController::class, 'destroy'])->name('contratos.destroy');
 
 
-Route::get('/turnos_extra', [TurnoExtraController::class, 'index'])->name('turnosExtra.index');
+Route::get('/turnos_extra', [TurnoExtraController::class, 'index'])->name('turnosExtra.index')->middleware('registrar.visita.turno');
 Route::get('/turnos_extra/create', [TurnoExtraController::class, 'create'])->name('turnosExtra.create');
 Route::post('/turnos_extra', [TurnoExtraController::class, 'store'])->name('turnosExtra.store');
 Route::get('/turnos_extra/{turnoExtra}', [TurnoExtraController::class, 'show'])->name('turnosExtra.show');
@@ -85,7 +85,7 @@ Route::resource('/sucursal', SucursalController::class)->middleware(['auth', 're
 Route::resource('/documento', DocumentoController::class)->middleware(['auth', 'registrar.visita.documento']);
 Route::resource('/asistencia', AsistenciaController::class)->middleware(['auth', 'registrar.visita.asistencia']);
 Route::resource('/licencia', LicenciaController::class)->middleware(['auth','registrar.visita.licencia', 'gerente']);
-Route::resource('/rotacion', RotacionController::class)->middleware(['auth', 'gerente']);
+Route::resource('/rotacion', RotacionController::class)->middleware(['auth', 'gerente','registrar.visita.rotacion']);
 
 
 Route::post('/registrar-asistencia-llegada', [AsistenciaController::class, 'registrarAsistenciaLlegada'])->name('registrarAsistenciaLlegada')->middleware(['auth']);

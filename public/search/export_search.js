@@ -44,20 +44,22 @@ export class search{
         });
     }
 
-    Showlist(data,valor){
+    Showlist(data, valor) {
         this.ul_add_li.style.display = "block";
-        if(data.estado == 1){
-            if(data.result != ""){
-                let arrayp = data.result;
-                this.ul_add_li.innerHTML = "";
-                let n = 0;
-                this.Show_list_each_data(arrayp,valor,n);
-                let adclasli = document.getElementById('1'+this.idli);
-                adclasli(classList.add('selected'));
-            }else{
-                this.ul_add_li.innerHTML = "";
+        if (data.estado == 1) {
+            this.ul_add_li.innerHTML = "";
+            let resultsArray = Object.values(data.result); // Convertir el objeto data.result en un array de arrays
+
+            // Verificar si hay resultados para cada tabla y mostrar los resultados
+            resultsArray.forEach((result) => {
+                if (result.length > 0) {
+                    this.Show_list_each_data(result, valor);
+                }
+            });
+
+            if (this.ul_add_li.innerHTML === "") {
                 this.ul_add_li.innerHTML += `
-                    <p style="color:red;"><br>No se encontro</p>
+                    <p style="color:red;"><br>No se encontraron resultados.</p>
                 `;
             }
         }
@@ -66,20 +68,32 @@ export class search{
     Show_list_each_data(arrayp, valor, n) {
         for (let item of arrayp) {
             n++;
-            let nombre = item.name;
-            let apellido = item.apellido;
-            let fotoSrc = item.foto_user || 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/svgs/solid/image.svg';
+            let fotoSrc =
+                item.foto_user ||
+                "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/svgs/solid/image.svg";
+    
+            let attributesHTML = ""; // Variable para almacenar los atributos en HTML
+    
+            // Recorrer todos los atributos del objeto y agregarlos al HTML si coinciden con el valor de búsqueda y no son los campos "password" ni "id"
+            for (let key in item) {
+                if (
+                    item.hasOwnProperty(key) &&
+                    key !== "password" && // No agregar el atributo "password"
+                    key !== "id" && // No agregar el atributo "id"
+                    String(item[key]).toLowerCase().includes(valor.toLowerCase())
+                ) {
+                    attributesHTML += `<p><strong>${key}: </strong>${item[key]}</p>`;
+                }
+            }
     
             this.ul_add_li.innerHTML += `
-                <li id="${n + this.idli}" value="${nombre}" class="list-group-item" style="">
+                <li id="${n + this.idli}" value="${item.name}" class="list-group-item" style="">
                     <div class="d-flex flew-row" style="">
                         <div class="p-2 text-center divimg" style="">
                             <img src="${fotoSrc}" class="img-thumbnail" width="50" height="50">
                         </div>
                         <div class="p-2">
-                            <strong>${nombre.substr(0, valor.length)}</strong>
-                            ${nombre.substr(valor.length)}
-                            ${apellido}
+                            ${attributesHTML}
                         </div>
                     </div>
                 </li>
@@ -87,15 +101,16 @@ export class search{
     
             // Agregar el evento de clic a cada elemento de la lista
             const listItem = document.getElementById(n + this.idli);
-            listItem.addEventListener('click', () => {
-                // Redireccionar a la URL almacenada en item.url
-                window.location.href = item.url;
+            listItem.addEventListener("click", () => {
+                // Verificar si la URL no es null antes de redireccionar
+                if (item.url !== null) {
+                    // Redireccionar a la URL almacenada en item.url
+                    window.location.href = item.url;
+                } else {
+                    console.log("La URL es null, no se puede redireccionar.");
+                }
             });
         }
     }
     
-    
-    
-    
-
 }

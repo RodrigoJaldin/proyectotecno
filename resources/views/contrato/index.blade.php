@@ -51,7 +51,7 @@
                     <h2 style="font-size: 17px;">Visitas</h2>
                     <div class="card" style="width: 60px; height: 70px; font-size: 18px; background-color: #31525B;">
                         <div class="card-body">
-                            <p style="color: #fff" class="card-text">{{ session('contadorVisitasRol') }}</p>
+                            <p style="color: #fff" class="card-text">{{ session('contadorVisitasContrato') }}</p>
                         </div>
                     </div>
                 </div>
