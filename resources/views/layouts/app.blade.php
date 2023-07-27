@@ -104,7 +104,7 @@
                         <a href="turnos_extra"><i class="far fa-calendar-check"></i> Turnos Extras</a>
                         <a href="graficovisita"><i class="fas fa-chart-bar chart-icon"></i> Grafico Visita</a>
                         <a href="graficolicencia"><i class="fas fa-chart-pie chart-icon"></i> Grafico Licencia</a>
-                        <a href="graficoNominas"><i class="fas fa-chart-line chart-icon"></i> Grafico Nominas</a>
+                        <a href="graficonomina"><i class="fas fa-chart-line chart-icon"></i> Grafico Nominas</a>
 
                     </li>
                     <li class="">
