@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('turno');
             $table->time('hora_entrada');
             $table->time('hora_salida');
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }

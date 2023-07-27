@@ -312,6 +312,8 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
+
+
          // Validar los datos del formulario de creación
          $request->validate([
             'name' => 'required|min:1',
@@ -336,6 +338,7 @@ class UserController extends Controller
         $user->codigo_empleado = $request->input('codigo_empleado');
         $user->id_rol = $request->input('id_rol');
         $user->id_sucursal = $request->input('id_sucursal');
+        $user->url = $request->fullUrl();
 
         if ($request->hasFile('foto_user')) {
             $foto = $request->file('foto_user')->store('public/users_imagenes');

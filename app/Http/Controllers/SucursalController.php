@@ -44,6 +44,7 @@ class SucursalController extends Controller
         $sucursal = new Sucursal();
         $sucursal->nombre = $request->input('nombre');
         $sucursal->direccion = $request->input('direccion');
+        $sucursal->url = $request->fullUrl();
         $sucursal->save();
 
         return redirect()->route('sucursal.index')->with('success', 'La sucursal ha sido creada exitosamente');

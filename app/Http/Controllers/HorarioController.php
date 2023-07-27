@@ -41,6 +41,7 @@ class HorarioController extends Controller
         $horario->turno = $request->input('turno');
         $horario->hora_entrada = $request->input('hora_entrada');
         $horario->hora_salida = $request->input('hora_salida');
+        $horario->url = $request->fullUrl();
         $horario->save();
 
         // Redireccionar a la vista index con un mensaje de éxito
