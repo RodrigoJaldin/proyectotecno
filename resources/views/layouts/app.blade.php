@@ -90,7 +90,6 @@
                         </ul>
 
                         <li>
-                            <a href="graficovisita"><i class="fas fa-broom"></i> graficovisita</a>
                             <a href="asistencia"><i class="far fa-calendar-check"></i> Asistencias</a>
                             <a href="horario"><i class="far fa-clock"></i> Horarios</a>
                             <a href="documento"><i class="far fa-file-alt"></i> Documentos</a>
@@ -98,6 +97,8 @@
                             <a href="rotacion"><i class="far fa-calendar-check"></i> Rotaciones</a>
                             <a href="contratos"><i class="far fa-calendar-check"></i> Contratos</a>
                             <a href="turnos_extra"><i class="far fa-calendar-check"></i> Turnos Extras</a>
+                            <a href="graficovisita"><i class="fas fa-broom"></i> Grafico Visita</a>
+                            <a href="graficolicencia"><i class="fas fa-broom"></i> Grafico Licencia</a>
 
                         </li>
                         <li class="">
@@ -115,6 +116,7 @@
                     <li>
                         <a href="asistencia"><i class="far fa-calendar-check"></i> Asistencias</a>
                         <a href="documento"><i class="far fa-file-alt"></i> Documentos</a>
+                        <a href="graficoasistencia"><i class="far fa-calendar-check"></i> Reporte Asistencia</a>
 
                     </li>
                     {{-- <li>
