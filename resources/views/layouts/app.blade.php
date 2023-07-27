@@ -164,10 +164,29 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#" id="modo-adulto-btn">Modo Adulto</a>
                             </li>
-                        </ul>
 
+                        </ul>
+                        <meta name="csrf-token" content="{{ csrf_token() }}">
+                        <div style="width: 40% ; " class="container">
+                            <div style=" height: 10% ; width: 90%" class="card">
+                                    <div class="container">
+                                        <div  class="justify-content-center align-items-center">
+                                            <div class="col-md-8">
+                                                <div style="width: 149%" class="search">
+                                                    <i class="fas fa-search icon"></i>
+                                                    <input type="text" id="mysearch" class="form-control" placeholder="Haz tu busqueda aqui">
+                                                </div>
+                                                <ul id="showlist" tabindex="1" class="list-group"></ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
+
+
             </nav>
             <div class="content">
                 @yield('content')
