@@ -225,7 +225,7 @@
         });
     </script>
 
-<script src={{{ asset('js/thememodes.js') }}}></script>
+<script src={{ asset('js/thememodes.js') }}></script>
 
 
 
