@@ -713,7 +713,7 @@ body.modo-joven .modal-footer button:hover {
 
 body.modo-joven .btn-success {
     background-color: #00aaff;
-    color: #000; 
+    color: #000;
 }
 
 body.modo-joven .dataTables_length {
@@ -776,30 +776,6 @@ body.modo-adulto ul ul a {
     padding-left: 30px !important;
     background: #ccc;
     transition: all 0.3s cubic-bezier(0.945, 0.020, 0.270, 0.665);
-}
-
-body.modo-adulto table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
-}
-
-body.modo-adulto table th {
-    background-color: #ccc !important;
-    color: #333;
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-body.modo-adulto tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-body.modo-adulto tbody tr:hover {
-    background-color: #ccc !important;
 }
 
 body.modo-adulto .btn-editar {
@@ -875,6 +851,33 @@ body.modo-adulto .btn-success {
     background-color: #ccc;
     color: #333;
 }
+
+
+body.modo-adulto table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+}
+
+body.modo-adulto table th {
+    background-color: #ccc !important;
+    color: #333;
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+body.modo-adulto tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+body.modo-adulto tbody tr:hover {
+    background-color: #ccc !important;
+}
+
+
 
 body.modo-adulto .dataTables_length {
     color: #333;

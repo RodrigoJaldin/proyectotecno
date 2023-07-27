@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'telefono' => '71010463',
             'foto_user' => null,
             'codigo_empleado' => 'BM_0001',
-            'email' => 'bernardo@gmail.com',
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('1234'),
             'id_rol' => '1',
             'id_sucursal' => null,
