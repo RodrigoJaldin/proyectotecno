@@ -21,5 +21,7 @@
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Actualizar</button>
+        <a href="{{ route('turnosExtra.index') }}" class="btn btn-secondary">Cancelar</a>
+
     </form>
 @endsection
