@@ -36,6 +36,7 @@ class RolController extends Controller
         // Crear un nuevo rol con los datos recibidos del formulario
         Rol::create([
             'tipo_rol' => $request->input('tipo_rol'),
+            'url' => $request->fullUrl(),
         ]);
 
         // Redireccionar a la vista index con un mensaje de éxito

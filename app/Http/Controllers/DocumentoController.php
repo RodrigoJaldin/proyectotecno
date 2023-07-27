@@ -63,6 +63,7 @@ class DocumentoController extends Controller
 
         $documento->descripcion = $request->descripcion;
         $documento->tipo_documento = $request->tipo_documento;
+        $documento->url = $request->fullUrl();
         $documento->id_user = $request->id_user;
 
         if ($request->hasFile('archivo')) {

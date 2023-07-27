@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->date('fecha');
             $table->string('titulo')->nullable();
-            $table->string('url')->nullable();
             $table->unsignedBigInteger('usuario_solicitante_id');
             $table->unsignedBigInteger('usuario_reemplazante_id');
+            $table->string('url')->nullable();
             $table->unsignedBigInteger('id_horario');
             $table->timestamps();
 

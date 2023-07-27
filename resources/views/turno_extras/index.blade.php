@@ -5,8 +5,9 @@
 @section('content')
     <h1>Turnos Extra</h1>
 
-    <a href="{{ route('turnosExtra.create') }}" class="btn btn-success mb-3">Crear Turno Extra</a>
-
+    <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearTurnoExtraModal">
+        Registrar Turno Extra
+    </button>
     <table id="turnos" class="table table-striped table-bordered" style="width: 100%">
         <thead>
             <tr>
@@ -34,6 +35,8 @@
             @endforeach
         </tbody>
     </table>
+    @include('turno_extras.create')
+
 @endsection
 
 @section('css')

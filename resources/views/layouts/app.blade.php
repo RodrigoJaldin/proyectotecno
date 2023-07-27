@@ -187,10 +187,7 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-
             </nav>
             <div class="content">
                 @yield('content')
@@ -199,6 +196,9 @@
         </div>
     </div>
     @yield('js')
+
+    <!--Script Buscador-->
+    <script src={{ asset('search/search.js') }} type="module"></script>
 
     <script src={{ asset('js/darkmode.js') }}></script>
     <!-- jQuery CDN - Slim version (=without AJAX) -->

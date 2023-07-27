@@ -2,7 +2,9 @@
 
 
 @section('content')
-<a href="{{ route('contratos.create') }}" class="btn btn-primary mb-3">Crear Contrato</a>
+<button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearContratoModal">
+    Crear Contrato
+</button>
 
     <br> <br>
     <table id="contratos" class="table table-striped table-bordered" style="width: 100%">
@@ -14,7 +16,7 @@
                 <th>Fecha Fin</th>
                 <th>Sueldo</th>
                 <th>Usuario</th>
-                <th>Acciones</th>
+                {{-- <th>Acciones</th> --}}
             </tr>
         </thead>
 
@@ -27,19 +29,20 @@
                     <td>{{ $contrato->fecha_fin }}</td>
                     <td>{{ $contrato->sueldo }}</td>
                     <td>{{ $contrato->user->name }}</td>
-                    <td>
-                        {{-- <a href="{{ route('contratos.show', $contrato) }}" class="btn btn-info">Ver</a> --}}
+                    {{-- <td>
+                        {{-- <a href="{{ route('contratos.show', $contrato) }}" class="btn btn-info">Ver</a>
                         <a href="{{ route('contratos.edit', $contrato) }}" class="btn btn-primary">Editar</a>
                         <form action="{{ route('contratos.destroy', $contrato) }}" method="POST" style="display: inline-block;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este contrato?')">Eliminar</button>
                         </form>
-                    </td>
+                    </td> --}}
                 </tr>
             @endforeach
         </tbody>
     </table>
+    @include('contrato.create')
 
     <div class="container mt-5">
         <div class="row">
@@ -55,7 +58,6 @@
             </div>
         </div>
     </div>
-
 
 @stop
 

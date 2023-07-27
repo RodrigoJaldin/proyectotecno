@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('rol', function (Blueprint $table) {
             $table->id();
             $table->string('tipo_rol');
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }
