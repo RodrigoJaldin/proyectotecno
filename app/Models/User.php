@@ -109,4 +109,14 @@ class User extends Authenticatable
      {
          return $this->hasMany(Rotacion::class, 'usuario_reemplazante_id');
      }
+
+     public function contrato()
+     {
+         return $this->hasOne(Contrato::class, 'id_user');
+     }
+
+    public function turno_extra()
+    {
+        return $this->hasMany(Horario::class, 'id_user');
+    }
 }
