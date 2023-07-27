@@ -90,7 +90,8 @@ Route::resource('/rotacion', RotacionController::class)->middleware(['auth', 'ge
 Route::post('/registrar-asistencia-llegada', [AsistenciaController::class, 'registrarAsistenciaLlegada'])->name('registrarAsistenciaLlegada')->middleware(['auth']);
 Route::post('/registrar-asistencia-salida', [AsistenciaController::class, 'registrarAsistenciaSalida'])->name('registrarAsistenciaSalida')->middleware(['auth']);
 Route::post('/asignarHorario', [HorarioUserController::class, 'store'])->name('asignarHorario')->middleware(['auth']);
-
+Route::get('/user/{user}/calcular-nomina', [UserController::class, 'calcularNomina'])
+    ->name('users.calcularNomina');
 
 Route::get('/{sucursal_id}', [SucursalController::class, 'trabajadoresPorSucursal'])
     ->name('sucursal.trabajadores')->middleware(['auth']);
