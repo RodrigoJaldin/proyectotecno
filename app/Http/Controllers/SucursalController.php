@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sucursal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SucursalController extends Controller
 {
@@ -13,8 +14,12 @@ class SucursalController extends Controller
     public function index()
     {
         $sucursales = Sucursal::all();
+
         return view('sucursal.index', compact('sucursales'));
     }
+
+
+
 
     public function trabajadoresPorSucursal($sucursal_id)
     {

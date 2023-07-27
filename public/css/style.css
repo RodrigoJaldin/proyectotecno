@@ -527,8 +527,10 @@ body.modo-nino .modal-header {
 body.modo-nino .modal-title {
     font-size: 1.4em;
     font-weight: 600;
-    color: pink;
+    color: pink !important;
 }
+
+
 
 body.modo-nino .modal-body {
     padding: 15px;
@@ -554,7 +556,7 @@ body.modo-nino .modal-footer {
 
 body.modo-nino .modal-footer button {
     padding: 8px 20px;
-    background-color: pink;
+    background-color: pink !important;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -643,7 +645,7 @@ body.modo-joven tbody tr:hover {
 }
 
 body.modo-joven .btn-editar {
-    background-color: #00aaff;
+    background-color: #00aaff  !important;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -655,7 +657,7 @@ body.modo-joven .modal {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #00aaff;
+    background-color: #00aaff  !important;
     max-width: 500px;
     margin: 0 auto;
     border-radius: 5px;
@@ -673,12 +675,12 @@ body.modo-joven .modal-header {
 body.modo-joven .modal-title {
     font-size: 1.4em;
     font-weight: 600;
-    color: #00aaff; /* Texto en un tono amarillo brillante */
+    color: #00aaff !important;
 }
 
 body.modo-joven .modal-body {
     padding: 15px;
-    color: black; /* Color del texto a negro */
+    color: black;
 }
 
 body.modo-joven .modal-close {
@@ -699,7 +701,7 @@ body.modo-joven .modal-footer {
 
 body.modo-joven .modal-footer button {
     padding: 8px 20px;
-    background-color: #00aaff;
+    background-color: #00aaff  !important;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -708,7 +710,7 @@ body.modo-joven .modal-footer button {
 }
 
 body.modo-joven .modal-footer button:hover {
-    background-color: #00aaff;
+    background-color: #00aaff  !important;
 }
 
 body.modo-joven .btn-success {

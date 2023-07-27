@@ -27,7 +27,7 @@ use App\Http\Controllers\VisitaController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::middleware([
@@ -57,6 +57,7 @@ Route::get('/{user_id}/horario', [HorarioUserController::class, 'showUserHorario
 //****************** G R A F I C O S ***************** */
 Route::get('/graficovisita', [VisitaController::class, 'generarGrafico'])->name('graficovisita');
 Route::get('/graficolicencia', [LicenciaController::class, 'licenciasPorUsuario'])->name('graficolicencia');
+Route::get('/graficoasistencia', [AsistenciaController::class, 'asistenciaPorUsuarioAutenticado'])->name('graficoasistencia');
 
 
 // Rutas para Contratos
@@ -101,3 +102,5 @@ Route::post('myurl',[SearchController::class,'show']);
 
 Route::get('/{sucursal_id}', [SucursalController::class, 'trabajadoresPorSucursal'])
     ->name('sucursal.trabajadores')->middleware(['auth']);
+
+

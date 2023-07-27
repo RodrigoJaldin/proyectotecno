@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class AsistenciaController extends Controller
 {
@@ -102,6 +103,32 @@ class AsistenciaController extends Controller
 
         return redirect()->route('asistencia.index')->with('success-salida', 'Salida registrada correctamente');
     }
+
+    //hacer grafico de asistencia por usuario autenticado
+
+
+
+    public function asistenciaPorUsuarioAutenticado()
+    {
+        // Obtener el ID del usuario autenticado
+        $userId = auth()->user()->id;
+
+        // Contar las asistencias por mes del usuario autenticado
+        $asistenciasPorMes = Asistencia::select(
+            DB::raw("TO_CHAR(fecha, 'YYYY-MM') as mes"),
+            DB::raw('count(*) as total')
+        )
+        ->where('id_user', $userId)
+        ->groupBy('mes')
+        ->orderBy('mes')
+        ->get();
+
+        // Pasar los datos a la vista para el gráfico
+        return view('grafico.graficoasistencia', compact('asistenciasPorMes'));
+    }
+
+
+
 
     /**
      * Show the form for creating a new resource.

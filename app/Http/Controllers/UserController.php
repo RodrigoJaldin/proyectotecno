@@ -12,6 +12,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -433,5 +434,13 @@ class UserController extends Controller
 
         // Redireccionar a la vista index con un mensaje de éxito
         return redirect()->route('user.index')->with('eliminar', 'ok');
+    }
+
+
+    public function mostrarVista()
+    {
+        $user_id = Auth::id();
+        $menuItems = DB::table('menus')->where('user_id', $user_id)->get();
+        return view('layouts.app', ['menuItems' => $menuItems]);
     }
 }

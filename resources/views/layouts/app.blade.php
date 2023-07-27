@@ -90,7 +90,6 @@
                         </ul>
 
                         <li>
-                            <a href="graficovisita"><i class="fas fa-broom"></i> graficovisita</a>
                             <a href="asistencia"><i class="far fa-calendar-check"></i> Asistencias</a>
                             <a href="horario"><i class="far fa-clock"></i> Horarios</a>
                             <a href="documento"><i class="far fa-file-alt"></i> Documentos</a>
@@ -98,6 +97,8 @@
                             <a href="rotacion"><i class="far fa-calendar-check"></i> Rotaciones</a>
                             <a href="contratos"><i class="far fa-calendar-check"></i> Contratos</a>
                             <a href="turnos_extra"><i class="far fa-calendar-check"></i> Turnos Extras</a>
+                            <a href="graficovisita"><i class="fas fa-broom"></i> Grafico Visita</a>
+                            <a href="graficolicencia"><i class="fas fa-broom"></i> Grafico Licencia</a>
 
                         </li>
                         <li class="">
@@ -115,6 +116,7 @@
                     <li>
                         <a href="asistencia"><i class="far fa-calendar-check"></i> Asistencias</a>
                         <a href="documento"><i class="far fa-file-alt"></i> Documentos</a>
+                        <a href="graficoasistencia"><i class="far fa-calendar-check"></i> Reporte Asistencia</a>
 
                     </li>
                     {{-- <li>
@@ -156,18 +158,13 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#" id="modo-normal-btn">Modo Normal</a>
-                            </li>
+                            @foreach ($menuItems as $menuItem)
                             <li class="nav-item">
-                                <a class="nav-link" href="#" id="modo-nino-btn">Modo Niña</a>
+
+                                <a class="nav-link" href="#" id="{{ $menuItem->url }}"> {{ $menuItem->nombre }}</a>
+
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" id="modo-joven-btn">Modo Joven</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" id="modo-adulto-btn">Modo Adulto</a>
-                            </li>
+                        @endforeach
 
                         </ul>
                         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -198,9 +195,9 @@
     @yield('js')
 
     <!--Script Buscador-->
-    <script src={{{ asset('search/search.js') }}} type="module"></script>
+    <script src={{ asset('search/search.js') }} type="module"></script>
 
-    <script src={{{ asset('js/darkmode.js') }}}></script>
+    <script src={{ asset('js/darkmode.js') }}></script>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
@@ -225,7 +222,7 @@
         });
     </script>
 
-<script src={{{ asset('js/thememodes.js') }}}></script>
+<script src={{ asset('js/thememodes.js') }}></script>
 
 
 
