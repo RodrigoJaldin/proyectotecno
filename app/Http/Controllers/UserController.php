@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asistencia;
+use App\Models\Contrato;
 use App\Models\Horario;
 use App\Models\Rol;
 use App\Models\Sucursal;
+use App\Models\TurnoExtra;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -24,8 +28,174 @@ class UserController extends Controller
         $sucursales = Sucursal::all();
         $horarios = Horario::all();
 
+        foreach ($users as $usuario) {
+            $nomina = $this->calcularNomina($usuario->id);
+            $usuario->nomina = $nomina;
+        }
+
         return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
+    public function calcularNomina($user_id)
+    {
+        // Obtener el usuario
+        $user = User::findOrFail($user_id);
+
+        // Obtener el contrato del usuario
+        $contrato = Contrato::where('id_user', $user_id)->first();
+
+        // Verificar si el usuario tiene un contrato registrado
+        if (!$contrato) {
+            // Si no tiene un contrato registrado, retornar un mensaje de error
+            return [
+                'error' => 'El usuario no tiene un contrato registrado.',
+            ];
+        }
+
+        // Calcular el monto a pagar por hora al usuario
+        $montoPorHora = $contrato->sueldo / $contrato->horas_laborales;
+
+        // Obtener las asistencias del usuario en el mes actual
+        $asistencias = Asistencia::where('id_user', $user_id)
+            ->whereMonth('fecha', now()->month)
+            ->get();
+
+        // Calcular la suma total de minutos trabajados
+        $minutosTrabajados = 0;
+
+        // Verificar si el usuario tiene asistencias registradas
+        if (!$asistencias->isEmpty()) {
+            foreach ($asistencias as $asistencia) {
+                $horaEntrada = Carbon::parse($asistencia->hora_entrada);
+                $horaSalida = Carbon::parse($asistencia->hora_salida);
+
+                // Calcular los minutos trabajados en esta asistencia
+                $minutosTrabajados += $horaEntrada->diffInMinutes($horaSalida);
+            }
+        }
+
+        // Calcular el total de minutos de retraso
+        $minutosRetraso = 0;
+        $horarios = $user->horarios;
+        if (!$horarios->isEmpty()) {
+            foreach ($horarios as $horario) {
+                $horaEntradaHorario = Carbon::parse($horario->hora_entrada);
+                foreach ($asistencias as $asistencia) {
+                    $horaEntrada = Carbon::parse($asistencia->hora_entrada);
+                    if ($horaEntrada->greaterThan($horaEntradaHorario)) {
+                        $retraso = $horaEntrada->diffInMinutes($horaEntradaHorario);
+                        $minutosRetraso += $retraso;
+                    }
+                }
+            }
+        }
+
+        // Calcular el descuento por faltas en función de las horas trabajadas en relación con las horas laborales establecidas en el contrato
+        $horasTrabajadas = $minutosTrabajados / 60;
+        $descuentoFaltas = ($horasTrabajadas < $contrato->horas_laborales) ? ($contrato->horas_laborales - $horasTrabajadas) * $montoPorHora : 0;
+
+        // Calcular el monto a pagar por horas extras
+        $horasExtras = max($horasTrabajadas - $contrato->horas_laborales, 0);
+        $montoHorasExtras = $horasExtras * $montoPorHora;
+
+        // Calcular el sueldo sin descuentos por retraso y faltas
+        $sueldoSinDescuentos = ($minutosTrabajados / 60) * $montoPorHora;
+
+        // Calcular el sueldo con descuentos por retraso y faltas
+        $sueldoConDescuentos = $sueldoSinDescuentos - $descuentoFaltas;
+
+        // Verificar si el sueldo con descuentos es menor que cero y establecerlo en cero si es así
+        $sueldoConDescuentos = max($sueldoConDescuentos, 0);
+
+        // Calcular el total a pagar al usuario
+        $totalAPagar = $sueldoConDescuentos + $montoHorasExtras;
+
+        // Retornar los resultados en un arreglo
+        return [
+            'user' => $user,
+            'sueldoActual' => $contrato->sueldo,
+            'horas_laborales' => $contrato->horas_laborales,
+            'sueldoPorHora' => $montoPorHora,
+            'minutosTrabajados' => $minutosTrabajados,
+            'minutosRetraso' => $minutosRetraso,
+            'descuentoFaltas' => $descuentoFaltas,
+            'montoHorasExtras' => $montoHorasExtras,
+            'totalAPagar' => $totalAPagar,
+        ];
+    }
+
+
+
+
+    public function calcularNomina2($id_user)
+    {
+        // Obtener el usuario con el id proporcionado junto con sus contratos, horarios, asistencias y turnos extras
+        $usuario = User::with(['contrato', 'user_horarios', 'asistencia', 'turno_extra'])
+            ->leftJoin('user_horario', 'user.id', '=', 'user_horario.id_user')
+            ->leftJoin('horarios', 'user_horario.id_horario', '=', 'horarios.id')
+            ->selectRaw('user.*, horarios.hora_entrada, horarios.hora_salida')
+            ->find($id_user);
+
+        // Verificar si el usuario existe
+        if (!$usuario) {
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        }
+
+        // Obtener el sueldo por hora del usuario
+        $sueldoPorHora = $usuario->contrato->sueldo / $usuario->contrato->horas_laborales;
+
+        // Calcular las horas trabajadas (suma de las horas en las asistencias)
+        $horasTrabajadas = $usuario->asistencia->sum(function ($asistencia) {
+            return $asistencia->hora_salida - $asistencia->hora_llegada;
+        });
+
+        // Calcular los minutos de retraso
+        $minutosRetraso = $usuario->asistencia->sum(function ($asistencia) use ($usuario) {
+            $horaEntradaHorario = strtotime($usuario->user_horarios->where('dia_laboral', $asistencia->fecha->format('N'))->first()->horario->hora_entrada);
+            $horaLlegada = strtotime($asistencia->hora_llegada);
+            return max(0, ($horaLlegada - $horaEntradaHorario) / 60);
+        });
+
+        // Reducir el salario por minutos de retraso
+        $salarioFinal = max(0, $usuario->contrato->sueldo - ($minutosRetraso * ($sueldoPorHora / 60)));
+
+        // Calcular el salario por turnos extras
+        $salarioFinal += $usuario->turno_extra->sum('cantidad_horas') * $sueldoPorHora;
+
+        // Aquí puedes hacer lo que desees con el resultado de la nómina
+        // Puedes devolverlo como respuesta HTTP, almacenarlo en una tabla en la base de datos, etc.
+
+        // Ejemplo: Devolver el resultado como respuesta HTTP en formato JSON
+        return response()->json([
+            'usuario' => $usuario->name . ' ' . $usuario->apellido,
+            'salario' => $salarioFinal,
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+    public function nomina()
+    {
+        // Obtener la lista de usuarios
+        $usuarios = User::all();
+
+        // Calcular la nómina para cada usuario y agregar los resultados al arreglo $usuarios
+        foreach ($usuarios as $usuario) {
+            $usuario->nomina = $this->calcularNomina($usuario->id);
+        }
+
+        // Cargar la vista nomina.blade.php y pasar la lista de usuarios
+        return view('user.nomina', compact('usuarios'));
+    }
+
+
+
 
 
     public function gerente()

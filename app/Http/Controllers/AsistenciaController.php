@@ -30,8 +30,7 @@ class AsistenciaController extends Controller
         }
 
         $fechaActual = now()->toDateString();
-        $horaActual = now()->toTimeString();
-
+        $horaActual = Carbon::now()->timezone('America/La_Paz')->toTimeString();
         return view('asistencia.index', compact('asistencias', 'fechaActual', 'horaActual'));
     }
 
@@ -40,7 +39,7 @@ class AsistenciaController extends Controller
     public function registrarAsistencia(Request $request)
     {
         $fechaActual = now()->toDateString(); // Obtener la fecha actual en formato yyyy-mm-dd
-        $horaActual = now()->toTimeString(); // Obtener la hora actual en formato hh:mm:ss
+        $horaActual = Carbon::now()->timezone('America/La_Paz')->toTimeString(); // Obtener la hora actual en formato hh:mm:ss
         $user_id = auth()->user()->id;
 
         // Comprobar si el usuario ya tiene una asistencia registrada para la fecha actual
@@ -72,10 +71,11 @@ class AsistenciaController extends Controller
         $user_id = auth()->user()->id;
         $now = Carbon::now();
 
+        //Carbon::now()->timezone('America/La_Paz')->toTimeString();
         // Registrar la asistencia con la hora de llegada
         Asistencia::create([
             'fecha' => $now->toDateString(),
-            'hora_llegada' => $now->toTimeString(),
+            'hora_llegada' => $now->timezone('America/La_Paz')->toTimeString(),
             'hora_salida' => null,
             'id_user' => $user_id,
         ]);
@@ -96,7 +96,7 @@ class AsistenciaController extends Controller
 
         if ($asistencia) {
             // Actualizar la hora de salida
-            $asistencia->hora_salida = $now->toTimeString();
+            $asistencia->hora_salida = $now->timezone('America/La_Paz')->toTimeString();
             $asistencia->save();
         }
 
