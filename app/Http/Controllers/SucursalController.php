@@ -18,6 +18,7 @@ class SucursalController extends Controller
 
     public function trabajadoresPorSucursal($sucursal_id)
     {
+        //dd($sucursal_id);
         $sucursal = Sucursal::findOrFail($sucursal_id);
         $trabajadores = $sucursal->users;
 

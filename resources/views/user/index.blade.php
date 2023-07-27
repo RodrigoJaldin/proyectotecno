@@ -53,7 +53,8 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Eliminar</button>
                                     <!-- Botón para ver horario -->
-                                    <a href="{{ route('horario_user.showUserHorarios', ['user_id' => $user->id]) }}" class="btn btn-primary">Ver Horario</a>
+                                    <a href="{{ route('horario_user.showUserHorarios', ['user_id' => $user->id]) }}"
+                                        class="btn btn-primary">Ver Horario</a>
 
                                     <!-- Botón para asignar horario -->
                                     <button type="button" class="btn btn-primary btn-asignar-horario"
