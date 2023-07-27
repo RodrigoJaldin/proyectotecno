@@ -26,18 +26,19 @@ class HorarioUserController extends Controller
         //
     }
 
-    public function showUserHorarios($user_id)
+    public function showUserHorarios($id)
     {
-        $user = User::find($user_id);
+        $user = User::find($id);
 
         if (!$user) {
             // Manejar el caso cuando el usuario no existe
             return redirect()->back()->with('error', 'Usuario no encontrado');
         }
 
-        $userHorarios = HorarioUser::where('id_user', $user_id)->with(['users', 'horario'])->get();
+        $userHorarios = HorarioUser::where('id_user', $id)->with(['users', 'horario'])->get();
         return view('horario_user.index', compact('userHorarios', 'user'));
     }
+
 
 
 

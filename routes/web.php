@@ -46,27 +46,25 @@ Route::get('/auxiliaresCocina', [UserController::class, 'auxiliaresCocina'])->na
 Route::get('/cajeros', [UserController::class, 'cajeros'])->name('cajeros')->middleware(['auth', 'gerente', 'registrar.visita']);
 Route::get('/limpieza', [UserController::class, 'limpieza'])->name('limpieza')->middleware(['auth', 'gerente', 'registrar.visita']);
 
-Route::resource('/user', UserController::class)->middleware(['auth', 'gerente', 'registrar.visita']);
-Route::resource('/rol', RolController::class)->middleware(['auth', 'registrar.visita.rol', 'gerente']);
 
+Route::resource('user', UserController::class)->middleware(['auth', 'gerente', 'registrar.visita']);
+Route::get('/{user_id}/horario', [HorarioUserController::class, 'showUserHorarios'])->name('horario_user.showUserHorarios')->middleware(['auth']);
 
-Route::resource('/licencia', LicenciaController::class)->middleware(['auth','registrar.visita.licencia', 'gerente']);
-Route::resource('/horario', HorarioController::class)->middleware(['auth','registrar.visita.horario', 'gerente']);
-Route::resource('/horario_user', HorarioUserController::class)->middleware(['auth']);
-Route::resource('/sucursal', SucursalController::class)->middleware(['auth', 'registrar.visita.sucursal', 'gerente']);
-Route::resource('/documento', DocumentoController::class)->middleware(['auth', 'registrar.visita.documento']);
-Route::resource('/asistencia', AsistenciaController::class)->middleware(['auth', 'registrar.visita.asistencia']);
-Route::resource('/licencia', LicenciaController::class)->middleware(['auth','registrar.visita.licencia', 'gerente']);
-Route::resource('/rotacion', RotacionController::class)->middleware(['auth', 'gerente']);
+Route::resource('rol', RolController::class)->middleware(['auth', 'registrar.visita.rol', 'gerente']);
+Route::resource('licencia', LicenciaController::class)->middleware(['auth','registrar.visita.licencia', 'gerente']);
+Route::resource('horario', HorarioController::class)->middleware(['auth','registrar.visita.horario', 'gerente']);
+Route::resource('horario_user', HorarioUserController::class)->middleware(['auth']);
+Route::resource('sucursal', SucursalController::class)->middleware(['auth', 'registrar.visita.sucursal', 'gerente']);
+Route::resource('documento', DocumentoController::class)->middleware(['auth', 'registrar.visita.documento']);
+Route::resource('asistencia', AsistenciaController::class)->middleware(['auth', 'registrar.visita.asistencia']);
+Route::resource('licencia', LicenciaController::class)->middleware(['auth','registrar.visita.licencia', 'gerente']);
+Route::resource('rotacion', RotacionController::class)->middleware(['auth', 'gerente']);
 
 Route::post('/registrar-asistencia-llegada', [AsistenciaController::class, 'registrarAsistenciaLlegada'])->name('registrarAsistenciaLlegada')->middleware(['auth']);
 Route::post('/registrar-asistencia-salida', [AsistenciaController::class, 'registrarAsistenciaSalida'])->name('registrarAsistenciaSalida')->middleware(['auth']);
 Route::post('/asignarHorario', [HorarioUserController::class, 'store'])->name('asignarHorario')->middleware(['auth']);
-Route::get('/user/{userId}/horarios', [HorarioUserController::class, 'showHorariosAsignados'])->name('showHorariosAsignados')->middleware(['auth']);
+/* Route::get('/user/{userId}/horarios', [HorarioUserController::class, 'showHorariosAsignados'])->name('showHorariosAsignados')->middleware(['auth']);
+ */
 
-Route::get('/user/{user_id}', [HorarioUserController::class, 'showUserHorarios'])
-    ->name('showUserHorarios')
-    ->middleware(['auth']);
-
-Route::get('/sucursal/{sucursal_id}/', [SucursalController::class, 'trabajadoresPorSucursal'])
+Route::get('/{sucursal_id}', [SucursalController::class, 'trabajadoresPorSucursal'])
     ->name('sucursal.trabajadores')->middleware(['auth']);
