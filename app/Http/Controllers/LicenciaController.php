@@ -44,6 +44,7 @@ class LicenciaController extends Controller
         $licencia->fecha_inicio = $request->fecha_inicio;
         $licencia->fecha_fin = $request->fecha_fin;
         $licencia->tipo_licencia = $request->tipo_licencia;
+        $licencia->url = $request->fullUrl();
         $licencia->id_user = $request->id_user;
 
         $licencia->save();

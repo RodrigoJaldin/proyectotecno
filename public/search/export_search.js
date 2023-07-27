@@ -40,6 +40,7 @@ export class search{
             }catch (error){
                 console.log(error);
             }
+            
         });
     }
 
@@ -67,23 +68,34 @@ export class search{
             n++;
             let nombre = item.name;
             let apellido = item.apellido;
+            let fotoSrc = item.foto_user || 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/svgs/solid/image.svg';
+    
             this.ul_add_li.innerHTML += `
                 <li id="${n + this.idli}" value="${nombre}" class="list-group-item" style="">
                     <div class="d-flex flew-row" style="">
                         <div class="p-2 text-center divimg" style="">
-                            <img src="/images/${item.image}" class="img-thumbnail" width="50" height="50">
+                            <img src="${fotoSrc}" class="img-thumbnail" width="50" height="50">
                         </div>
                         <div class="p-2">
                             <strong>${nombre.substr(0, valor.length)}</strong>
                             ${nombre.substr(valor.length)}
                             ${apellido}
-                            
                         </div>
                     </div>
                 </li>
             `;
+    
+            // Agregar el evento de clic a cada elemento de la lista
+            const listItem = document.getElementById(n + this.idli);
+            listItem.addEventListener('click', () => {
+                // Redireccionar a la URL almacenada en item.url
+                window.location.href = item.url;
+            });
         }
     }
+    
+    
+    
     
 
 }

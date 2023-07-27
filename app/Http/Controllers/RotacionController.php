@@ -54,6 +54,7 @@ class RotacionController extends Controller
         'usuario_solicitante_id' => $request->input('usuario_solicitante'),
         'usuario_reemplazante_id' => $request->input('usuario_reemplazante'),
         'fecha' => $request->input('fecha'),
+        'url' => $request->fullUrl(),
         'id_horario' => $request->input('id_horario'),
     ]);
 

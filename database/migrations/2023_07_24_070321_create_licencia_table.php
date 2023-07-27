@@ -16,6 +16,7 @@ return new class extends Migration
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
             $table->string('tipo_licencia', 100);
+            $table->string('url')->nullable();
             $table->unsignedBigInteger("id_user")->nullable();
             $table->foreign('id_user')->on('user')->references('id')->onDelete('cascade');
 
