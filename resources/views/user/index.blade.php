@@ -54,10 +54,10 @@
                                 <a href="{{ route('horario_user.showUserHorarios', ['user_id' => $user->id]) }}"
                                     class="btn btn-primary">Ver Horario</a>
                                 <!-- Enlace para calcular nómina -->
-                                <a href="{{ route('users.calcularNomina', ['user' => $user->id]) }}"
-                                    class="btn btn-primary">
+                                <a href="{{ route('nomina.show', ['user_id' => $user->id]) }}" class="btn btn-primary">
                                     Calcular Nómina
                                 </a>
+
 
                                 <!-- Botón para asignar horario -->
                                 <button type="button" class="btn btn-primary btn-asignar-horario"
