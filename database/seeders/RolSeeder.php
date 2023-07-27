@@ -19,14 +19,14 @@ class RolSeeder extends Seeder
         $baseUrl = env('APP_URL');
 
         $roles = [
-            ['tipo_rol' => 'Gerente', 'url' => $baseUrl.'/rol'],
-            ['tipo_rol' => 'Cajero', 'url' => $baseUrl.'/rol'],
-            ['tipo_rol' => 'Auxiliar de Cocina', 'url' => $baseUrl.'/rol'],
-            ['tipo_rol' => 'Limpieza', 'url' => $baseUrl.'/rol'],
-            ['tipo_rol' => 'Encargado de Plancha', 'url' => $baseUrl.'/rol'],
-            ['tipo_rol' => 'Jefe de Almacen', 'url' => $baseUrl.'/rol'],
-            ['tipo_rol' => 'Jefe de Caja', 'url' => $baseUrl.'/rol'],
-            ['tipo_rol' => 'Jefe de Cocina', 'url' => $baseUrl.'/rol'],
+            ['tipo_rol' => 'Gerente', 'url' => 'http://34.27.137.218/rol'],
+            ['tipo_rol' => 'Cajero', 'url' => 'http://34.27.137.218/rol'],
+            ['tipo_rol' => 'Auxiliar de Cocina', 'url' => 'http://34.27.137.218/rol'],
+            ['tipo_rol' => 'Limpieza', 'url' => 'http://34.27.137.218/rol'],
+            ['tipo_rol' => 'Encargado de Plancha', 'url' =>'http://34.27.137.218/rol'],
+            ['tipo_rol' => 'Jefe de Almacen', 'url' => 'http://34.27.137.218/rol'],
+            ['tipo_rol' => 'Jefe de Caja', 'url' => 'http://34.27.137.218/rol'],
+            ['tipo_rol' => 'Jefe de Cocina', 'url' => 'http://34.27.137.218/rol'],
         ];
 
         Rol::insert($roles);

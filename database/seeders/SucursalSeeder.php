@@ -22,12 +22,12 @@ class SucursalSeeder extends Seeder
             [
                 'nombre' => 'Sucursal 1',
                 'direccion' => 'Av. Beni',
-                'url' => $baseUrl.'/sucursal' // Agregar el segmento de la URL específico para la sucursal
+                'url' => 'http://34.27.137.218/sucursal' // Agregar el segmento de la URL específico para la sucursal
             ],
             [
                 'nombre' => 'Sucursal Equipetrol',
                 'direccion' => 'Av. Equipetrol',
-                'url' => $baseUrl.'/sucursal' // Agregar el segmento de la URL específico para la sucursal
+                'url' => 'http://34.27.137.218/sucursal' // Agregar el segmento de la URL específico para la sucursal
             ],
         ];
 
