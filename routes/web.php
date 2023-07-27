@@ -10,6 +10,7 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\RotacionController;
 use App\Http\Controllers\SucursalController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VisitaController;
 
 /*
@@ -64,3 +65,5 @@ Route::post('/registrar-asistencia-salida', [AsistenciaController::class, 'regis
 Route::post('/asignarHorario', [HorarioUserController::class, 'store'])->name('asignarHorario')->middleware(['auth']);
 Route::get('/user/{userId}/horarios', [HorarioUserController::class, 'showHorariosAsignados'])->name('showHorariosAsignados')->middleware(['auth']);
 Route::get('/{user_id}', [HorarioUserController::class, 'showUserHorarios'])->name('showUserHorarios')->middleware(['auth']);
+
+Route::post('myurl',[SearchController::class,'show']);
