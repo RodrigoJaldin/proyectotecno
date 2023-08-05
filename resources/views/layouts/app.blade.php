@@ -46,12 +46,13 @@
 
             </div>
             <div align="center">
-                    @if (!empty(auth()->user()->foto_user))
-                        <img src="{{ auth()->user()->foto_user }}" alt="Foto de perfil" class="rounded-circle" style="width: 120px; height: 120px;">
-                    @else
-                        <i class="fas fa-user-circle" style="font-size: 120px;"></i>
-                    @endif
-                </div>
+                @if (!empty(auth()->user()->foto_user))
+                    <img src="{{ auth()->user()->foto_user }}" alt="Foto de perfil" class="rounded-circle"
+                        style="width: 120px; height: 120px;">
+                @else
+                    <i class="fas fa-user-circle" style="font-size: 120px;"></i>
+                @endif
+            </div>
             @if (auth()->user()->rol->tipo_rol === 'Gerente')
                 <ul class="list-unstyled components">
                     <p></p>
@@ -69,16 +70,20 @@
                                 <a href="{{ route('jefesCocina') }}"><i class="fas fa-chef"></i> Jefes de Cocina</a>
                             </li>
                             <li>
-                                <a href="{{ route('jefesCaja') }}"><i class="fas fa-cash-register"></i> Jefes de Caja</a>
+                                <a href="{{ route('jefesCaja') }}"><i class="fas fa-cash-register"></i> Jefes de
+                                    Caja</a>
                             </li>
                             <li>
-                                <a href="{{ route('jefesAlmacen') }}"><i class="fas fa-warehouse"></i> Jefes de Almacén</a>
+                                <a href="{{ route('jefesAlmacen') }}"><i class="fas fa-warehouse"></i> Jefes de
+                                    Almacén</a>
                             </li>
                             <li>
-                                <a href="{{ route('encargadosPlancha') }}"><i class="fas fa-user-hard-hat"></i> Encargados de Plancha</a>
+                                <a href="{{ route('encargadosPlancha') }}"><i class="fas fa-user-hard-hat"></i>
+                                    Encargados de Plancha</a>
                             </li>
                             <li>
-                                <a href="{{ route('auxiliaresCocina') }}"><i class="fas fa-user-check"></i> Auxiliar de Cocina</a>
+                                <a href="{{ route('auxiliaresCocina') }}"><i class="fas fa-user-check"></i> Auxiliar de
+                                    Cocina</a>
                             </li>
                             <li>
                                 <a href="{{ route('cajeros') }}"><i class="fas fa-cash-register"></i> Cajero</a>
@@ -89,29 +94,30 @@
 
                         </ul>
 
-                        <li>
-                            <a href="asistencia"><i class="far fa-calendar-check"></i> Asistencias</a>
-                            <a href="horario"><i class="far fa-clock"></i> Horarios</a>
-                            <a href="documento"><i class="far fa-file-alt"></i> Documentos</a>
-                            <a href="licencia"><i class="far fa-id-card"></i> Licencias</a>
-                            <a href="rotacion"><i class="far fa-calendar-check"></i> Rotaciones</a>
-                            <a href="contratos"><i class="far fa-calendar-check"></i> Contratos</a>
-                            <a href="turnos_extra"><i class="far fa-calendar-check"></i> Turnos Extras</a>
-                            <a href="graficovisita"><i class="fas fa-broom"></i> Grafico Visita</a>
-                            <a href="graficolicencia"><i class="fas fa-broom"></i> Grafico Licencia</a>
+                    <li>
+                        <a href="asistencia"><i class="far fa-calendar-check"></i> Asistencias</a>
+                        <a href="horario"><i class="far fa-clock"></i> Horarios</a>
+                        <a href="documento"><i class="far fa-file-alt"></i> Documentos</a>
+                        <a href="licencia"><i class="far fa-id-card"></i> Licencias</a>
+                        <a href="rotacion"><i class="far fa-calendar-check"></i> Rotaciones</a>
+                        <a href="contratos"><i class="far fa-calendar-check"></i> Contratos</a>
+                        <a href="turnos_extra"><i class="far fa-calendar-check"></i> Turnos Extras</a>
+                        <a href="graficovisita"><i class="fas fa-chart-bar chart-icon"></i> Grafico Visita</a>
+                        <a href="graficolicencia"><i class="fas fa-chart-pie chart-icon"></i> Grafico Licencia</a>
+                        <a href="graficonomina"><i class="fas fa-chart-line chart-icon"></i> Grafico Nominas</a>
 
-                        </li>
-                        <li class="">
-                            <a  id="link" href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="fas fa-sign-out-alt"></i> Cerrar Sesion
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        </li>
+                    </li>
+                    <li class="">
+                        <a id="link" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt"></i> Cerrar Sesion
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
                 </ul>
-                @else
+            @else
                 <ul class="list-unstyled components">
                     <li>
                         <a href="asistencia"><i class="far fa-calendar-check"></i> Asistencias</a>
@@ -131,7 +137,7 @@
                             {{ csrf_field() }}
                         </form>
                     </li>
-                @endif
+            @endif
 
             </ul>
             </ul>
@@ -150,37 +156,39 @@
                         <span></span>
                         <span></span>
                     </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button"
+                        data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             @foreach ($menuItems as $menuItem)
-                            <li class="nav-item">
+                                <li class="nav-item">
 
-                                <a class="nav-link" href="#" id="{{ $menuItem->url }}"> {{ $menuItem->nombre }}</a>
+                                    <a class="nav-link" href="#" id="{{ $menuItem->url }}">
+                                        {{ $menuItem->nombre }}</a>
 
-                            </li>
-                        @endforeach
+                                </li>
+                            @endforeach
 
                         </ul>
                         <meta name="csrf-token" content="{{ csrf_token() }}">
                         <div style="width: 40% ; " class="container">
                             <div style=" height: 10% ; width: 90%" class="card">
-                                    <div class="container">
-                                        <div  class="justify-content-center align-items-center">
-                                            <div class="col-md-8">
-                                                <div style="width: 149%" class="search">
-                                                    <i class="fas fa-search icon"></i>
-                                                    <input type="text" id="mysearch" class="form-control" placeholder="Haz tu busqueda aqui">
-                                                </div>
-                                                <ul id="showlist" tabindex="1" class="list-group"></ul>
+                                <div class="container">
+                                    <div class="justify-content-center align-items-center">
+                                        <div class="col-md-8">
+                                            <div style="width: 149%" class="search">
+                                                <i class="fas fa-search icon"></i>
+                                                <input type="text" id="mysearch" class="form-control"
+                                                    placeholder="Haz tu busqueda aqui">
                                             </div>
+                                            <ul id="showlist" tabindex="1" class="list-group"></ul>
                                         </div>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -222,7 +230,7 @@
         });
     </script>
 
-<script src={{ asset('js/thememodes.js') }}></script>
+    <script src={{ asset('js/thememodes.js') }}></script>
 
 
 

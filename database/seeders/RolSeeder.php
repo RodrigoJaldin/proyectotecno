@@ -15,15 +15,18 @@ class RolSeeder extends Seeder
      */
     public function run()
     {
+
+        $baseUrl = env('APP_URL');
+
         $roles = [
-            ['tipo_rol' => 'Gerente'],
-            ['tipo_rol' => 'Cajero'],
-            ['tipo_rol' => 'Auxiliar de Cocina'],
-            ['tipo_rol' => 'Limpieza'],
-            ['tipo_rol' => 'Encargado de Plancha'],
-            ['tipo_rol' => 'Jefe de Almacen'],
-            ['tipo_rol' => 'Jefe de Caja'],
-            ['tipo_rol' => 'Jefe de Cocina'],
+            ['tipo_rol' => 'Gerente', 'url' => 'http://34.27.137.218/rol'],
+            ['tipo_rol' => 'Cajero', 'url' => 'http://34.27.137.218/rol'],
+            ['tipo_rol' => 'Auxiliar de Cocina', 'url' => 'http://34.27.137.218/rol'],
+            ['tipo_rol' => 'Limpieza', 'url' => 'http://34.27.137.218/rol'],
+            ['tipo_rol' => 'Encargado de Plancha', 'url' =>'http://34.27.137.218/rol'],
+            ['tipo_rol' => 'Jefe de Almacen', 'url' => 'http://34.27.137.218/rol'],
+            ['tipo_rol' => 'Jefe de Caja', 'url' => 'http://34.27.137.218/rol'],
+            ['tipo_rol' => 'Jefe de Cocina', 'url' => 'http://34.27.137.218/rol'],
         ];
 
         Rol::insert($roles);

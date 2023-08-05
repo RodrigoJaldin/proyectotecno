@@ -35,7 +35,7 @@ class UserController extends Controller
 
         return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
-    public function calcularNomina($user_id)
+    /*   public function calcularNomina($user_id)
     {
         // Obtener el usuario
         $user = User::findOrFail($user_id);
@@ -122,6 +122,125 @@ class UserController extends Controller
             'totalAPagar' => $totalAPagar,
         ];
     }
+ */
+    //calcular nomina
+
+    public function calcularNomina($user_id)
+    {
+        // Obtener el usuario
+        $user = User::findOrFail($user_id);
+
+        // Obtener el contrato del usuario
+        $contrato = Contrato::where('id_user', $user_id)->first();
+
+        // Verificar si el usuario tiene un contrato registrado
+        if (!$contrato) {
+            // Si no tiene un contrato registrado, retornar un mensaje de error
+            return [
+                'error' => 'El usuario no tiene un contrato registrado.',
+            ];
+        }
+
+        // Calcular el monto a pagar por hora al usuario
+        $montoPorHora = $contrato->sueldo / $contrato->horas_laborales;
+
+        // Obtener las asistencias del usuario en el mes actual
+        $asistencias = Asistencia::where('id_user', $user_id)
+            ->whereMonth('fecha', now()->month)
+            ->get();
+
+        // Calcular la suma total de minutos trabajados
+        $minutosTrabajados = 0;
+        foreach ($asistencias as $asistencia) {
+            $horaEntrada = strtotime($asistencia->hora_llegada);
+            $horaSalida = strtotime($asistencia->hora_salida);
+            $minutosTrabajados += ($horaSalida - $horaEntrada) / 60;
+        }
+
+        // Calcular el monto a pagar al usuario
+        $montoAPagar = $minutosTrabajados * $montoPorHora;
+
+        // Obtener los turnos extras del usuario en el mes actual, no tiene fecha
+        $turnosExtras = TurnoExtra::where('id_user', $user_id)
+            ->whereMonth('created_at', now()->month)
+            ->get();
+
+        // Calcular la suma total de horas de los turnos extras
+        $horasTurnosExtras = 0;
+        foreach ($turnosExtras as $turnoExtra) {
+            $horasTurnosExtras += $turnoExtra->cantidad_horas;
+        }
+
+        // Calcular el monto a pagar por los turnos extras
+        $montoAPagar += $horasTurnosExtras * $montoPorHora;
+
+        // Retornar los datos de la nómina
+        return [
+            'user' => $user,
+            'contrato' => $contrato,
+            'monto_por_hora' => $montoPorHora,
+            'asistencias' => $asistencias,
+            'minutos_trabajados' => $minutosTrabajados,
+            'monto_a_pagar' => $montoAPagar,
+            'turnos_extras' => $turnosExtras,
+            'horas_turnos_extras' => $horasTurnosExtras,
+        ];
+    }
+
+    public function showNomina($user_id)
+    {
+        // Call the calcularNomina function to get the calculated data
+        $nominaData = $this->calcularNomina($user_id);
+
+        // Check if there's an error in the data
+        if (isset($nominaData['error'])) {
+            // If there's an error, return the view with the error message
+            return view('user.nomina', ['error' => $nominaData['error']]);
+        }
+
+        // If there's no error, continue and return the view with the calculated data
+        return view('user.nomina', [
+            'user' => $nominaData['user'],
+            'contrato' => $nominaData['contrato'],
+            'monto_por_hora' => $nominaData['monto_por_hora'],
+            'asistencias' => $nominaData['asistencias'],
+            'minutos_trabajados' => $nominaData['minutos_trabajados'],
+            'monto_a_pagar' => $nominaData['monto_a_pagar'],
+            'turnos_extras' => $nominaData['turnos_extras'],
+            'horas_turnos_extras' => $nominaData['horas_turnos_extras'],
+        ]);
+    }
+
+// Controlador
+public function graficoNominas()
+{
+    // Obtener todos los usuarios
+    $users = User::all();
+
+    // Inicializar arreglos para almacenar los datos de las nóminas por usuario
+    $usersArray = [];
+    $montoAPagarArray = [];
+
+    // Procesar los datos de las nóminas de cada usuario
+    foreach ($users as $user) {
+        // Obtener los datos de la nómina para el usuario actual
+        $nominaData = $this->calcularNomina($user->id);
+
+        // Verificar si la nómina tiene el monto a pagar
+        if (isset($nominaData['monto_a_pagar'])) {
+            // Agregar el nombre del usuario y el monto a pagar a los arreglos correspondientes
+            $usersArray[] = $user->name . ' ' . $user->apellido;
+            $montoAPagarArray[] = $nominaData['monto_a_pagar'];
+        }
+    }
+
+    // Retornar los datos procesados para el gráfico
+    return view('grafico.graficonomina', [
+        'users' => $usersArray,
+        'montoAPagar' => $montoAPagarArray,
+    ]);
+}
+
 
 
 
@@ -315,8 +434,8 @@ class UserController extends Controller
     {
 
 
-         // Validar los datos del formulario de creación
-         $request->validate([
+        // Validar los datos del formulario de creación
+        $request->validate([
             'name' => 'required|min:1',
             'apellido' => 'required|min:1',
             'email' => 'required|email|unique:user,email',
