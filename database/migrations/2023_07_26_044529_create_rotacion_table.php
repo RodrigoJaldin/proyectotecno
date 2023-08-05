@@ -21,8 +21,8 @@ return new class extends Migration
             $table->unsignedBigInteger('id_horario');
             $table->timestamps();
 
-            $table->foreign('usuario_solicitante_id')->references('id')->on('user');
-            $table->foreign('usuario_reemplazante_id')->references('id')->on('user');
+            $table->foreign('usuario_solicitante_id')->references('id')->on('persona');
+            $table->foreign('usuario_reemplazante_id')->references('id')->on('persona');
             $table->foreign('id_horario')->references('id')->on('horario');
         });
     }

@@ -18,9 +18,9 @@ return new class extends Migration
             $table->date('fecha_fin');
             $table->decimal('sueldo', 8, 2);
             $table->timestamps();
-            
+
             $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('user')->onDelete('cascade');
+            $table->foreign('id_user')->references('id')->on('persona')->onDelete('cascade');
         });
     }
 

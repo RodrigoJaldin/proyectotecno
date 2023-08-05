@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('dia_laboral', 50);
             $table->unsignedBigInteger("id_user")->nullable();
-            $table->foreign('id_user')->on('user')->references('id')->onDelete('cascade');
+            $table->foreign('id_user')->on('persona')->references('id')->onDelete('cascade');
             $table->unsignedBigInteger("id_horario")->nullable();
             $table->foreign('id_horario')->on('horario')->references('id')->onDelete('cascade');
 

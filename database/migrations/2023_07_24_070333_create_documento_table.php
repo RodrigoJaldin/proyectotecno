@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('archivo');
             $table->string('url')->nullable();
             $table->unsignedBigInteger("id_user")->nullable();
-            $table->foreign('id_user')->on('user')->references('id')->onDelete('cascade');
+            $table->foreign('id_user')->on('persona')->references('id')->onDelete('cascade');
 
             $table->timestamps();
         });

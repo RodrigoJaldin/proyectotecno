@@ -19,7 +19,7 @@ return new class extends Migration
 
             // Agregar la clave foránea para la relación con la tabla "users"
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('persona')->onDelete('cascade');
         });
     }
 

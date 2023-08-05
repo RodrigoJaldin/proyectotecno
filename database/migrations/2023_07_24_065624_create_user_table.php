@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user', function (Blueprint $table) {
+        Schema::create('persona', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('apellido');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('url');
+            $table->string('url')->nullable();
             $table->rememberToken();
 
             $table->foreignId('current_team_id')->nullable();

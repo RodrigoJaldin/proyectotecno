@@ -17,7 +17,7 @@ return new class extends Migration
             $table->time('hora_llegada')->nullable();
             $table->time('hora_salida')->nullable();
             $table->unsignedBigInteger("id_user")->nullable();
-            $table->foreign('id_user')->on('user')->references('id')->onDelete('cascade');
+            $table->foreign('id_user')->on('persona')->references('id')->onDelete('cascade');
             $table->timestamps();
         });
 

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('tipo_licencia', 100);
             $table->string('url')->nullable();
             $table->unsignedBigInteger("id_user")->nullable();
-            $table->foreign('id_user')->on('user')->references('id')->onDelete('cascade');
+            $table->foreign('id_user')->on('persona')->references('id')->onDelete('cascade');
 
             $table->timestamps();
         });
