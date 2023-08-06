@@ -62,7 +62,7 @@ Route::get('/graficonomina', [UserController::class, 'graficoNominas'])->name('g
 
 
 // Rutas para Contratos
-Route::get('/contratos', [ContratoController::class, 'index'])->name('contrato.index')->middleware('gerente','registrar.visita.contrato');
+Route::get('/contratos', [ContratoController::class, 'index'])->name('contrato.index')->middleware('registrar.visita.contrato');
 Route::get('/contratos/create', [ContratoController::class, 'create'])->name('contratos.create')->middleware(['auth', 'gerente']);
 Route::post('/contratos', [ContratoController::class, 'store'])->name('contratos.store')->middleware(['auth', 'gerente']);
 Route::get('/contratos/{contrato}', [ContratoController::class, 'show'])->name('contratos.show')->middleware(['auth', 'gerente']);
@@ -80,13 +80,12 @@ Route::put('/turnos_extra/{turnoExtra}', [TurnoExtraController::class, 'update']
 Route::delete('/turnos_extra/{turnoExtra}', [TurnoExtraController::class, 'destroy'])->name('turnosExtra.destroy')->middleware(['auth', 'gerente']);
 
 Route::resource('/rol', RolController::class)->middleware(['auth', 'registrar.visita.rol', 'gerente']);
-Route::resource('/licencia', LicenciaController::class)->middleware(['auth','registrar.visita.licencia', 'gerente']);
+Route::resource('/licencia', LicenciaController::class)->middleware(['auth','registrar.visita.licencia']);
 Route::resource('/horario', HorarioController::class)->middleware(['auth','registrar.visita.horario', 'gerente']);
 Route::resource('/horario_user', HorarioUserController::class)->middleware(['auth', 'gerente']);
 Route::resource('/sucursal', SucursalController::class)->middleware(['auth', 'registrar.visita.sucursal', 'gerente']);
 Route::resource('/documento', DocumentoController::class)->middleware(['auth', 'registrar.visita.documento']);
 Route::resource('/asistencia', AsistenciaController::class)->middleware(['auth','registrar.visita.asistencia']);
-Route::resource('/licencia', LicenciaController::class)->middleware(['auth','registrar.visita.licencia', 'gerente']);
 Route::resource('/rotacion', RotacionController::class)->middleware(['auth', 'gerente','registrar.visita.rotacion']);
 
 

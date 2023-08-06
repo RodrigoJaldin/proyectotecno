@@ -438,11 +438,11 @@ public function graficoNominas()
         $request->validate([
             'name' => 'required|min:1',
             'apellido' => 'required|min:1',
-            'email' => 'required|email|unique:user,email',
+            'email' => 'required|email|unique:persona,email',
             'ci' => 'required|min:1',
             'telefono' => 'required|min:1',
             'foto_user' => ['image', 'nullable', 'max:2048'],
-            'codigo_empleado' => 'required|unique:user,codigo_empleado',
+            'codigo_empleado' => 'required|unique:persona,codigo_empleado',
             'id_rol' => 'required|exists:rol,id',
             'id_sucursal' => 'required|exists:sucursal,id',
         ]);
@@ -497,11 +497,11 @@ public function graficoNominas()
         $request->validate([
             'name' => 'required|min:1',
             'apellido' => 'required|min:1',
-            'email' => 'required|email|unique:user,email,' . $id,
+            'email' => 'required|email|unique:persona,email,' . $id,
             'ci' => 'required|min:1',
             'telefono' => 'required|min:1',
             'foto_user' => ['image', 'nullable', 'max:2048'],
-            'codigo_empleado' => 'required|unique:user,codigo_empleado,' . $id,
+            'codigo_empleado' => 'required|unique:persona,codigo_empleado,' . $id,
             'id_rol' => 'required|exists:rol,id',
         ]);
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Licencia;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -15,7 +16,16 @@ class LicenciaController extends Controller
      */
     public function index()
     {
-        $licencias = Licencia::all();
+        $user = Auth::user(); // Obtener el usuario autenticado
+
+        if ($user->rol->tipo_rol === 'Gerente') {
+            // Si el usuario es un Gerente, mostrar todas las licencias
+            $licencias = Licencia::all();
+        } else {
+            // Si el usuario tiene otro rol, mostrar solo sus licencias
+            $licencias = Licencia::where('id_user', $user->id)->get();
+        }
+
         $users = User::all();
         return view('licencia.index', compact('licencias', 'users'));
     }
@@ -37,15 +47,18 @@ class LicenciaController extends Controller
             'fecha_inicio' => 'required|date',
             'fecha_fin' => 'required|date|after_or_equal:fecha_inicio',
             'tipo_licencia' => 'required',
-            'id_user' => 'required|exists:user,id',
         ]);
+
+        $user = Auth::user(); // Obtener el usuario autenticado
+        $id_user = $user->id;
 
         $licencia = new Licencia();
         $licencia->fecha_inicio = $request->fecha_inicio;
         $licencia->fecha_fin = $request->fecha_fin;
         $licencia->tipo_licencia = $request->tipo_licencia;
+        $licencia->estado = 'pendiente'; // Estado por defecto
         $licencia->url = $request->fullUrl();
-        $licencia->id_user = $request->id_user;
+        $licencia->id_user = $id_user; // Asignar el id del usuario autenticado
 
         $licencia->save();
 
@@ -68,25 +81,27 @@ class LicenciaController extends Controller
     }
 
 
-    public function update(Request $request, Licencia $licencia)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'fecha_inicio' => 'required|date',
-            'fecha_fin' => 'required|date|after_or_equal:fecha_inicio',
-            'tipo_licencia' => 'required',
-            'id_user' => 'required|exists:user,id',
+            'estado' => 'required|in:aceptar,rechazar',
         ]);
 
-        $licencia->fecha_inicio = $request->fecha_inicio;
-        $licencia->fecha_fin = $request->fecha_fin;
-        $licencia->tipo_licencia = $request->tipo_licencia;
-        $licencia->id_user = $request->id_user;
+        $licencia = Licencia::findOrFail($id);
 
-        $licencia->save();
+        $user = Auth::user(); // Obtener el usuario autenticado
 
-        return redirect()->route('licencia.index')->with('edit-success', 'La licencia ha sido editada exitosamente.');
+        // Verificar si el usuario es un Gerente
+        if ($user->rol->tipo_rol === 'Gerente') {
+            $licencia->estado = $request->estado;
+            $licencia->save();
+
+            return redirect()->route('licencia.index')->with('success', 'El estado de la licencia ha sido actualizado exitosamente.');
+        } else {
+            return redirect()->route('licencia.index')->with('error', 'No tienes permiso para actualizar el estado de esta licencia.');
+        }
     }
-    /**
+        /**
      * Remove the specified resource from storage.
      */
     public function destroy(Licencia $licencia)
@@ -99,9 +114,9 @@ class LicenciaController extends Controller
     //funcion para mostrar la cantidad de licencias por usuarios
     public function licenciasPorUsuario()
     {
-        $licenciasPorUsuario = Licencia::join('user', 'licencia.id_user', '=', 'user.id')
-            ->groupBy('user.id')
-            ->select('user.name', 'user.apellido', DB::raw('count(*) as total'))
+        $licenciasPorUsuario = Licencia::join('persona', 'licencia.id_user', '=', 'persona.id')
+            ->groupBy('persona.id')
+            ->select('persona.name', 'persona.apellido', DB::raw('count(*) as total'))
             ->get();
 
         // Preparar los datos para el gráfico

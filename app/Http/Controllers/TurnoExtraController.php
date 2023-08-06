@@ -66,7 +66,7 @@ class TurnoExtraController extends Controller
     {
         $request->validate([
             'cantidad_horas' => 'required|integer',
-            'id_user' => 'required|exists:user,id',
+            'id_user' => 'required|exists:persona,id',
         ]);
 
         $turnoExtra->update($request->all());

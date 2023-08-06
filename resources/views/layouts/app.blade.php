@@ -46,6 +46,7 @@
 
             </div>
             <div align="center">
+                <br>
                 @if (!empty(auth()->user()->foto_user))
                     <img src="{{ auth()->user()->foto_user }}" alt="Foto de perfil" class="rounded-circle"
                         style="width: 120px; height: 120px;">
@@ -120,9 +121,12 @@
             @else
                 <ul class="list-unstyled components">
                     <li>
-                        <a href="asistencia"><i class="far fa-calendar-check"></i> Asistencias</a>
-                        <a href="documento"><i class="far fa-file-alt"></i> Documentos</a>
-                        <a href="graficoasistencia"><i class="far fa-calendar-check"></i> Reporte Asistencia</a>
+                        <a href="asistencia"><i class="far fa-calendar-check"></i> Registrar Asistencias</a>
+                        <a href="documento"><i class="far fa-file-alt"></i> Mis Documentos</a>
+                        <a href="licencia"><i class="far fa-id-card"></i> Mis Licencias</a>
+                        <a href="contratos"><i class="far fa-file-alt"></i> Mi Contrato</a>
+
+                        <a href="graficoasistencia"><i class="fas fa-chart-pie chart-icon"></i> Reporte Asistencia</a>
 
                     </li>
                     {{-- <li>

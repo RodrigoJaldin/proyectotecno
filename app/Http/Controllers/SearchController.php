@@ -15,7 +15,7 @@ class SearchController extends Controller
 
             // Realizar la búsqueda por separado para cada tabla
             $results = [];
-            $tables = ['user', 'asistencia', 'documento', 'horario', 'licencia', 'rol', 'rotacion', 'sucursal'];
+            $tables = ['persona', 'asistencia', 'documento', 'horario', 'licencia', 'rol', 'rotacion', 'sucursal'];
 
             foreach ($tables as $table) {
                 if (DB::getSchemaBuilder()->hasTable($table)) {
@@ -23,7 +23,7 @@ class SearchController extends Controller
 
                     // Verificar columnas específicas por tabla
                     switch ($table) {
-                        case 'user':
+                        case 'persona':
                             $columns = ['id','name', 'apellido', 'ci', 'telefono', 'codigo_empleado', 'email'];
                             break;
                         case 'asistencia':

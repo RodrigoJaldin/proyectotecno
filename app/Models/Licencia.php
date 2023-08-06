@@ -14,6 +14,7 @@ class Licencia extends Model
         'fecha_inicio',
         'fecha_fin',
         'tipo_licencia',
+        'estado',
         'id_user'
     ];
 

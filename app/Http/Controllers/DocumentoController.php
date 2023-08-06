@@ -56,7 +56,7 @@ class DocumentoController extends Controller
             'descripcion' => 'required|min:1',
             'tipo_documento' => 'required|min:1',
             'archivo' => 'required|file',
-            'id_user' => 'required|exists:user,id',
+            'id_user' => 'required|exists:persona,id',
         ]);
 
         $documento = new Documento();
@@ -103,7 +103,7 @@ class DocumentoController extends Controller
         $request->validate([
             'descripcion' => 'required|min:1',
             'tipo_documento' => 'required|min:1',
-            'id_user' => 'required|exists:user,id',
+            'id_user' => 'required|exists:persona,id',
 
         ]);
 

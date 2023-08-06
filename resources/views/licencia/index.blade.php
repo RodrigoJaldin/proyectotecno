@@ -13,8 +13,11 @@
                 <th>Fecha de Inicio</th>
                 <th>Fecha Fin</th>
                 <th>Tipo de Licencia</th>
+                <th>Estado</th>
                 <th>Usuario</th>
+
                 <th>Acciones</th>
+
             </tr>
         </thead>
         <tbody>
@@ -24,16 +27,21 @@
                     <td>{{ $licencia->fecha_inicio }}</td>
                     <td>{{ $licencia->fecha_fin }}</td>
                     <td>{{ $licencia->tipo_licencia }}</td>
-                    <td>{{ $licencia->users->name }}</td>
                     <td>
-                        <form class="formulario-eliminar" action="{{ route('licencia.destroy', $licencia->id) }}"
-                            method="POST">
+                        @if ($licencia->estado === 'aceptar')
+                            Aceptada
+                        @elseif ($licencia->estado === 'rechazar')
+                            Rechazada
+                        @else
+                            {{ $licencia->estado }}
+                        @endif
+                    </td>
+                    <td>{{ $licencia->users->name }} {{ $licencia->users->apellido }}</td>
+                    <td>
+                        @if (Auth::user()->rol->tipo_rol === 'Gerente')
                             <button type="button" class="btn btn-info btn-editar" data-licencia-id="{{ $licencia->id }}"
                                 data-toggle="modal" data-target="#editarLicenciaModal{{ $licencia->id }}">Editar</button>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                        </form>
+                        @endif
                     </td>
                 </tr>
 
@@ -55,35 +63,17 @@
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
-                                        <label for="fecha_inicio{{ $licencia->id }}">Fecha de Inicio</label>
-                                        <input type="date" name="fecha_inicio" id="fecha_inicio{{ $licencia->id }}"
-                                            class="form-control" value="{{ $licencia->fecha_inicio }}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="fecha_fin{{ $licencia->id }}">Fecha Fin</label>
-                                        <input type="date" name="fecha_fin" id="fecha_fin{{ $licencia->id }}"
-                                            class="form-control" value="{{ $licencia->fecha_fin }}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="tipo_licencia{{ $licencia->id }}">Tipo de Licencia</label>
-                                        <input type="text" name="tipo_licencia" id="tipo_licencia{{ $licencia->id }}"
-                                            class="form-control" value="{{ $licencia->tipo_licencia }}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="id_user{{ $licencia->id }}">Usuario</label>
-                                        <select name="id_user" id="id_user{{ $licencia->id }}" class="form-control"
+                                        <label for="estado{{ $licencia->id }}">Estado</label>
+                                        <select name="estado" id="estado{{ $licencia->id }}" class="form-control"
                                             required>
-                                            <option value="">Seleccionar Usuario</option>
-                                            @foreach ($users as $user)
-                                                <option value="{{ $user->id }}"
-                                                    {{ $licencia->id_user == $user->id ? 'selected' : '' }}>
-                                                    {{ $user->name }}</option>
-                                            @endforeach
+                                            <option value="aceptar"
+                                                {{ $licencia->estado === 'aceptar' ? 'selected' : '' }}>Aceptar</option>
+                                            <option value="rechazar"
+                                                {{ $licencia->estado === 'rechazar' ? 'selected' : '' }}>Rechazar</option>
                                         </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Actualizar Licencia</button>
                                 </form>
-
                             </div>
                         </div>
                     </div>

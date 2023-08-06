@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contrato;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ContratoController extends Controller
 {
@@ -13,10 +14,18 @@ class ContratoController extends Controller
      */
     public function index()
     {
-        $contratos = Contrato::all();
+        $user = Auth::user(); // Obtener el usuario autenticado
+
+        if ($user->rol->tipo_rol === 'Gerente') {
+            $contratos = Contrato::all(); // Mostrar todos los contratos para Gerentes
+        } else {
+            $contratos = Contrato::where('id_user', $user->id)->get(); // Mostrar solo los contratos del usuario logueado
+        }
+
         $usuarios = User::all();
         return view('contrato.index', compact('contratos', 'usuarios'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -36,7 +45,7 @@ class ContratoController extends Controller
             'fecha_inicio' => 'required|date',
             'fecha_fin' => 'required|date|after_or_equal:fecha_inicio',
             'sueldo' => 'required|numeric',
-            'id_user' => 'required|exists:user,id',
+            'id_user' => 'required|exists:persona,id',
         ]);
 
         Contrato::create($request->all());
@@ -72,7 +81,7 @@ class ContratoController extends Controller
             'fecha_inicio' => 'required|date',
             'fecha_fin' => 'required|date|after_or_equal:fecha_inicio',
             'sueldo' => 'required|numeric',
-            'id_user' => 'required|exists:user,id',
+            'id_user' => 'required|exists:persona,id',
         ]);
 
         $contrato->update($request->all());

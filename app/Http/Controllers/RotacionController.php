@@ -43,8 +43,8 @@ class RotacionController extends Controller
     public function store(Request $request)
 {
     $request->validate([
-        'usuario_solicitante' => 'required|exists:user,id',
-        'usuario_reemplazante' => 'required|exists:user,id',
+        'usuario_solicitante' => 'required|exists:persona,id',
+        'usuario_reemplazante' => 'required|exists:persona,id',
         'fecha' => 'required|date',
         'id_horario' => 'required|exists:horario,id',
     ]);

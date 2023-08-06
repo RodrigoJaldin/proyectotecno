@@ -1,4 +1,4 @@
-<!-- Modal para crear un nuevo horario -->
+<!-- Modal para crear una nueva licencia -->
 <div class="modal fade" id="crearLicenciaModal" tabindex="-1" role="dialog" aria-labelledby="crearLicenciaModalLabel" aria-hidden="true" data-backdrop="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -24,12 +24,9 @@
                         <input type="text" name="tipo_licencia" id="tipo_licencia" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="id_user">Usuario</label>
-                        <select name="id_user" id="id_user" class="form-control" required>
-                            <option value="">Seleccionar Usuario</option>
-                            @foreach ($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
-                            @endforeach
+                        <label for="estado">Estado</label>
+                        <select name="estado" id="estado" class="form-control" required>
+                            <option value="pendiente">Pendiente</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Crear Licencia</button>

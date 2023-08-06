@@ -2,9 +2,12 @@
 
 
 @section('content')
-<button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearContratoModal">
-    Crear Contrato
-</button>
+@if (Auth::user()->rol->tipo_rol === 'Gerente')
+    <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearContratoModal">
+        Crear Contrato
+    </button>
+@endif
+
 
     <br> <br>
     <table id="contratos" class="table table-striped table-bordered" style="width: 100%">
