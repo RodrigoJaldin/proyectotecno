@@ -82,7 +82,7 @@ Route::delete('/turnos_extra/{turnoExtra}', [TurnoExtraController::class, 'destr
 Route::resource('/rol', RolController::class)->middleware(['auth', 'registrar.visita.rol', 'gerente']);
 Route::resource('/licencia', LicenciaController::class)->middleware(['auth','registrar.visita.licencia']);
 Route::resource('/horario', HorarioController::class)->middleware(['auth','registrar.visita.horario', 'gerente']);
-Route::resource('/horario_user', HorarioUserController::class)->middleware(['auth', 'gerente']);
+Route::resource('/horario_user', HorarioUserController::class)->middleware(['auth']);
 Route::resource('/sucursal', SucursalController::class)->middleware(['auth', 'registrar.visita.sucursal', 'gerente']);
 Route::resource('/documento', DocumentoController::class)->middleware(['auth', 'registrar.visita.documento']);
 Route::resource('/asistencia', AsistenciaController::class)->middleware(['auth','registrar.visita.asistencia']);

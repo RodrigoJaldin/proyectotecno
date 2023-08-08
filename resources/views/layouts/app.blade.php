@@ -125,6 +125,7 @@
                         <a href="documento"><i class="far fa-file-alt"></i> Mis Documentos</a>
                         <a href="licencia"><i class="far fa-id-card"></i> Mis Licencias</a>
                         <a href="contratos"><i class="far fa-file-alt"></i> Mi Contrato</a>
+                        <a href="horario_user"><i class="far fa-file-alt"></i> Mis Horarios</a>
 
                         <a href="graficoasistencia"><i class="fas fa-chart-pie chart-icon"></i> Reporte Asistencia</a>
 

@@ -111,6 +111,25 @@
 
     <script>
         $('#users').DataTable();
+
+        $('.formulario-eliminar').submit(function(evento) {
+            evento.preventDefault();
+
+            Swal.fire({
+                title: 'Estas seguro?',
+                text: "Este horario asignado se eliminara",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    this.submit();
+                }
+            })
+        })
     </script>
     @if (session('eliminar') == 'ok')
         <script>

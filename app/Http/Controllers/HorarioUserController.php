@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Horario;
 use App\Models\HorarioUser;
+use App\Models\Sucursal;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,10 +15,20 @@ class HorarioUserController extends Controller
      */
     public function index()
     {
+        $user = auth()->user(); // Obtener el usuario logueado
+        $horarios = Horario::all(); // Obtener todos los horarios
 
-        $userHorarios = HorarioUser::with(['users', 'horario'])->get();
-        return view('horario_user.index', compact('userHorarios'));
+        if ($user->rol->tipo_rol === 'Gerente') {
+            // Si el usuario es Gerente, mostrar todos los horarios asignados
+            $userHorarios = HorarioUser::with(['users', 'horario'])->get();
+        } else {
+            // Si el usuario no es Gerente, mostrar solo sus horarios asignados
+            $userHorarios = HorarioUser::where('id_user', $user->id)->with(['users', 'horario'])->get();
+        }
+
+        return view('horario_user.index', compact('userHorarios', 'horarios'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -29,14 +41,14 @@ class HorarioUserController extends Controller
     public function showUserHorarios($id)
     {
         $user = User::find($id);
-
+        $horarios = Horario::all();
         if (!$user) {
             // Manejar el caso cuando el usuario no existe
             return redirect()->back()->with('error', 'Usuario no encontrado');
         }
 
         $userHorarios = HorarioUser::where('id_user', $id)->with(['users', 'horario'])->get();
-        return view('horario_user.index', compact('userHorarios', 'user'));
+        return view('horario_user.index', compact('userHorarios', 'user', 'horarios'));
     }
 
 
@@ -50,7 +62,7 @@ class HorarioUserController extends Controller
     {
         // Validar los datos recibidos del formulario
         $request->validate([
-            'userId' => 'required|integer|exists:user,id',
+            'userId' => 'required|integer|exists:persona,id',
             'horario_id' => 'required|integer|exists:horario,id',
             'dia_laboral' => 'required|string|max:50',
         ]);
@@ -98,16 +110,39 @@ class HorarioUserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, HorarioUser $horarioUser)
+    public function update(Request $request, $id)
     {
-        //
+        // Validar los datos recibidos del formulario de edición
+        $request->validate([
+            'editHorarioId' => 'required|integer|exists:horario,id',
+            'editDiaLaboral' => 'required|string|max:50',
+        ]);
+
+        try {
+            // Obtener la asignación de horario a editar
+            $userHorario = HorarioUser::findOrFail($id);
+
+            // Actualizar los campos necesarios
+            $userHorario->id_horario = $request->input('editHorarioId');
+            $userHorario->dia_laboral = $request->input('editDiaLaboral');
+
+            // Guardar los cambios
+            $userHorario->save();
+
+            return redirect()->route('horario_user.index')->with('edit-success', 'Horario asignado editado exitosamente');
+        } catch (\Exception $e) {
+            return redirect()->route('horario_user.index')->with('error', 'Ocurrió un error al editar el horario asignado');
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(HorarioUser $horarioUser)
     {
-        //
+        $horarioUser->delete();
+
+        return redirect()->route('horario_user.index')->with('eliminar', 'ok');
     }
 }
