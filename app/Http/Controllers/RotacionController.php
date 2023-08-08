@@ -15,17 +15,16 @@ class RotacionController extends Controller
      */
     public function index()
     {
-        // Cargar la lista de usuarios disponibles
-        $users = User::all();
+        // Cargar la lista de rotaciones con sus relaciones
+        $rotaciones = Rotacion::with(['userHorarios_solicitante', 'userHorarios_reemplazante'])->get();
 
-        // Cargar la lista de horarios disponibles
-        $horarios = Horario::all();
+        // Cargar la lista de usuarios disponibles con horarios asignados
+        $users  = User::whereHas('user_horarios')->get();
 
-        // Cargar la lista de rotaciones (si tienes una relación en el modelo Rotacion, puedes usar "with")
-        $rotaciones = Rotacion::all();
-
-        return view('rotacion.index', compact('users', 'horarios', 'rotaciones'));
+        return view('rotacion.index', compact('rotaciones', 'users'));
     }
+
+
 
     // Método para obtener los horarios de un usuario solicitante mediante una consulta AJAX
 
@@ -41,25 +40,23 @@ class RotacionController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $request->validate([
-        'usuario_solicitante' => 'required|exists:persona,id',
-        'usuario_reemplazante' => 'required|exists:persona,id',
-        'fecha' => 'required|date',
-        'id_horario' => 'required|exists:horario,id',
-    ]);
+    {
+        $request->validate([
+            'fecha' => 'required|date',
+            'usuario_solicitante' => 'required|exists:user_horario,id_user',
+            'usuario_reemplazante' => 'required|exists:user_horario,id_user',
+        ]);
 
-    // Guardar la nueva rotación en la base de datos
-    Rotacion::create([
-        'usuario_solicitante_id' => $request->input('usuario_solicitante'),
-        'usuario_reemplazante_id' => $request->input('usuario_reemplazante'),
-        'fecha' => $request->input('fecha'),
-        'url' => $request->fullUrl(),
-        'id_horario' => $request->input('id_horario'),
-    ]);
+        // Guardar la nueva rotación en la base de datos
+        Rotacion::create([
+            'fecha' => $request->input('fecha'),
+            'usuario_solicitante_id' => $request->input('usuario_solicitante'),
+            'usuario_reemplazante_id' => $request->input('usuario_reemplazante'),
+            'url' => $request->fullUrl(),
+        ]);
 
-    return redirect()->route('rotacion.index')->with('success', 'La rotación ha sido registrada exitosamente.');
-}
+        return redirect()->route('rotacion.index')->with('success', 'La rotación ha sido registrada exitosamente.');
+    }
 
     /**
      * Display the specified resource.

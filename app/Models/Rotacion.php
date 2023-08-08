@@ -12,25 +12,18 @@ class Rotacion extends Model
     protected $fillable = [
         'fecha',
         'usuario_solicitante_id',
-        'usuario_reemplazante_id',
-        'id_horario',
+        'usuario_reemplazante_id'
     ];
 
-    // Relación con el usuario solicitante
-    public function usuarioSolicitante()
+    public function userHorarios_solicitante()
     {
-        return $this->belongsTo(User::class, 'usuario_solicitante_id');
+        return $this->belongsTo(HorarioUser::class, 'usuario_solicitante_id');
     }
 
-    // Relación con el usuario reemplazante
-    public function usuarioReemplazante()
+    public function userHorarios_reemplazante()
     {
-        return $this->belongsTo(User::class, 'usuario_reemplazante_id');
+        return $this->belongsTo(HorarioUser::class, 'usuario_reemplazante_id');
     }
 
-    // Relación con el horario involucrado en la rotación
-    public function horario()
-    {
-        return $this->belongsTo(Horario::class, 'id_horario');
-    }
+
 }

@@ -17,6 +17,6 @@ class Horario extends Model
 
     public function user_horario()
     {
-        return $this->belongsToMany(HorarioUser::class, 'id_horario');
+        return $this->hasMany(HorarioUser::class, 'id_horario');
     }
 }

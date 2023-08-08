@@ -8,20 +8,18 @@
     <table id="rotaciones" class="table table-striped table-bordered" style="width: 100%">
         <thead class="bg-primary text-white">
             <tr>
+                <th>Fecha</th>
                 <th>Usuario Solicitante</th>
                 <th>Usuario Reemplazante</th>
-                <th>Fecha</th>
-                <th>Horario</th>
             </tr>
         </thead>
 
         <tbody>
             @foreach ($rotaciones as $rotacion)
                 <tr>
-                    <td>{{ $rotacion->usuarioSolicitante->name }}</td>
-                    <td>{{ $rotacion->usuarioReemplazante->name }}</td>
                     <td>{{ $rotacion->fecha }}</td>
-                    <td>{{ $rotacion->horario->turno }}</td>
+                    <td>{{ $rotacion->userHorarios_solicitante->users->name }}</td>
+                    <td>{{ $rotacion->userHorarios_reemplazante->users->name }}</td>
                 </tr>
             @endforeach
         </tbody>
@@ -63,15 +61,7 @@
                             <label for="fecha">Fecha:</label>
                             <input type="date" class="form-control" id="fecha" name="fecha" required>
                         </div>
-                        <div class="form-group">
-                            <label for="id_horario">Horario:</label>
-                            <select class="form-control" id="id_horario" name="id_horario" required>
-                                <!-- Aquí debes mostrar la lista de horarios disponibles -->
-                                @foreach ($horarios as $horario)
-                                    <option value="{{ $horario->id }}">{{ $horario->turno }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -111,6 +101,15 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
+    @if (session('success'))
+        <script>
+            Swal.fire(
+                'Exito!',
+                'La rotacion ha sido creada exitosamente',
+                'success'
+            )
+        </script>
+    @endif
     <script>
         $('#rotaciones').DataTable();
 

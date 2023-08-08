@@ -13,49 +13,31 @@
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
+                        <label for="fecha">Fecha:</label>
+                        <input type="date" class="form-control" id="fecha" name="fecha" required>
+                    </div>
+                    <div class="form-group">
                         <label for="usuario_solicitante">Usuario Solicitante:</label>
                         <select class="form-control" id="usuario_solicitante" name="usuario_solicitante" required>
-                            <!-- Aquí debes mostrar la lista de usuarios que pueden ser solicitantes -->
+                            <!-- Mostrar la lista de usuarios solicitantes -->
                             @foreach ($users as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                             @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_horario_solicitante">Horario del Usuario Solicitante:</label>
-                        <select class="form-control" id="id_horario_solicitante" name="id_horario_solicitante" required>
-                            <!-- Los horarios del usuario solicitante se actualizarán dinámicamente mediante JavaScript -->
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="usuario_reemplazante">Usuario Reemplazante:</label>
                         <select class="form-control" id="usuario_reemplazante" name="usuario_reemplazante" required>
-                            <!-- Aquí debes mostrar la lista de usuarios que pueden ser reemplazantes -->
+                            <!-- Mostrar la lista de usuarios reemplazantes, excluyendo al usuario solicitante -->
                             @foreach ($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @if ($user->id !== old('usuario_solicitante_id'))
+                                    <!-- O puedes usar el valor que recibiste en el controlador -->
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="id_horario_reemplazante">Horario del Usuario Reemplazante:</label>
-                        <select class="form-control" id="id_horario_reemplazante" name="id_horario_reemplazante"
-                            required>
-                            <!-- Los horarios del usuario reemplazante se actualizarán dinámicamente mediante JavaScript -->
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="fecha">Fecha:</label>
-                        <input type="date" class="form-control" id="fecha" name="fecha" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_horario">Horario:</label>
-                        <select class="form-control" id="id_horario" name="id_horario" required>
-                            <!-- Aquí debes mostrar la lista de horarios disponibles -->
-                            @foreach ($horarios as $horario)
-                                <option value="{{ $horario->id }}">{{ $horario->turno }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -74,7 +56,7 @@
                 url: `/getHorarios/${usuarioSolicitanteId}`,
                 type: 'GET',
                 dataType: 'json',
-                success: function (data) {
+                success: function(data) {
                     const selectHorarioSolicitante = $('#id_horario_solicitante');
                     selectHorarioSolicitante.empty();
                     data.forEach(horario => {
@@ -93,7 +75,7 @@
                 url: `/getHorarios/${usuarioReemplazanteId}`,
                 type: 'GET',
                 dataType: 'json',
-                success: function (data) {
+                success: function(data) {
                     const selectHorarioReemplazante = $('#id_horario_reemplazante');
                     selectHorarioReemplazante.empty();
                     data.forEach(horario => {
@@ -114,6 +96,5 @@
         $('#usuario_reemplazante').on('change', function() {
             fetchHorariosReemplazante($(this).val());
         });
-
     </script>
 @stop

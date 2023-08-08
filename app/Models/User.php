@@ -94,26 +94,8 @@ class User extends Authenticatable
 
     public function user_horarios()
     {
-        return $this->belongsToMany(HorarioUser::class, 'user_horario', 'id_user', 'id_horario');
+        return $this->hasMany(HorarioUser::class, 'id_user');
     }
-
-    public function horarios()
-    {
-        return $this->belongsToMany(Horario::class, 'user_horario', 'id_user', 'id_horario');
-    }
-
-
-     // Relación con las rotaciones que ha solicitado el usuario
-     public function rotacionesSolicitadas()
-     {
-         return $this->hasMany(Rotacion::class, 'usuario_solicitante_id');
-     }
-
-     // Relación con las rotaciones en las que actúa como reemplazante
-     public function rotacionesReemplazante()
-     {
-         return $this->hasMany(Rotacion::class, 'usuario_reemplazante_id');
-     }
 
      public function contrato()
      {
