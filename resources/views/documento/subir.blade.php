@@ -27,13 +27,9 @@
                             <label for="id_user">Usuario</label>
                             <select name="id_user" id="id_user" class="form-control" required>
                                 <option value="">Seleccionar Usuario</option>
-                                @if (auth()->user()->rol->tipo_rol === 'Gerente')
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                                     @endforeach
-                                @else
-                                    <option value="{{ auth()->user()->id }}">{{ auth()->user()->name }}</option>
-                                @endif
                             </select>
                         </div>
                         <br>
