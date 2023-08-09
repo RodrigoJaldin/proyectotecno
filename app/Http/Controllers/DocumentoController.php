@@ -140,15 +140,9 @@ class DocumentoController extends Controller
 
 
     public function subir_mail(){
-        $user = auth()->user();
-        $users = null;
-
-        if ($user->rol->tipo_rol === 'Gerente') {
+        
             $users = User::all();
-        } else {
-            $users = User::where('id', $user->id)->get();
-        }
-
+       
         return view('documento.subir', compact('users'));
     }
 
