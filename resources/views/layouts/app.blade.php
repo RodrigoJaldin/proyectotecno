@@ -42,7 +42,7 @@
         <!-- Sidebar Holder -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Hola@! {{ auth()->user()->name }}</h3>
+                <h3>Bienvenid@! {{ auth()->user()->name }}</h3>
 
             </div>
             <div align="center">
