@@ -96,7 +96,7 @@ class LicenciaController extends Controller
             $licencia->estado = $request->estado;
             $licencia->save();
 
-            return redirect()->route('licencia.index')->with('success', 'El estado de la licencia ha sido actualizado exitosamente.');
+            return redirect()->route('licencia.index')->with('edit-success', 'El estado de la licencia ha sido actualizado exitosamente.');
         } else {
             return redirect()->route('licencia.index')->with('error', 'No tienes permiso para actualizar el estado de esta licencia.');
         }
