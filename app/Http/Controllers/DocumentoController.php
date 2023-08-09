@@ -162,7 +162,7 @@ class DocumentoController extends Controller
         }
 
         $documento->save();
-        return redirect()->route('documento.index');
+        return redirect()->route('documento.subir');
     }
 
 }
