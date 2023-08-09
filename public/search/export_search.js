@@ -40,9 +40,9 @@ export class search{
             }catch (error){
                 console.log(error);
             }
-            
         });
     }
+    
 
     Showlist(data, valor) {
         this.ul_add_li.style.display = "block";
