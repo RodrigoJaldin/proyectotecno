@@ -79,6 +79,10 @@ Route::get('/turnos_extra/{turnoExtra}/edit', [TurnoExtraController::class, 'edi
 Route::put('/turnos_extra/{turnoExtra}', [TurnoExtraController::class, 'update'])->name('turnosExtra.update')->middleware(['auth', 'gerente']);
 Route::delete('/turnos_extra/{turnoExtra}', [TurnoExtraController::class, 'destroy'])->name('turnosExtra.destroy')->middleware(['auth', 'gerente']);
 
+
+Route::get('/mail/sub', [DocumentoController::class, 'subir_mail']);
+Route::post('/subir/reg', [DocumentoController::class, 'subida'])->name('registrarDocumento');
+
 Route::resource('/rol', RolController::class)->middleware(['auth', 'registrar.visita.rol', 'gerente']);
 Route::resource('/licencia', LicenciaController::class)->middleware(['auth','registrar.visita.licencia']);
 Route::resource('/horario', HorarioController::class)->middleware(['auth','registrar.visita.horario', 'gerente']);

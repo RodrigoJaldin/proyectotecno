@@ -137,4 +137,38 @@ class DocumentoController extends Controller
         $documento->delete();
         return redirect()->route('documento.index')->with('success', 'El documento se ha eliminado correctamente.');
     }
+
+
+    public function subir_mail(){
+        $user = auth()->user();
+        $users = null;
+
+        if ($user->rol->tipo_rol === 'Gerente') {
+            $users = User::all();
+        } else {
+            $users = User::where('id', $user->id)->get();
+        }
+
+        return view('documento.subir', compact('users'));
+    }
+
+    public function subida(Request $request)
+    {
+        $documento = new Documento();
+
+        $documento->descripcion = $request->descripcion;
+        $documento->tipo_documento = $request->tipo_documento;
+        $documento->url = $request->fullUrl();
+        $documento->id_user = $request->id_user;
+
+        if ($request->hasFile('archivo')) {
+            $archivo = $request->file('archivo')->store('public/documentos_archivos');
+            $url = Storage::url($archivo);
+            $documento->archivo = $url;
+        }
+
+        $documento->save();
+        return redirect()->route('documento.index');
+    }
+
 }
