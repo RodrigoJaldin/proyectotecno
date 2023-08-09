@@ -1,6 +1,6 @@
 
 export class search{
-    constructor(myurlp, mysearchp, ul_add_lip){
+    constructor(mysearchp, ul_add_lip){
         
         this.url = "https://mail.tecnoweb.org.bo/inf513/grupo11sc/proyecto2/proyectotecno/public";
         this.mysearch = mysearchp;
