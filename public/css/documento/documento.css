@@ -1,0 +1,23 @@
+body {
+    background-image: url("https://scontent.flpb3-2.fna.fbcdn.net/v/t39.30808-6/277256053_388044203145164_1162481884763721154_n.jpg?_nc_cat=100&cb=99be929b-59f725be&ccb=1-7&_nc_sid=a26aad&_nc_ohc=M-WrRKcEvBUAX-QT4dA&_nc_oc=AQmyoy8cyAiHAvJYP5OC0i3QFym6_YX052bhOul1oFv_fHKMdT6bTng7DigQp5smNS4&_nc_ht=scontent.flpb3-2.fna&oh=00_AfCe3cXKGGG69mAbk60CnIvOH9J2Ga80FFsThbM6Xos5xg&oe=64D7CBE8");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+   
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centrar verticalmente */
+    margin-top: 20px;
+}
+
+.card {
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff; /* Color del cuadrado */
+}

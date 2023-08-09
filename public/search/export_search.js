@@ -1,7 +1,7 @@
-
 export class search{
     constructor(myurlp, mysearchp, ul_add_lip){
-        this.url = myurlp;
+        //this.url = myurlp;
+        this.url = "https://mail.tecnoweb.org.bo/inf513/grupo11sc/proyecto2/proyectotecno/public/myurl";
         this.mysearch = mysearchp;
         this.ul_add_li = ul_add_lip;
         this.idli = "mylist";
@@ -40,9 +40,9 @@ export class search{
             }catch (error){
                 console.log(error);
             }
-            
         });
     }
+    
 
     Showlist(data, valor) {
         this.ul_add_li.style.display = "block";
