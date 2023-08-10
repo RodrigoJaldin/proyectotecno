@@ -159,7 +159,7 @@ class UserController extends Controller
 
         //monto a pagar por minuto
         $montoAPagarMinuto = $montoPorHora / 60;
-         $montoAPagar = $minutosTrabajados  * $montoAPagarMinuto;
+         $montoAPagar = $minutosTrabajados  *  $montoAPagarMinuto;
 
         // Calcular el monto a pagar al usuario
         $montoAPagar = $minutosTrabajados  * $montoPorHora;
