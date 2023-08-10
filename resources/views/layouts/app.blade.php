@@ -129,7 +129,7 @@
                             Asistencias</a>
                         <a href={{ route('documento.index') }}><i class="far fa-file-alt"></i> Mis Documentos</a>
                         <a href={{ route('licencia.index') }}><i class="far fa-id-card"></i> Mis Licencias</a>
-                        <a href={{ route('contratos.index') }}><i class="far fa-file-alt"></i> Mi Contrato</a>
+                        <a href={{ route('contrato.index') }}><i class="far fa-file-alt"></i> Mi Contrato</a>
                         <a href={{ route('horario_user.index') }}><i class="far fa-file-alt"></i> Mis Horarios</a>
 
                         <a href="graficoasistencia"><i class="fas fa-chart-pie chart-icon"></i> Reporte Asistencia</a>
