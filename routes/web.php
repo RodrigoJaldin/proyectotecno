@@ -56,9 +56,9 @@ Route::get('/{user_id}/horario', [HorarioUserController::class, 'showUserHorario
 
 //****************** G R A F I C O S ***************** */.
 Route::get('/graficovisita', [VisitaController::class, 'generarGrafico'])->name('graficovisita')->middleware(['auth', 'gerente']);
-Route::get('/graficolicencia', [LicenciaController::class, 'licenciasPorUsuario'])->middleware(['auth', 'gerente']);
-Route::get('/graficoasistencia', [AsistenciaController::class, 'asistenciaPorUsuarioAutenticado'])->middleware(['auth']);
-Route::get('/graficonomina', [UserController::class, 'graficoNominas'])->name('graficoNominas')->middleware(['auth', 'gerente']);
+Route::get('/graficolicencia', [LicenciaController::class, 'licenciasPorUsuario'])->name('graficolicencia')->middleware(['auth', 'gerente']);
+Route::get('/graficoasistencia', [AsistenciaController::class, 'asistenciaPorUsuarioAutenticado'])->name('graficoasistencia')->middleware(['auth']);
+Route::get('/graficonomina', [UserController::class, 'graficoNominas'])->name('graficonomina')->middleware(['auth', 'gerente']);
 
 
 // Rutas para Contratos

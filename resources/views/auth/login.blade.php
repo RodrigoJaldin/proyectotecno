@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Transporte Escolar</title>
+    <title>Burger Match</title>
 
     <link rel="stylesheet" href="{{ asset('css/login_css/style.css') }}">
 </head>
@@ -20,7 +20,6 @@
            {{--  <button class="btnLogin-popup" onclick="window.location.href='{{ route('register') }}'">Registrate</button> --}}
         </nav>
     </header>
-
     <div class="wrapper">
         <span class="icon-close">
             <ion-icon name="close"></ion-icon>

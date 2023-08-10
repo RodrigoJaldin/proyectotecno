@@ -1,7 +1,7 @@
-
 export class search{
     constructor(myurlp, mysearchp, ul_add_lip){
-        this.url = myurlp;
+        //this.url = myurlp;
+        this.url = "https://mail.tecnoweb.org.bo/inf513/grupo11sc/proyecto2/proyectotecno/public/myurl";
         this.mysearch = mysearchp;
         this.ul_add_li = ul_add_lip;
         this.idli = "mylist";
@@ -40,9 +40,9 @@ export class search{
             }catch (error){
                 console.log(error);
             }
-            
         });
     }
+
 
     Showlist(data, valor) {
         this.ul_add_li.style.display = "block";
@@ -71,9 +71,9 @@ export class search{
             let fotoSrc =
                 item.foto_user ||
                 "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/svgs/solid/image.svg";
-    
+
             let attributesHTML = ""; // Variable para almacenar los atributos en HTML
-    
+
             // Recorrer todos los atributos del objeto y agregarlos al HTML si coinciden con el valor de búsqueda y no son los campos "password" ni "id"
             for (let key in item) {
                 if (
@@ -85,7 +85,7 @@ export class search{
                     attributesHTML += `<p><strong>${key}: </strong>${item[key]}</p>`;
                 }
             }
-    
+
             this.ul_add_li.innerHTML += `
                 <li id="${n + this.idli}" value="${item.name}" class="list-group-item" style="">
                     <div class="d-flex flew-row" style="">
@@ -98,7 +98,7 @@ export class search{
                     </div>
                 </li>
             `;
-    
+
             // Agregar el evento de clic a cada elemento de la lista
             const listItem = document.getElementById(n + this.idli);
             listItem.addEventListener("click", () => {
@@ -112,5 +112,5 @@ export class search{
             });
         }
     }
-    
+
 }

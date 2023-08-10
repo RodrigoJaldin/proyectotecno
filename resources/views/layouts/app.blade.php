@@ -58,8 +58,8 @@
                 <ul class="list-unstyled components">
                     <p></p>
                     <li class="active">
-                        <a href="sucursal"><i class="fas fa-building"></i> Sucursales</a>
-                        <a href="rol"><i class="fas fa-user-cog"></i> Roles</a>
+                        <a href={{ route('sucursal.index') }}><i class="fas fa-building"></i> Sucursales</a>
+                        <a href="{{ route('rol.index') }}"><i class="fas fa-user-cog"></i> Roles</a>
                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <i class="fas fa-users"></i> Usuarios
                         </a>
@@ -96,16 +96,20 @@
                         </ul>
 
                     <li>
-                        <a href="asistencia"><i class="far fa-calendar-check"></i> Asistencias</a>
-                        <a href="horario"><i class="far fa-clock"></i> Horarios</a>
-                        <a href="documento"><i class="far fa-file-alt"></i> Documentos</a>
-                        <a href="licencia"><i class="far fa-id-card"></i> Licencias</a>
-                        <a href="rotacion"><i class="far fa-calendar-check"></i> Rotaciones</a>
-                        <a href="contratos"><i class="far fa-calendar-check"></i> Contratos</a>
-                        <a href="turnos_extra"><i class="far fa-calendar-check"></i> Turnos Extras</a>
-                        <a href="graficovisita"><i class="fas fa-chart-bar chart-icon"></i> Grafico Visita</a>
-                        <a href="graficolicencia"><i class="fas fa-chart-pie chart-icon"></i> Grafico Licencia</a>
-                        <a href="graficonomina"><i class="fas fa-chart-line chart-icon"></i> Grafico Nominas</a>
+                        <a href={{ route('asistencia.index') }}><i class="far fa-calendar-check"></i> Asistencias</a>
+                        <a href={{ route('horario.index') }}><i class="far fa-clock"></i> Horarios</a>
+                        <a href={{ route('documento.index') }}><i class="far fa-file-alt"></i> Documentos</a>
+                        <a href={{ route('licencia.index') }}><i class="far fa-id-card"></i> Licencias</a>
+                        <a href={{ route('rotacion.index') }}><i class="far fa-calendar-check"></i> Rotaciones</a>
+                        <a href="{{ route('contrato.index') }}"><i class="far fa-calendar-check"></i> Contratos</a>
+                        <a  href="{{ route('turnosExtra.index') }}"><i class="far fa-calendar-check"></i> Turnos Extras</a>
+                        <a href="{{ route('graficovisita') }}"><i class="fas fa-chart-bar chart-icon"></i> Grafico
+                            Visita</a>
+                        <a href="{{ route('graficolicencia') }}"><i class="fas fa-chart-pie chart-icon"></i> Grafico
+                            Licencia</a>
+
+                        <a href={{ route('graficonomina') }}><i class="fas fa-chart-line chart-icon"></i> Grafico
+                            Nominas</a>
 
                     </li>
                     <li class="">
@@ -121,11 +125,12 @@
             @else
                 <ul class="list-unstyled components">
                     <li>
-                        <a href="asistencia"><i class="far fa-calendar-check"></i> Registrar Asistencias</a>
-                        <a href="documento"><i class="far fa-file-alt"></i> Mis Documentos</a>
-                        <a href="licencia"><i class="far fa-id-card"></i> Mis Licencias</a>
-                        <a href="contratos"><i class="far fa-file-alt"></i> Mi Contrato</a>
-                        <a href="horario_user"><i class="far fa-file-alt"></i> Mis Horarios</a>
+                        <a href={{ route('asistencia.index') }}><i class="far fa-calendar-check"></i> Registrar
+                            Asistencias</a>
+                        <a href={{ route('documento.index') }}><i class="far fa-file-alt"></i> Mis Documentos</a>
+                        <a href={{ route('licencia.index') }}><i class="far fa-id-card"></i> Mis Licencias</a>
+                        <a href={{ route('contrato.index') }}><i class="far fa-file-alt"></i> Mi Contrato</a>
+                        <a href={{ route('horario_user.index') }}><i class="far fa-file-alt"></i> Mis Horarios</a>
 
                         <a href="graficoasistencia"><i class="fas fa-chart-pie chart-icon"></i> Reporte Asistencia</a>
 
