@@ -22,12 +22,12 @@ class SucursalSeeder extends Seeder
             [
                 'nombre' => 'Sucursal A',
                 'direccion' => 'Av. Beni',
-                'url' => 'http://34.27.137.218/sucursal' // Agregar el segmento de la URL específico para la sucursal
+                'url' => 'https://mail.tecnoweb.org.bo/inf513/grupo11sc/proyecto2/proyectotecno/public/sucursal' // Agregar el segmento de la URL específico para la sucursal
             ],
             [
                 'nombre' => 'Sucursal B',
                 'direccion' => 'Av. Equipetrol',
-                'url' => 'http://34.27.137.218/sucursal' // Agregar el segmento de la URL específico para la sucursal
+                'url' => 'https://mail.tecnoweb.org.bo/inf513/grupo11sc/proyecto2/proyectotecno/public/sucursal' // Agregar el segmento de la URL específico para la sucursal
             ],
         ];
 

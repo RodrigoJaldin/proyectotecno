@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'codigo_empleado' => 'BM_0001',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('1234'),
-            'url' => 'http://34.27.137.218/user',
+            'url' => 'https://mail.tecnoweb.org.bo/inf513/grupo11sc/proyecto2/proyectotecno/public/Gerente',
             'id_rol' => '1',
             'id_sucursal' => null,
         ]);
