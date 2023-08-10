@@ -158,11 +158,12 @@ class UserController extends Controller
         }
 
         //monto a pagar por minuto
+        $montoAPagarMinuto = 0;
         $montoAPagarMinuto = $montoPorHora / 60;
-         $montoAPagar = $minutosTrabajados  *  $montoAPagarMinuto;
+        //$montoAPagar = $minutosTrabajados  *  $montoAPagarMinuto;
 
         // Calcular el monto a pagar al usuario
-        $montoAPagar = $minutosTrabajados  * $montoPorHora;
+        $montoAPagar = $minutosTrabajados  * $montoAPagarMinuto;
 
         // Obtener los turnos extras del usuario en el mes actual, no tiene fecha
         $turnosExtras = TurnoExtra::where('id_user', $user_id)
