@@ -102,7 +102,7 @@
                         <a href={{ route('licencia.index') }}><i class="far fa-id-card"></i> Licencias</a>
                         <a href={{ route('rotacion.index') }}><i class="far fa-calendar-check"></i> Rotaciones</a>
                         <a href="{{ route('contrato.index') }}"><i class="far fa-calendar-check"></i> Contratos</a>
-                        <a href="turnos_extra"><i class="far fa-calendar-check"></i> Turnos Extras</a>
+                        <a  href="{{ route('turnosExtra.index') }}"><i class="far fa-calendar-check"></i> Turnos Extras</a>
                         <a href="{{ route('graficovisita') }}"><i class="fas fa-chart-bar chart-icon"></i> Grafico
                             Visita</a>
                         <a href="{{ route('graficolicencia') }}"><i class="fas fa-chart-pie chart-icon"></i> Grafico
