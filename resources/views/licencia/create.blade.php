@@ -1,5 +1,6 @@
 <!-- Modal para crear una nueva licencia -->
-<div class="modal fade" id="crearLicenciaModal" tabindex="-1" role="dialog" aria-labelledby="crearLicenciaModalLabel" aria-hidden="true" data-backdrop="false">
+<div class="modal fade" id="crearLicenciaModal" tabindex="-1" role="dialog" aria-labelledby="crearLicenciaModalLabel"
+    aria-hidden="true" data-backdrop="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -29,6 +30,17 @@
                             <option value="pendiente">Pendiente</option>
                         </select>
                     </div>
+                    @if (Auth::user()->rol->tipo_rol == 'Gerente')
+                        <div class="form-group">
+                            <label for="id_user">Seleccionar Usuario</label>
+                            <select name="id_user" id="id_user" class="form-control" required>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endif
+
                     <button type="submit" class="btn btn-primary">Crear Licencia</button>
                 </form>
             </div>

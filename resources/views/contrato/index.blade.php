@@ -2,11 +2,11 @@
 
 
 @section('content')
-@if (Auth::user()->rol->tipo_rol === 'Gerente')
-    <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearContratoModal">
-        Crear Contrato
-    </button>
-@endif
+    @if (Auth::user()->rol->tipo_rol === 'Gerente')
+        <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearContratoModal">
+            Crear Contrato
+        </button>
+    @endif
 
 
     <br> <br>
@@ -19,6 +19,7 @@
                 <th>Fecha Fin</th>
                 <th>Sueldo</th>
                 <th>Usuario</th>
+                <th>Acciones</th>
                 {{-- <th>Acciones</th> --}}
             </tr>
         </thead>
@@ -32,15 +33,20 @@
                     <td>{{ $contrato->fecha_fin }}</td>
                     <td>{{ $contrato->sueldo }}</td>
                     <td>{{ $contrato->user->name }}</td>
-                    {{-- <td>
-                        {{-- <a href="{{ route('contratos.show', $contrato) }}" class="btn btn-info">Ver</a>
-                        <a href="{{ route('contratos.edit', $contrato) }}" class="btn btn-primary">Editar</a>
-                        <form action="{{ route('contratos.destroy', $contrato) }}" method="POST" style="display: inline-block;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este contrato?')">Eliminar</button>
-                        </form>
-                    </td> --}}
+
+
+                    <td>
+                        @if (Auth::user()->rol->tipo_rol === 'Gerente')
+                            <form class="formulario-eliminar" action="{{ route('contratos.destroy', $contrato) }}"
+                                method="POST">
+                                <a href="{{ route('contratos.edit', $contrato) }}" class="btn btn-primary">Editar</a>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        @endif
+                    </td>
+
                 </tr>
             @endforeach
         </tbody>
@@ -96,7 +102,6 @@
                 }
             })
         })
-
     </script>
 
     @if (session('eliminar') == 'ok')

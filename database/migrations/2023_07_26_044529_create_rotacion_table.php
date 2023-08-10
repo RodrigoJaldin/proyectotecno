@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('url')->nullable();
             $table->timestamps();
 
-            $table->foreign('usuario_solicitante_id')->references('id')->on('user_horario');
-            $table->foreign('usuario_reemplazante_id')->references('id')->on('user_horario');
+            $table->foreign('usuario_solicitante_id')->references('id')->on('user_horario')->onDelete('cascade');
+            $table->foreign('usuario_reemplazante_id')->references('id')->on('user_horario')->onDelete('cascade');
         });
     }
 

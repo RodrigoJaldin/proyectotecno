@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Licencia;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,19 +17,18 @@ class LicenciaController extends Controller
      */
     public function index()
     {
-        $user = Auth::user(); // Obtener el usuario autenticado
+        $user = Auth::user();
 
         if ($user->rol->tipo_rol === 'Gerente') {
-            // Si el usuario es un Gerente, mostrar todas las licencias
             $licencias = Licencia::all();
         } else {
-            // Si el usuario tiene otro rol, mostrar solo sus licencias
             $licencias = Licencia::where('id_user', $user->id)->get();
         }
 
         $users = User::all();
         return view('licencia.index', compact('licencias', 'users'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -43,27 +43,47 @@ class LicenciaController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
         $request->validate([
-            'fecha_inicio' => 'required|date',
-            'fecha_fin' => 'required|date|after_or_equal:fecha_inicio',
+            'fecha_inicio' => 'required|date|date_format:Y-m-d',
+            'fecha_fin' => 'required|date|date_format:Y-m-d|after_or_equal:fecha_inicio',
             'tipo_licencia' => 'required',
         ]);
 
-        $user = Auth::user(); // Obtener el usuario autenticado
+        $fechaInicio = Carbon::parse($request->fecha_inicio);
+        $fechaFin = Carbon::parse($request->fecha_fin);
+
+        if ($fechaFin->isBefore($fechaInicio)) {
+            // Establecer un mensaje en la sesión y redirigir con error
+            return redirect()->route('licencia.index')->with('error-fecha-invalida', 'La fecha de fin no puede ser antes que la fecha de inicio.');
+        }
+
         $id_user = $user->id;
+
+        // Si el usuario tiene el rol de "gerente" y proporcionó un ID de usuario
+        if ($user->rol->tipo_rol = 'Gerente' && $request->has('id_user')) {
+            $selectedUser = User::find($request->id_user);
+            if ($selectedUser) {
+                $id_user = $selectedUser->id;
+            }
+        }
 
         $licencia = new Licencia();
         $licencia->fecha_inicio = $request->fecha_inicio;
         $licencia->fecha_fin = $request->fecha_fin;
         $licencia->tipo_licencia = $request->tipo_licencia;
-        $licencia->estado = 'pendiente'; // Estado por defecto
+        $licencia->estado = 'pendiente';
         $licencia->url = $request->fullUrl();
-        $licencia->id_user = $id_user; // Asignar el id del usuario autenticado
+        $licencia->id_user = $id_user;
 
         $licencia->save();
 
-        return redirect()->route('licencia.index')->with('success', 'La licencia ha sido creada exitosamente.');
+        // Mostrar una alerta de éxito
+
+        return redirect()->route('licencia.index')->with('success');
     }
+
+
 
 
     /**

@@ -142,6 +142,17 @@
             )
         </script>
     @endif
+
+    @if (session('error-fecha-invalida'))
+        <script>
+            Swal.fire(
+                'Error',
+                '{{ session('error-fecha-invalida') }}',
+                'error'
+            )
+        </script>
+    @endif
+
     <script>
         $('.formulario-eliminar').submit(function(evento) {
             evento.preventDefault();

@@ -159,6 +159,16 @@
         </script>
     @endif
 
+    @if (session('error-horario-existente'))
+        <script>
+            Swal.fire(
+                'Error',
+                '{{ session('error-horario-existente') }}',
+                'error'
+            )
+        </script>
+    @endif
+
     @if (session('edit-success'))
         <script>
             Swal.fire(

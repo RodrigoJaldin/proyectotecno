@@ -87,7 +87,7 @@ class ContratoController extends Controller
         $contrato->update($request->all());
 
         return redirect()->route('contrato.index')
-            ->with('success', 'Contrato actualizado exitosamente.');
+            ->with('edit-success', 'Contrato actualizado exitosamente.');
     }
 
     /**
@@ -98,6 +98,6 @@ class ContratoController extends Controller
         $contrato->delete();
 
         return redirect()->route('contrato.index')
-            ->with('success', 'Contrato eliminado exitosamente.');
+            ->with('eliminar', 'ok');
     }
 }

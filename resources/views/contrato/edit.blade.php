@@ -30,6 +30,7 @@
                 @endforeach
             </select>
         </div>
+        <br> <br>
         <button type="submit" class="btn btn-primary">Actualizar</button>
         <a href="{{ route('contrato.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>

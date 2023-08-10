@@ -92,8 +92,15 @@ class HorarioController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Horario $horario)
+    public function destroy($id)
     {
-        //
+        // Obtener el usuario existente por su ID
+        $horario = Horario::findOrFail($id);
+
+        // Eliminar el usuario
+        $horario->delete();
+
+        // Redireccionar a la vista index con un mensaje de éxito
+        return redirect()->route('horario.index')->with('eliminar', 'ok');
     }
 }

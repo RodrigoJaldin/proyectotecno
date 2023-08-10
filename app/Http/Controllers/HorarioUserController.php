@@ -76,8 +76,8 @@ class HorarioUserController extends Controller
         $userHorario = HorarioUser::where('id_user', $userId)->where('dia_laboral', $diaLaboral)->first();
 
         if ($userHorario) {
-            // Si el usuario ya tiene un horario asignado para el día laboral seleccionado, actualizar el horario
-            $userHorario->update(['id_horario' => $horarioId]);
+            // Si el usuario ya tiene un horario asignado para el día laboral seleccionado, mostrar un mensaje de error
+            return redirect()->back()->with('error-horario-existente', 'El usuario ya tiene un horario asignado para ese día laboral.');
         } else {
             // Si el usuario no tiene un horario asignado para el día laboral seleccionado, crear un nuevo registro
             HorarioUser::create([
@@ -85,11 +85,12 @@ class HorarioUserController extends Controller
                 'id_horario' => $horarioId,
                 'dia_laboral' => $diaLaboral,
             ]);
-        }
 
-        // Redirigir de regreso al index de usuarios con un mensaje de éxito
-        return redirect()->route('user.index')->with('success-horario-asignado', 'Horario asignado exitosamente');
+            // Redirigir de regreso al index de usuarios con un mensaje de éxito
+            return redirect()->route('user.index')->with('success-horario-asignado', 'Horario asignado exitosamente');
+        }
     }
+
 
     /**
      * Display the specified resource.
