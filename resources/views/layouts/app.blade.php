@@ -64,6 +64,11 @@
                             <i class="fas fa-users"></i> Usuarios
                         </a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
+
+                            <li>
+                                <a href="{{ route('user.index') }}"><i class="fas fa-user-tie"></i> Usuarios</a>
+                            </li>
+
                             <li>
                                 <a href="{{ route('gerente') }}"><i class="fas fa-user-tie"></i> Gerente</a>
                             </li>
@@ -102,7 +107,8 @@
                         <a href={{ route('licencia.index') }}><i class="far fa-id-card"></i> Licencias</a>
                         <a href={{ route('rotacion.index') }}><i class="far fa-calendar-check"></i> Rotaciones</a>
                         <a href="{{ route('contrato.index') }}"><i class="far fa-calendar-check"></i> Contratos</a>
-                        <a  href="{{ route('turnosExtra.index') }}"><i class="far fa-calendar-check"></i> Turnos Extras</a>
+                        <a href="{{ route('turnosExtra.index') }}"><i class="far fa-calendar-check"></i> Turnos
+                            Extras</a>
                         <a href="{{ route('graficovisita') }}"><i class="fas fa-chart-bar chart-icon"></i> Grafico
                             Visita</a>
                         <a href="{{ route('graficolicencia') }}"><i class="fas fa-chart-pie chart-icon"></i> Grafico
