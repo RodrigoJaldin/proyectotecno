@@ -41,7 +41,7 @@
                     <td>{{ $user->rol->tipo_rol ?? '--' }}</td>
                     <td>{{ $user->telefono ?? '--' }}</td>
                     <td>
-                        @if (isset($user) && $user->rol->tipo_rol !== 'Gerente')
+                        @if ($user->rol->tipo_rol !== 'Gerente')
                             <!-- Formulario para editar y eliminar usuarios -->
                             <form class="formulario-eliminar" action="{{ route('user.destroy', $user->id) }}"
                                 method="POST">
@@ -57,22 +57,159 @@
                                 <a href="{{ route('nomina.show', ['user_id' => $user->id]) }}" class="btn btn-primary">
                                     Calcular Nómina
                                 </a>
-
-
                                 <!-- Botón para asignar horario -->
                                 <button type="button" class="btn btn-primary btn-asignar-horario"
                                     data-user-id="{{ $user->id }}" data-toggle="modal"
                                     data-target="#asignarHorarioModal">Asignar Horario</button>
                             </form>
-                        @elseif (isset($user) && $user->rol->tipo_rol === 'Gerente')
-                            <!-- Solo botón de editar para el rol Gerente -->
-                            <button type="button" class="btn btn-info btn-editar" data-user-id="{{ $user->id }}"
-                                data-toggle="modal" data-target="#editarUserModal{{ $user->id }}">Editar</button>
                         @endif
-
                     </td>
-
                 </tr>
+                <!-- Modal para asignar horario a un usuario -->
+                <div class="modal fade" id="asignarHorarioModal" tabindex="-1" role="dialog"
+                    aria-labelledby="asignarHorarioModalLabel" aria-hidden="true" data-backdrop="false">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="asignarHorarioModalLabel">Asignar Horario</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="asignarHorarioForm" action="{{ route('asignarHorario') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" id="userId" name="userId" value="{{ $user->id }}">
+
+
+                                    <div class="form-group">
+                                        <label for="horario_id">Seleccionar Horario</label>
+                                        <select class="form-control" id="horario_id" name="horario_id">
+                                            @foreach ($horarios as $horario)
+                                                <option value="{{ $horario->id }}">{{ $horario->turno }} -
+                                                    {{ $horario->hora_entrada }} a {{ $horario->hora_salida }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dia_laboral">Seleccionar Día Laboral</label>
+                                        <select class="form-control" id="dia_laboral" name="dia_laboral">
+                                            <option value="Lunes">Lunes</option>
+                                            <option value="Martes">Martes</option>
+                                            <option value="Miércoles">Miércoles</option>
+                                            <option value="Jueves">Jueves</option>
+                                            <option value="Viernes">Viernes</option>
+                                            <option value="Sábado">Sábado</option>
+                                            <option value="Domingo">Domingo</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Asignar</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Editar Usuario -->
+                <div class="modal fade" id="editarUserModal{{ $user->id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="editarUserModal{{ $user->id }}" aria-hidden="true" data-backdrop="false">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 class="modal-title" id="editarUserModal{{ $user->id }}">Editar Usuario</h2>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form id="editarUserForm{{ $user->id }}" action="{{ route('user.update', $user->id) }}"
+                                method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="codigo_empleado{{ $user->id }}">Codigo:</label>
+                                        <input type="text" class="form-control"
+                                            id="codigo_empleado{{ $user->id }}" name="codigo_empleado"
+                                            value="{{ $user->codigo_empleado }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name{{ $user->id }}">Nombre:</label>
+                                        <input type="text" class="form-control" id="name{{ $user->id }}"
+                                            name="name" value="{{ $user->name }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="apellido{{ $user->id }}">Apellido:</label>
+                                        <input type="text" class="form-control" id="apellido{{ $user->id }}"
+                                            name="apellido" value="{{ $user->apellido }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email{{ $user->id }}">Correo Electrónico:</label>
+                                        <input type="email" class="form-control" id="email{{ $user->id }}"
+                                            name="email" value="{{ $user->email }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ci{{ $user->id }}">Carnet:</label>
+                                        <input type="text" class="form-control" id="ci{{ $user->id }}"
+                                            name="ci" value="{{ $user->ci }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telefono{{ $user->id }}">Telefono:</label>
+                                        <input type="text" class="form-control" id="telefono{{ $user->id }}"
+                                            name="telefono" value="{{ $user->telefono }}">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="foto_user" class="form-label">{{ __('Foto del Usuario') }}</label>
+                                        <input type="file" id="foto_user" class="form-control" name="foto_user">
+                                    </div>
+
+                                    @if ($user->foto_user)
+                                        <div class="mb-3">
+                                            <img src="{{ asset($user->foto_user) }}" alt="Foto del Usuario"
+                                                style="max-width: 100px; height: auto;">
+                                        </div>
+                                    @endif
+
+                                    <!-- Agregar campo select para los roles -->
+                                    <div class="form-group">
+                                        <label for="id_rol{{ $user->id }}">Rol:</label>
+                                        <select class="form-control" id="rol{{ $user->id }}" name="id_rol">
+                                            @foreach ($roles as $rol)
+                                                <option value="{{ $rol->id }}"
+                                                    @if ($user->id_rol === $rol->id) selected @endif>
+                                                    {{ $rol->tipo_rol }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <!-- Agregar campo select para las sucursales -->
+                                    <div class="form-group">
+                                        <label for="id_sucursal{{ $user->id }}">Sucursal:</label>
+                                        <select class="form-control" id="rol{{ $user->id }}" name="id_sucursal">
+                                            @foreach ($sucursales as $sucursal)
+                                                <option value="{{ $sucursal->id }}"
+                                                    @if ($user->id_sucursal === $sucursal->id) selected @endif>
+                                                    {{ $sucursal->nombre }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             @endforeach
 
         </tbody>
@@ -92,10 +229,9 @@
         </div>
     </div>
     @include('user.create')
-    @if (isset($user))
-        @include('user.edit')
-        @include('horario_user.create') {{-- ASIGNAR HORARIO --}}
-    @endif
+    {{-- @include('user.edit') --}}
+   {{--  @include('horario_user.create') --}} {{-- ASIGNAR HORARIO --}}
+
 @stop
 
 @section('css')

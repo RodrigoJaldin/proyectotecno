@@ -35,6 +35,102 @@ class UserController extends Controller
 
         return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
     }
+
+    public function gerente()
+    {
+        $users = User::whereHas('rol', function ($query) {
+            $query->where('tipo_rol', 'Gerente');
+        })->get();
+
+        $roles = Rol::all();
+        $sucursales = Sucursal::all();
+        $horarios = Horario::all();
+
+        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+    }
+
+    public function jefesCocina()
+    {
+        $users = User::whereHas('rol', function ($query) {
+            $query->where('tipo_rol', 'Jefe de Cocina');
+        })->get();
+
+        $roles = Rol::all();
+        $sucursales = Sucursal::all();
+        $horarios = Horario::all();
+
+        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+    }
+
+    public function jefesCaja()
+    {
+        $users = User::whereHas('rol', function ($query) {
+            $query->where('tipo_rol', 'Jefe de Caja');
+        })->get();
+        $roles = Rol::all();
+        $sucursales = Sucursal::all();
+        $horarios = Horario::all();
+
+        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+    }
+
+    public function jefesAlmacen()
+    {
+        $users = User::whereHas('rol', function ($query) {
+            $query->where('tipo_rol', 'Jefe de Almacen');
+        })->get();
+        $roles = Rol::all();
+        $sucursales = Sucursal::all();
+        $horarios = Horario::all();
+
+        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+    }
+
+    public function encargadosPlancha()
+    {
+        $users = User::whereHas('rol', function ($query) {
+            $query->where('tipo_rol', 'Encargado de Plancha');
+        })->get();
+        $roles = Rol::all();
+        $sucursales = Sucursal::all();
+        $horarios = Horario::all();
+
+        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+    }
+    public function auxiliaresCocina()
+    {
+        $users = User::whereHas('rol', function ($query) {
+            $query->where('tipo_rol', 'Auxiliar de Cocina');
+        })->get();
+        $roles = Rol::all();
+        $sucursales = Sucursal::all();
+        $horarios = Horario::all();
+
+        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+    }
+    public function cajeros()
+    {
+        $users = User::whereHas('rol', function ($query) {
+            $query->where('tipo_rol', 'Cajero');
+        })->get();
+        $roles = Rol::all();
+        $sucursales = Sucursal::all();
+        $horarios = Horario::all();
+
+        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+    }
+    public function limpieza()
+    {
+        $users = User::whereHas('rol', function ($query) {
+            $query->where('tipo_rol', 'Limpieza');
+        })->get();
+        $roles = Rol::all();
+        $sucursales = Sucursal::all();
+        $horarios = Horario::all();
+
+        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
+    }
+
     /*   public function calcularNomina($user_id)
     {
         // Obtener el usuario
@@ -297,13 +393,6 @@ public function graficoNominas()
 
 
 
-
-
-
-
-
-
-
     public function nomina()
     {
         // Obtener la lista de usuarios
@@ -322,100 +411,6 @@ public function graficoNominas()
 
 
 
-    public function gerente()
-    {
-        $users = User::whereHas('rol', function ($query) {
-            $query->where('tipo_rol', 'Gerente');
-        })->get();
-
-        $roles = Rol::all();
-        $sucursales = Sucursal::all();
-        $horarios = Horario::all();
-
-        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
-    }
-
-    public function jefesCocina()
-    {
-        $users = User::whereHas('rol', function ($query) {
-            $query->where('tipo_rol', 'Jefe de Cocina');
-        })->get();
-
-        $roles = Rol::all();
-        $sucursales = Sucursal::all();
-        $horarios = Horario::all();
-
-        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
-    }
-
-    public function jefesCaja()
-    {
-        $users = User::whereHas('rol', function ($query) {
-            $query->where('tipo_rol', 'Jefe de Caja');
-        })->get();
-        $roles = Rol::all();
-        $sucursales = Sucursal::all();
-        $horarios = Horario::all();
-
-        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
-    }
-
-    public function jefesAlmacen()
-    {
-        $users = User::whereHas('rol', function ($query) {
-            $query->where('tipo_rol', 'Jefe de Almacen');
-        })->get();
-        $roles = Rol::all();
-        $sucursales = Sucursal::all();
-        $horarios = Horario::all();
-
-        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
-    }
-
-    public function encargadosPlancha()
-    {
-        $users = User::whereHas('rol', function ($query) {
-            $query->where('tipo_rol', 'Encargado de Plancha');
-        })->get();
-        $roles = Rol::all();
-        $sucursales = Sucursal::all();
-        $horarios = Horario::all();
-
-        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
-    }
-    public function auxiliaresCocina()
-    {
-        $users = User::whereHas('rol', function ($query) {
-            $query->where('tipo_rol', 'Auxiliar de Cocina');
-        })->get();
-        $roles = Rol::all();
-        $sucursales = Sucursal::all();
-        $horarios = Horario::all();
-
-        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
-    }
-    public function cajeros()
-    {
-        $users = User::whereHas('rol', function ($query) {
-            $query->where('tipo_rol', 'Cajero');
-        })->get();
-        $roles = Rol::all();
-        $sucursales = Sucursal::all();
-        $horarios = Horario::all();
-
-        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
-    }
-    public function limpieza()
-    {
-        $users = User::whereHas('rol', function ($query) {
-            $query->where('tipo_rol', 'Limpieza');
-        })->get();
-        $roles = Rol::all();
-        $sucursales = Sucursal::all();
-        $horarios = Horario::all();
-
-        return view('user.index', compact('users', 'roles', 'sucursales', 'horarios'));
-    }
 
 
     /**
