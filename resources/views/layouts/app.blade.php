@@ -116,6 +116,8 @@
 
                         <a href={{ route('graficonomina') }}><i class="fas fa-chart-line chart-icon"></i> Grafico
                             Nominas</a>
+                        <a href={{ route('graficoretrasos') }}><i class="fas fa-chart-line chart-icon"></i> Grafico
+                            Retrasos Mes</a>
 
                     </li>
                     <li class="">

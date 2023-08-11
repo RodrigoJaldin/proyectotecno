@@ -59,6 +59,11 @@ Route::get('/graficovisita', [VisitaController::class, 'generarGrafico'])->name(
 Route::get('/graficolicencia', [LicenciaController::class, 'licenciasPorUsuario'])->name('graficolicencia')->middleware(['auth', 'gerente']);
 Route::get('/graficoasistencia', [AsistenciaController::class, 'asistenciaPorUsuarioAutenticado'])->name('graficoasistencia')->middleware(['auth']);
 Route::get('/graficonomina', [UserController::class, 'graficoNominas'])->name('graficonomina')->middleware(['auth', 'gerente']);
+Route::match(['get', 'post'], '/graficoretrasos', [AsistenciaController::class, 'asistenciaPorPersonaMinutos'])
+    ->name('graficoretrasos')
+    ->middleware(['auth', 'gerente']);
+
+
 
 
 // Rutas para Contratos
@@ -71,7 +76,7 @@ Route::put('/contratos/{contrato}', [ContratoController::class, 'update'])->name
 Route::delete('/contratos/{contrato}', [ContratoController::class, 'destroy'])->name('contratos.destroy')->middleware(['auth', 'gerente']);
 
 
-Route::get('/turnos_extra', [TurnoExtraController::class, 'index'])->name('turnosExtra.index')->middleware('auth','gerente','registrar.visita.turno');
+Route::get('/turnos_extra', [TurnoExtraController::class, 'index'])->name('turnosExtra.index')->middleware('auth', 'gerente', 'registrar.visita.turno');
 Route::get('/turnos_extra/create', [TurnoExtraController::class, 'create'])->name('turnosExtra.create')->middleware(['auth', 'gerente']);
 Route::post('/turnos_extra', [TurnoExtraController::class, 'store'])->name('turnosExtra.store')->middleware(['auth', 'gerente']);
 Route::get('/turnos_extra/{turnoExtra}', [TurnoExtraController::class, 'show'])->name('turnosExtra.show')->middleware(['auth', 'gerente']);
@@ -84,13 +89,13 @@ Route::get('/mail/sub', [DocumentoController::class, 'subir_mail']);
 Route::post('/subir/reg', [DocumentoController::class, 'subida'])->name('registrarDocumento');
 
 Route::resource('/rol', RolController::class)->middleware(['auth', 'registrar.visita.rol', 'gerente']);
-Route::resource('/licencia', LicenciaController::class)->middleware(['auth','registrar.visita.licencia']);
-Route::resource('/horario', HorarioController::class)->middleware(['auth','registrar.visita.horario', 'gerente']);
+Route::resource('/licencia', LicenciaController::class)->middleware(['auth', 'registrar.visita.licencia']);
+Route::resource('/horario', HorarioController::class)->middleware(['auth', 'registrar.visita.horario', 'gerente']);
 Route::resource('/horario_user', HorarioUserController::class)->middleware(['auth']);
 Route::resource('/sucursal', SucursalController::class)->middleware(['auth', 'registrar.visita.sucursal', 'gerente']);
 Route::resource('/documento', DocumentoController::class)->middleware(['auth', 'registrar.visita.documento']);
-Route::resource('/asistencia', AsistenciaController::class)->middleware(['auth','registrar.visita.asistencia']);
-Route::resource('/rotacion', RotacionController::class)->middleware(['auth', 'gerente','registrar.visita.rotacion']);
+Route::resource('/asistencia', AsistenciaController::class)->middleware(['auth', 'registrar.visita.asistencia']);
+Route::resource('/rotacion', RotacionController::class)->middleware(['auth', 'gerente', 'registrar.visita.rotacion']);
 
 
 Route::post('/registrar-asistencia-llegada', [AsistenciaController::class, 'registrarAsistenciaLlegada'])->name('registrarAsistenciaLlegada')->middleware(['auth']);
@@ -105,10 +110,8 @@ Route::get('/nomina/{user_id}', [UserController::class, 'showNomina'])->name('no
 Route::get('/user/{userId}/horarios', [HorarioUserController::class, 'showHorariosAsignados'])->name('showHorariosAsignados')->middleware(['auth']);
 Route::get('/{user_id}', [HorarioUserController::class, 'showUserHorarios'])->name('showUserHorarios')->middleware(['auth', 'gerente']);
 
-Route::post('myurl',[SearchController::class,'show']);
+Route::post('myurl', [SearchController::class, 'show']);
 
 
 Route::get('/{sucursal_id}', [SucursalController::class, 'trabajadoresPorSucursal'])
     ->name('sucursal.trabajadores')->middleware(['auth']);
-
-

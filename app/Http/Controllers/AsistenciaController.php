@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asistencia;
+use App\Models\Horario;
+use App\Models\HorarioUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -106,26 +108,24 @@ class AsistenciaController extends Controller
 
     //hacer grafico de asistencia por usuario autenticado
 
-
-
-    public function asistenciaPorUsuarioAutenticado()
+    public function asistenciaPorPersonaMinutos(Request $request)
     {
-        // Obtener el ID del usuario autenticado
-        $userId = auth()->user()->id;
+        $mesSeleccionado = $request->input('mes');
 
-        // Contar las asistencias por mes del usuario autenticado
-        $asistenciasPorMes = Asistencia::select(
-            DB::raw("TO_CHAR(fecha, 'YYYY-MM') as mes"),
-            DB::raw('count(*) as total')
-        )
-        ->where('id_user', $userId)
-        ->groupBy('mes')
-        ->orderBy('mes')
-        ->get();
+        $asistenciasPorPersona = DB::table('asistencia')
+            ->select(
+                'persona.name as persona',
+                DB::raw('SUM(EXTRACT(MINUTE FROM hora_llegada)) as total_minutos')
+            )
+            ->join('persona', 'asistencia.id_user', '=', 'persona.id')
+            ->whereRaw('EXTRACT(MONTH FROM asistencia.fecha) = ?', [$mesSeleccionado])
+            ->groupBy('persona.name')
+            ->orderBy('persona.name')
+            ->get();
 
-        // Pasar los datos a la vista para el gráfico
-        return view('grafico.graficoasistencia', compact('asistenciasPorMes'));
+        return view('grafico.graficoretrasos', compact('asistenciasPorPersona', 'mesSeleccionado'));
     }
+
 
 
 
