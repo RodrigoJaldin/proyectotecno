@@ -10,7 +10,9 @@
             <tr>
                 <th>Fecha</th>
                 <th>Usuario Solicitante</th>
+                <th>Horario de Usuario Solicitante</th>
                 <th>Usuario Reemplazante</th>
+                <th>Horario de Usuario Reemplazante</th>
             </tr>
         </thead>
 
@@ -19,7 +21,10 @@
                 <tr>
                     <td>{{ $rotacion->fecha }}</td>
                     <td>{{ $rotacion->userHorarios_solicitante->users->name }}</td>
+                    <td>{{ $rotacion->userHorarios_solicitante->horario->turno }}</td>
                     <td>{{ $rotacion->userHorarios_reemplazante->users->name }}</td>
+                    <td>{{ $rotacion->userHorarios_reemplazante->horario->turno }}</td>
+
                 </tr>
             @endforeach
         </tbody>
@@ -39,28 +44,39 @@
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="usuario_solicitante">Usuario Solicitante:</label>
-                            <select class="form-control" id="usuario_solicitante" name="usuario_solicitante" required>
-                                <!-- Aquí debes mostrar la lista de usuarios que pueden ser solicitantes -->
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endforeach
-                            </select>
+                            <label for="fecha">Fecha:</label>
+                            <input type="date" class="form-control" id="fecha" name="fecha" required>
                         </div>
                         <div class="form-group">
-                            <label for="usuario_reemplazante">Usuario Reemplazante:</label>
-                            <select class="form-control" id="usuario_reemplazante" name="usuario_reemplazante" required>
-                                <!-- Aquí debes mostrar la lista de usuarios que pueden ser reemplazantes -->
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            <label for="usuario_solicitante">Usuario Solicitante:</label>
+                            <select class="form-control" id="usuario_solicitante" name="usuario_solicitante" required>
+                                @foreach ($usersWithHorarios as $user)
+                                    @foreach ($user->user_horarios as $userHorario)
+                                        <option value="{{ $userHorario->id }}">
+                                            {{ $user->name }} -
+                                            Día Laboral: {{ $userHorario->dia_laboral }} -
+                                            Horario: {{ $userHorario->horario->turno }}
+                                        </option>
+                                    @endforeach
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="fecha">Fecha:</label>
-                            <input type="date" class="form-control" id="fecha" name="fecha" required>
+                            <label for="usuario_reemplazante">Usuario Reemplazante:</label>
+                            <select class="form-control" id="usuario_reemplazante" name="usuario_reemplazante" required>
+                                @foreach ($usersReemplazantes as $user)
+                                    @foreach ($user->user_horarios as $userHorario)
+                                        <option value="{{ $userHorario->id }}">
+                                            {{ $user->name }} -
+                                            Día Laboral: {{ $userHorario->dia_laboral }} -
+                                            Horario: {{ $userHorario->horario->turno }}
+                                        </option>
+                                    @endforeach
+                                @endforeach
+                            </select>
                         </div>
+
 
                     </div>
                     <div class="modal-footer">

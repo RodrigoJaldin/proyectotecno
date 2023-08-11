@@ -13,16 +13,24 @@ class RotacionController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         // Cargar la lista de rotaciones con sus relaciones
         $rotaciones = Rotacion::with(['userHorarios_solicitante', 'userHorarios_reemplazante'])->get();
 
-        // Cargar la lista de usuarios disponibles con horarios asignados
-        $users  = User::whereHas('user_horarios')->get();
+        // Cargar la lista de usuarios disponibles con horarios asignados y sus detalles
+        $usersWithHorarios = User::whereHas('user_horarios')->with(['user_horarios.horario'])->get();
 
-        return view('rotacion.index', compact('rotaciones', 'users'));
+         // Cargar la lista de usuarios disponibles con horarios asignados
+        // $users  = User::whereHas('user_horarios')->get();
+
+        // Filtrar los usuarios reemplazantes excluyendo al usuario solicitante
+        $usersReemplazantes = User::whereHas('user_horarios')->where('id', '!=', old('usuario_solicitante_id'))->get();
+
+        return view('rotacion.index', compact('rotaciones', 'usersWithHorarios', 'usersReemplazantes'));
     }
+
 
 
 
@@ -43,15 +51,19 @@ class RotacionController extends Controller
     {
         $request->validate([
             'fecha' => 'required|date',
-            'usuario_solicitante' => 'required|exists:user_horario,id_user',
-            'usuario_reemplazante' => 'required|exists:user_horario,id_user',
+            'usuario_solicitante' => 'required|exists:user_horario,id',
+            'usuario_reemplazante' => 'required|exists:user_horario,id|different:usuario_solicitante',
         ]);
+
+        // Obtener los IDs de los user_horario seleccionados
+        $usuarioSolicitanteId = $request->input('usuario_solicitante');
+        $usuarioReemplazanteId = $request->input('usuario_reemplazante');
 
         // Guardar la nueva rotación en la base de datos
         Rotacion::create([
             'fecha' => $request->input('fecha'),
-            'usuario_solicitante_id' => $request->input('usuario_solicitante'),
-            'usuario_reemplazante_id' => $request->input('usuario_reemplazante'),
+            'usuario_solicitante_id' => $usuarioSolicitanteId,
+            'usuario_reemplazante_id' => $usuarioReemplazanteId,
             'url' => $request->fullUrl(),
         ]);
 

@@ -19,24 +19,35 @@
                     <div class="form-group">
                         <label for="usuario_solicitante">Usuario Solicitante:</label>
                         <select class="form-control" id="usuario_solicitante" name="usuario_solicitante" required>
-                            <!-- Mostrar la lista de usuarios solicitantes -->
-                            @foreach ($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            <!-- Mostrar la lista de usuarios solicitantes con detalles de horario y día laboral -->
+                            @foreach ($usersWithHorarios as $user)
+                                <option value="{{ $user->id }}">
+                                    {{ $user->name }}
+                                    @foreach ($user->user_horarios as $userHorario)
+                                        - {{ $userHorario->dia_laboral }} (ID: {{ $userHorario->id }})
+                                        - Horario: {{ $userHorario->horario->turno }}
+                                    @endforeach
+                                </option>
                             @endforeach
                         </select>
                     </div>
+
                     <div class="form-group">
                         <label for="usuario_reemplazante">Usuario Reemplazante:</label>
                         <select class="form-control" id="usuario_reemplazante" name="usuario_reemplazante" required>
                             <!-- Mostrar la lista de usuarios reemplazantes, excluyendo al usuario solicitante -->
-                            @foreach ($users as $user)
-                                @if ($user->id !== old('usuario_solicitante_id'))
-                                    <!-- O puedes usar el valor que recibiste en el controlador -->
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endif
+                            @foreach ($usersReemplazantes as $user)
+                                <option value="{{ $user->id }}">
+                                    {{ $user->name }}
+                                    @foreach ($user->user_horarios as $userHorario)
+                                        - {{ $userHorario->dia_laboral }} (ID: {{ $userHorario->id }})
+                                        - Horario: {{ $userHorario->horario->turno }}
+                                    @endforeach
+                                </option>
                             @endforeach
                         </select>
                     </div>
+
 
                 </div>
                 <div class="modal-footer">
